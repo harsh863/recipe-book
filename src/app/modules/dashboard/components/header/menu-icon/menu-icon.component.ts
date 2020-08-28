@@ -13,7 +13,9 @@ export class MenuIconComponent {
   constructor(private _router: Router, private _activatedRoute: ActivatedRoute) { }
 
   openLink(path: string) {
-    this._router.navigate([path], {relativeTo: this._activatedRoute})
-      .then(_ => this.isDrawerVisible = false);
+    setTimeout(_ => {
+      this._router.navigate([path], {relativeTo: this._activatedRoute})
+        .then(_ => this.isDrawerVisible = false);
+    }, 1000);
   }
 }

@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AngularFireStorage} from '@angular/fire/storage';
-import {finalize} from 'rxjs/operators';
-import {Observable} from 'rxjs';
 import {FileUploadService} from '../../../services/file-upload.service';
 
 @Component({

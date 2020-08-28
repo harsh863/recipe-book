@@ -34,7 +34,7 @@
            aria-valuemin="0"
            aria-valuemax="100" [ngStyle]="{'width': fileUploadProgress + '%'}"></div>
     </div>
-    <div class="w-100 flex mt-2 flex justify-content-start" *ngIf="control.image_url.value">
+    <div class="w-100 flex mt-2 flex justify-content-start" *ngIf="!uploading && control.image_url.value">
       <img class="image-preview" src="{{control.image_url.value}}" alt="">
     </div>
   </div>
