@@ -66,6 +66,13 @@
       cursor: not-allowed;
     }
   }
+
+  & .image-preview {
+    border: 1px dashed grey;
+    padding: 4px;
+    border-radius: 5px;
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 500px) {

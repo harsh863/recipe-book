@@ -13,12 +13,13 @@ import { ShoppingComponent } from './components/shopping/shopping.component';
 import { RecipesHomeComponent } from './components/recipes/recipes-home/recipes-home.component';
 import { MenuIconComponent } from './components/header/menu-icon/menu-icon.component';
 import {RecipeService} from './services/recipe.service';
+import {FileUploadService} from './services/file-upload.service';
 
 const components = [DashboardComponent, HeaderComponent, RecipesComponent,
   RecipesListComponent, RecipeItemComponent, RecipeFormComponent];
 const modules = [CommonModule, DashboardRoutingModule, HttpClientModule,
   FormsModule, ReactiveFormsModule];
-const services = [RecipeService];
+const services = [RecipeService, FileUploadService];
 
 @NgModule({
   declarations: [...components, ShoppingComponent, RecipesHomeComponent, MenuIconComponent],

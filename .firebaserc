@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "recipe-book-3229e": {
+      "hosting": {
+        "recipe-book": [
+          "recipe-book-3229e"
+        ]
+      }
+    }
+  }
+}

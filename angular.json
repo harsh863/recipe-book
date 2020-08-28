@@ -124,8 +124,13 @@
               "devServerTarget": "recipe-book:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "recipe-book"
 }

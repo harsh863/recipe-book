@@ -21,14 +21,22 @@
       <input type="text" class="form-control"
              placeholder="Image Url" [formControl]="control.image_url">
       <div class="custom-file">
-        <input type="file" class="custom-file-input"
-               id="inputGroupFile04"  (change)="onFileSelected($event, preview)">
+        <input type="file" class="custom-file-input" accept="image/*"
+               id="inputGroupFile04"  (change)="onFileSelected($event)">
         <label class="custom-file-label" for="inputGroupFile04">
           <img src="https://img.icons8.com/officel/20/000000/add-image.png"/>
         </label>
       </div>
     </div>
-    <img src="" alt="" #preview>
+    <div class="progress mt-2" *ngIf="uploading" style="height: .6rem !important;">
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-info"
+           role="progressbar"
+           aria-valuemin="0"
+           aria-valuemax="100" [ngStyle]="{'width': fileUploadProgress + '%'}"></div>
+    </div>
+    <div class="w-100 flex mt-2 flex justify-content-start" *ngIf="control.image_url.value">
+      <img class="image-preview" src="{{control.image_url.value}}" alt="">
+    </div>
   </div>
   <div class="row w-100 flex flex-column justify-content-start mb-3">
     <div class="label">Recipe</div>
