@@ -1,0 +1,23 @@
+<div class="navigation">
+  <input type="checkbox" [checked]="isDrawerVisible" class="navigation__checkbox" id="navi-toggle">
+
+  <label for="navi-toggle" class="navigation__button" (click)="isDrawerVisible = true">
+    <span class="navigation__icon">&nbsp;</span>
+  </label>
+
+  <div class="navigation__background">&nbsp;</div>
+
+  <nav class="navigation__nav">
+    <ul class="navigation__list">
+      <li class="navigation__item">
+        <a routerLink="" (click)="openLink('recipes')" class="navigation__link">Recipes</a>
+      </li>
+      <li class="navigation__item">
+        <a routerLink="" (click)="openLink('shopping-list')" class="navigation__link">Shopping List</a>
+      </li>
+      <li class="navigation__item">
+        <a routerLink="" class="navigation__link">Logout</a>
+      </li>
+    </ul>
+  </nav>
+</div>

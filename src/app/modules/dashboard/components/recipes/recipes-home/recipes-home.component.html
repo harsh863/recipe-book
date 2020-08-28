@@ -1,0 +1,17 @@
+<div class="recipe-container flex flex-column justify-content-start align-items-center">
+  <div class="row w-100 flex justify-content-start align-items-center">
+    <button type="button" class="btn btn-info mr-3 mb-2" (click)="createNewRecipe()">Add New Recipe</button>
+    <div class="btn-group mb-2" [ngClass]="{'show': isDropdownExpanded}">
+      <button type="button" class="btn btn-danger">{{isPrivateMode ? 'Private': 'Public'}}</button>
+      <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split"
+              (click)="toggleDropdown()"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <span class="sr-only">Toggle Dropdown</span>
+      </button>
+      <div class="dropdown-menu p-0" style="z-index: 500;" [ngClass]="{'show': isDropdownExpanded}">
+        <p class="dropdown-item m-0" (click)="toggleViewMode(false)">Public</p>
+        <p class="dropdown-item m-0" (click)="toggleViewMode(true)">Private</p>
+      </div>
+    </div>
+  </div>
+</div>

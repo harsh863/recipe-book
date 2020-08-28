@@ -1,0 +1,40 @@
+<div class="shopping-container flex flex-column align-items-center">
+  <div class="row w-100 flex flex-row flex-wrap justify-content-start align-items-center">
+    <div class="name flex flex-column justify-content-start mr-2">
+      <div class="label">Ingredient Name</div>
+      <div class="input-group">
+        <input type="text" class="form-control"
+               placeholder="Ingredient Name" [formControl]="control.name">
+      </div>
+    </div>
+    <div class="qty flex flex-column justify-content-start mr-2">
+      <div class="label">Quantity</div>
+      <div class="input-group">
+        <input type="number" class="form-control"
+               placeholder="Quantity" [formControl]="control.quantity">
+      </div>
+    </div>
+    <div class="unit flex flex-column justify-content-start">
+      <div class="label">Unit</div>
+      <div class="input-group">
+        <input type="text" class="form-control"
+               placeholder="Unit" [formControl]="control.unit">
+      </div>
+    </div>
+  </div>
+  <div class="row flex flex-row justify-content-start align-items-center mt-4">
+    <button type="button" class="btn btn-outline-primary mr-2">Add</button>
+    <button type="button" class="btn btn-outline-warning">Clear</button>
+  </div>
+  <div class="row dropdown-divider mt-4 mb-4"></div>
+  <div class="row mb-4 flex flex-row-reverse">
+    <img *ngIf="!isFilterBarVisible" (click)="isFilterBarVisible = true"
+         src="https://img.icons8.com/plasticine/50/000000/google-web-search.png" alt=""/>
+  </div>
+  <div class="w-100 list-group">
+    <div class="list-group-item p-1 flex justify-content-between" *ngFor="let ingredient of ingredients">
+      <div class="ing-info flex align-items-center pl-2">{{ingredient.name}} ({{ingredient.quantity}} {{ingredient.unit}})</div>
+      <div class="delete"><img src="https://img.icons8.com/plasticine/30/000000/delete-forever.png"/></div>
+    </div>
+  </div>
+</div>

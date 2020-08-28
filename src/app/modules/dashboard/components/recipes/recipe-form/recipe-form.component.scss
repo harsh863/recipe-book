@@ -1,0 +1,92 @@
+.recipe-form-container {
+  margin: auto;
+  width: 80vw;
+
+  & .label {
+    margin-bottom: 4px;
+  }
+
+  & textarea{
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+    &::-webkit-scrollbar-track {
+      background: lightgray;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: gray;
+      border-radius: 20px;
+      border: 1px solid lightgray;
+    }
+
+  }
+
+  & .image-block {
+    input[type='text'] {
+      width: calc(100% - 45px);
+    }
+
+    & .custom-file {
+      cursor: pointer;
+      width: 45px;
+
+      & input {
+        width: 45px;
+      }
+      & label {
+        cursor: pointer;
+        width: 45px;
+        &::after{
+          display: none;
+        }
+      }
+    }
+  }
+
+  & .ingredient {
+    &-name {
+      width: 49%;
+    }
+
+    &-qty {
+      width: 25%;
+    }
+
+    &-unit {
+      width: 25%;
+    }
+
+    &-remove {
+      width: 36px;
+    }
+  }
+
+  & .save-btn {
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .recipe-form-container {
+    width: 90vw !important;
+
+    & .ingredient {
+      flex-wrap: wrap;
+      justify-content: flex-start !important;
+      &-name {
+        width: 100% !important;
+        margin-bottom: 10px;
+      }
+      &-qty{
+        margin-left: 0 !important;
+        width: calc((100% - 38px) / 2 - 10px) !important;
+        margin-bottom: 10px;
+      }
+      &-unit {
+        width: calc((100% - 38px) / 2 - 10px) !important;
+      }
+    }
+  }
+}

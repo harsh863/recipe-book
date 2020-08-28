@@ -1,0 +1,60 @@
+$height: 55px;
+
+.header{
+  height: $height;
+  width: 100vw;
+  background: teal;
+  padding: 5px 20px;
+
+  & .toggle-drawer {
+    width: 40px;
+    padding: 10px 0;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    div {
+      width: 90%;
+      height: 3px;
+      background-color: white;
+    }
+  }
+
+  & .app-logo{
+    height: 100%;
+    background: white;
+    padding: 4px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: fit-content;
+
+    img {
+      height: 100%;
+      display: block;
+    }
+  }
+
+  & .menu-items {
+    height: $height;
+    transform: translateY(-5px);
+    & .menu-item{
+      padding: 0 15px;
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+
+      &:hover{
+        height: 100% !important;
+        border-bottom: 3px solid black;
+        border-bottom: 4px solid #40a4c8;
+      }
+
+      &:not(.active) {
+        height: calc(100% - 4px);
+      }
+    }
+
+    & .active {
+      border-bottom: 4px solid #40a4c8;
+      background-color: #1c7171f2;
+    }
+  }
+}

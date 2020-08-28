@@ -1,0 +1,70 @@
+<div class="recipe-form-container flex flex-column align-items-center mt-5">
+  <div class="row w-100 flex flex-column justify-content-start mb-3">
+    <div class="label">Recipe Name</div>
+    <div class="input-group">
+      <input type="text" class="form-control"
+             placeholder="Recipe Name" [formControl]="control.name">
+    </div>
+  </div>
+  <div class="row w-100 flex flex-column justify-content-start mb-3">
+    <div class="label">Who can view this?</div>
+    <div class="input-group">
+      <select class="custom-select">
+        <option value="false">Anyone</option>
+        <option value="true">Only Me</option>
+      </select>
+    </div>
+  </div>
+  <div class="row w-100 flex flex-column justify-content-start mb-3 image-block">
+    <div class="label">Image Url</div>
+    <div class="input-group">
+      <input type="text" class="form-control"
+             placeholder="Image Url" [formControl]="control.image_url">
+      <div class="custom-file">
+        <input type="file" class="custom-file-input"
+               id="inputGroupFile04"  (change)="onFileSelected($event, preview)">
+        <label class="custom-file-label" for="inputGroupFile04">
+          <img src="https://img.icons8.com/officel/20/000000/add-image.png"/>
+        </label>
+      </div>
+    </div>
+    <img src="" alt="" #preview>
+  </div>
+  <div class="row w-100 flex flex-column justify-content-start mb-3">
+    <div class="label">Recipe</div>
+    <div class="input-group">
+      <textarea type="text" class="form-control"
+                placeholder="Recipe" [formControl]="control.description"></textarea>
+    </div>
+  </div>
+  <div class="row w-100 flex flex-column justify-content-start mb-5">
+    <div class="label">Ingredients</div>
+    <div class="ingredient flex flex-row justify-content-between mb-2" *ngFor="let ingredient of control.ingredients.controls; let i = index">
+      <input type="text"
+             class="ingredient-name form-control text-truncate"
+             placeholder="Ingredient Name"
+             [formControl]="control.ingredients.controls[i].get('name')">
+
+      <input type="number"
+             class="ingredient-qty form-control mr-2 ml-2 text-truncate"
+             placeholder="Quantity"
+             [formControl]="control.ingredients.controls[i].get('quantity')">
+
+      <input type="text"
+             class="ingredient-unit form-control mr-2 text-truncate"
+             placeholder="Unit"
+             [formControl]="control.ingredients.controls[i].get('unit')">
+
+      <div class="ingredient-remove">
+        <button type="button" (click)="removeIngredientControl(i)" class="btn btn-dark">X</button>
+      </div>
+    </div>
+    <div class="add-button flex flex-row justify-content-start align-items-center mt-3">
+      <button type="button" class="btn btn-primary" (click)="addIngredientControl()">+</button>
+    </div>
+  </div>
+  <div class="row w-100 flex justify-content-end align-items-center">
+    <button type="button" class="btn btn-danger mr-3" (click)="cancel()">Cancel</button>
+    <button type="button" class="save-btn btn btn-success" [disabled]="recipeForm.invalid">Save</button>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+.shopping-container {
+  width: 80vw;
+  margin: 2rem auto 0;
+
+  & .label {
+    margin-bottom: 3px;
+  }
+
+  & .row {
+    width: 100%;
+
+    & .name {
+      width: 50%;
+    }
+
+    & .qty,
+    .unit {
+      min-width: 100px;
+      width: 12%;
+    }
+  }
+
+  & .ing-info {
+    color: #555;
+    font-size: 14px;
+  }
+
+  & .delete {
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 600px) {
+  .row {
+    width: 100%;
+    flex-wrap: wrap;
+
+    & .name {
+      margin-right: 0 !important;
+      width: 100% !important;
+      margin-bottom: 10px;
+    }
+
+    & .qty,
+    .unit {
+      margin-right: 0 !important;
+      width: calc((100% - 1rem) / 2) !important;
+    }
+
+    & .qty {
+      margin-right: 1rem !important;
+    }
+  }
+}
