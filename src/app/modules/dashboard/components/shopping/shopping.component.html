@@ -27,10 +27,6 @@
     <button type="button" class="btn btn-outline-warning">Clear</button>
   </div>
   <div class="row dropdown-divider mt-4 mb-4"></div>
-  <div class="row mb-4 flex flex-row-reverse">
-    <img *ngIf="!isFilterBarVisible" (click)="isFilterBarVisible = true"
-         src="https://img.icons8.com/plasticine/50/000000/google-web-search.png" alt=""/>
-  </div>
   <div class="w-100 list-group">
     <div class="list-group-item p-1 flex justify-content-between" *ngFor="let ingredient of ingredients">
       <div class="ing-info flex align-items-center pl-2">{{ingredient.name}} ({{ingredient.quantity}} {{ingredient.unit}})</div>

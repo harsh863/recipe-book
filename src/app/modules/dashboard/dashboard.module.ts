@@ -14,6 +14,7 @@ import { RecipesHomeComponent } from './components/recipes/recipes-home/recipes-
 import { MenuIconComponent } from './components/header/menu-icon/menu-icon.component';
 import {RecipeService} from './services/recipe.service';
 import {FileUploadService} from './services/file-upload.service';
+import {NgxStarRatingModule} from 'ngx-star-rating';
 
 const components = [DashboardComponent, HeaderComponent, RecipesComponent,
   RecipesListComponent, RecipeItemComponent, RecipeFormComponent];
@@ -23,7 +24,7 @@ const services = [RecipeService, FileUploadService];
 
 @NgModule({
   declarations: [...components, ShoppingComponent, RecipesHomeComponent, MenuIconComponent],
-  imports: [...modules],
+    imports: [...modules, NgxStarRatingModule],
   providers: [...services]
 })
 export class DashboardModule { }

@@ -19,6 +19,7 @@ export class RecipeFormComponent implements OnInit {
     is_private: new FormControl(false),
     image_url: new FormControl(),
     description: new FormControl(),
+    recipe: new FormControl(null),
     ingredients: new FormArray([], Validators.required),
   };
   recipeForm = new FormGroup(this.control);
@@ -45,7 +46,6 @@ export class RecipeFormComponent implements OnInit {
     this.control.ingredients.removeAt(index);
   }
 
-
   onFileSelected(event) {
     this.uploading = true;
     if (event.target.files[0]) {
@@ -63,5 +63,9 @@ export class RecipeFormComponent implements OnInit {
 
   cancel() {
     this._router.navigate(['../'], {relativeTo: this._activatedRoute});
+  }
+
+  save() {
+    console.log(this.recipeForm.value);
   }
 }

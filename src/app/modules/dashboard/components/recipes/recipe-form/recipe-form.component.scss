@@ -8,7 +8,8 @@
 
   & textarea{
     &::-webkit-scrollbar {
-      width: 8px;
+      display: unset !important;
+      width: 8px !important;
     }
     &::-webkit-scrollbar-track {
       background: lightgray;

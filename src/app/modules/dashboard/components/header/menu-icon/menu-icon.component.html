@@ -1,13 +1,13 @@
 <div class="navigation">
-  <input type="checkbox" [checked]="isDrawerVisible" class="navigation__checkbox" id="navi-toggle">
+  <input type="checkbox" [formControl]="drawerControl" class="navigation__checkbox" id="navi-toggle">
 
-  <label for="navi-toggle" class="navigation__button" (click)="isDrawerVisible = true">
+  <label for="navi-toggle" class="navigation__button">
     <span class="navigation__icon">&nbsp;</span>
   </label>
 
-  <div class="navigation__background">&nbsp;</div>
+  <div class="navigation__background"></div>
 
-  <nav class="navigation__nav">
+  <nav class="navigation__nav" [ngClass]="{'disable': !drawerControl.value}">
     <ul class="navigation__list">
       <li class="navigation__item">
         <a routerLink="" (click)="openLink('recipes')" class="navigation__link">Recipes</a>

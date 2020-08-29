@@ -1,9 +1,12 @@
-<div class="recipe row flex flex-row w-100 justify-content-between align-items-start">
-  <div class="recipe-info h-100 flex flex-column justify-content-center align-items-start">
-    <div class="recipe-title">{{recipe.name}}</div>
-    <div class="recipe-description">{{recipe.description}}</div>
+<div class="recipe">
+  <div class="recipe-icon">
+    <img src="{{recipe.image_url}}" alt="{{recipe.name}}" class="h-100">
   </div>
-  <div class="recipe-icon h-100">
-    <img src="{{recipe.image_url}}" alt="{{recipe.name}}">
+  <div class="recipe-info">
+    <div class="recipe-title">{{recipe.name}}</div>
+    <div class="w-100 flex justify-content-start align-items-center">
+      <ngx-star-rating class="recipe-rating" [(ngModel)]="recipe.rating" id="{{recipe.id}}" [disabled]="true"></ngx-star-rating >
+    </div>
+    <div class="recipe-description">{{recipe.description}}</div>
   </div>
 </div>
