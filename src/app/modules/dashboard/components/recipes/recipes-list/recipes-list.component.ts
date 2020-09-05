@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Recipe} from '../../../models/recipe.model';
 
 @Component({
@@ -9,6 +9,8 @@ import {Recipe} from '../../../models/recipe.model';
 export class RecipesListComponent implements OnInit {
 
   constructor() { }
+
+  @Input() isPrivateMode: boolean;
 
   recipes: Recipe[] = [
     {name: 'One Pot Thai-Style Rice Noodles', image_url: 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F3949345.jpg&w=272&h=272&c=sc&poi=face&q=85'

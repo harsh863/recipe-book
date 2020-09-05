@@ -1,4 +1,4 @@
-<div class="recipe-form-container flex flex-column align-items-center mt-5">
+<div class="recipe-form-container flex flex-column align-items-center mt-5 mb-3">
   <div class="row w-100 flex flex-column justify-content-start mb-3">
     <div class="label">Recipe Name</div>
     <div class="input-group">
@@ -24,7 +24,7 @@
         <input type="file" class="custom-file-input" accept="image/*"
                id="inputGroupFile04"  (change)="onFileSelected($event)">
         <label class="custom-file-label" for="inputGroupFile04">
-          <img src="https://img.icons8.com/officel/20/000000/add-image.png"/>
+          <img src="../../../../../../assets/icons/add-image.png"/>
         </label>
       </div>
     </div>
@@ -44,6 +44,14 @@
       <textarea type="text" class="form-control"
                 placeholder="Description" [formControl]="control.description"></textarea>
     </div>
+  </div>
+  <div class="row w-100 flex flex-column justify-content-start mb-3">
+    <div class="label">Recipe</div>
+    <quill-editor
+      placeholder="Enter your recipe here."
+      [styles]="{'height': '250px', 'max-width': '100%', 'width': '100%'}"
+      [formControl]="control.recipe">
+    </quill-editor>
   </div>
   <div class="row w-100 flex flex-column justify-content-start mb-5">
     <div class="label">Ingredients</div>
@@ -73,6 +81,6 @@
   </div>
   <div class="row w-100 flex justify-content-end align-items-center">
     <button type="button" class="btn btn-danger mr-3" (click)="cancel()">Cancel</button>
-    <button type="button" class="save-btn btn btn-success" [disabled]="recipeForm.invalid">Save</button>
+    <button type="button" class="save-btn btn btn-success" [disabled]="recipeForm.invalid" (click)="save()">Save</button>
   </div>
 </div>

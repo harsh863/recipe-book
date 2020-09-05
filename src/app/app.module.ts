@@ -18,7 +18,7 @@ import {environment} from '../environments/environment';
     FormsModule,
     HttpClientModule,
     AngularFireStorageModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig, 'recipe-book')
+    AngularFireModule.initializeApp(environment.firebaseConfig, 'recipe-book'),
   ],
   bootstrap: [AppComponent]
 })

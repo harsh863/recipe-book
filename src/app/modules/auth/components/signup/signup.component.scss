@@ -1,0 +1,84 @@
+.signup-container {
+
+  & .sign-up-btn {
+    margin-top: 40px;
+    cursor: pointer;
+    background: #696969;
+    border-radius: 40px;
+    font-size: 19px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    border: 0;
+    font-weight: 600;
+    outline: 0;
+    padding: 9px 50px;
+    letter-spacing: .5px;
+  }
+
+  & .separator {
+    margin-top: 5vh;
+    font-size: 16px;
+    color: darkgray;
+    font-family: 'Quicksand', 'Lato', sans-serif;
+    user-select: none;
+  }
+
+  & .sign-up-google {
+    margin-top: 5vh;
+    font-size: 15px;
+    cursor: pointer;
+    font-family: 'Lato', sans-serif;
+
+    & img {
+      margin-right: 10px;
+      width: 25px;
+      height: 25px;
+    }
+  }
+
+  & .footer {
+    position: absolute;
+    bottom: 2vh;
+    font-size: 16px;
+    font-family: 'Quicksand', 'Lato', 'Montserrat', sans-serif;
+    user-select: none;
+
+    a {
+      color: #9db692;
+      padding-bottom: 5px;
+      user-select: unset;
+      margin-left: 5px;
+      border-bottom: 1px solid #6e8565;
+
+      &:hover {
+        text-decoration: none !important;
+        color: #86a07a;
+        font-weight: bold;
+        border-bottom: 1.5px solid #59734f;
+      }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .sign-up-btn {
+    font-size: 17px !important;
+    padding: 7px 40px !important;
+  }
+}
+
+@media (max-height: 590px) {
+  .signup-container {
+    .sign-up-btn {
+      margin-top: 20px;
+    }
+
+    .separator {
+      margin-top: 2vh;
+    }
+
+    .sign-up-google{
+      margin-top: 1.5vh;
+    }
+  }
+}

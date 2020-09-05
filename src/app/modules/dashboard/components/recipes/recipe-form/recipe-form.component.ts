@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FileUploadService} from '../../../services/file-upload.service';
@@ -17,7 +17,7 @@ export class RecipeFormComponent implements OnInit {
   control = {
     name: new FormControl(null, Validators.required),
     is_private: new FormControl(false),
-    image_url: new FormControl(),
+    image_url: new FormControl(null, Validators.required),
     description: new FormControl(),
     recipe: new FormControl(null),
     ingredients: new FormArray([], Validators.required),

@@ -15,16 +15,37 @@ import { MenuIconComponent } from './components/header/menu-icon/menu-icon.compo
 import {RecipeService} from './services/recipe.service';
 import {FileUploadService} from './services/file-upload.service';
 import {NgxStarRatingModule} from 'ngx-star-rating';
+import {QuillModule} from 'ngx-quill';
+import { RecipePreviewComponent } from './components/recipes/recipe-preview/recipe-preview.component';
+import {SharedModule} from '../shared/shared.module';
 
 const components = [DashboardComponent, HeaderComponent, RecipesComponent,
-  RecipesListComponent, RecipeItemComponent, RecipeFormComponent];
+  RecipesListComponent, RecipeItemComponent, RecipeFormComponent, ShoppingComponent,
+  RecipesHomeComponent, MenuIconComponent, RecipePreviewComponent];
 const modules = [CommonModule, DashboardRoutingModule, HttpClientModule,
-  FormsModule, ReactiveFormsModule];
+  FormsModule, ReactiveFormsModule, NgxStarRatingModule, SharedModule,
+  QuillModule.forRoot({
+    theme: 'snow',
+    modules: {
+      toolbar: {
+        container:
+          [
+            ['bold', 'italic', 'underline', 'strike'],
+            ['blockquote', 'code-block'],
+            [{'list': 'ordered'}, {'list': 'bullet'}],
+            [{'script': 'sub'}, {'script': 'super'}],
+            [{'indent': '-1'}, {'indent': '+1'}],
+            [{'size': ['small', 'normal', 'large']}],
+            [{color: []}, {'background': []}],
+          ],
+      }
+    }
+  })];
 const services = [RecipeService, FileUploadService];
 
 @NgModule({
-  declarations: [...components, ShoppingComponent, RecipesHomeComponent, MenuIconComponent],
-    imports: [...modules, NgxStarRatingModule],
+  declarations: [...components],
+    imports: [...modules],
   providers: [...services]
 })
 export class DashboardModule { }

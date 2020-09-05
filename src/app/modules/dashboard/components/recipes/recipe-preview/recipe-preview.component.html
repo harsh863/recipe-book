@@ -1,0 +1,21 @@
+<div class="w-100 recipe-preview-container" id="recipe-preview">
+  <div class="w-100 flex flex-column justify-content-start align-items-start mb-3">
+    <div class="title">{{recipe.name}}</div>
+    <div class="description">{{recipe.description}}</div>
+  </div>
+  <div class="w-100 recipe-icon mb-3">
+    <img src="{{recipe.image_url}}" alt="">
+  </div>
+  <div class="w-100 flex flex-column justify-content-start align-items-start">
+    <div class="w-100 text-dark font-weight-bold label mb-2" style="font-size: 22px; font-family: 'Lato', sans-serif">Recipe :- </div>
+    <div class="w-100 ml-4" [innerHTML]="recipe.recipe"></div>
+  </div>
+  <div class="w-100 flex flex-column justify-content-start align-items-start">
+    <div class="w-100 text-dark font-weight-bold label mb-2" style="font-size: 22px; font-family: 'Lato', sans-serif">Ingredients :- </div>
+    <ul class="w-100 ml-4 flex flex-column justify-content-start align-items-start">
+      <li *ngFor="let ingredient of recipe.ingredients" class="mb-1 list-item">
+        {{ingredient.name}} ({{ingredient.quantity}}{{ingredient.unit ? ' ' + ingredient.unit : ''}})
+      </li>
+    </ul>
+  </div>
+</div>

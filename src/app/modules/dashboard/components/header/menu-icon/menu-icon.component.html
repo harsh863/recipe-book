@@ -10,13 +10,13 @@
   <nav class="navigation__nav" [ngClass]="{'disable': !drawerControl.value}">
     <ul class="navigation__list">
       <li class="navigation__item">
-        <a routerLink="" (click)="openLink('recipes')" class="navigation__link">Recipes</a>
+        <a routerLink="" (click)="openLink('dashboard/recipes')" class="navigation__link">Recipes</a>
       </li>
       <li class="navigation__item">
-        <a routerLink="" (click)="openLink('shopping-list')" class="navigation__link">Shopping List</a>
+        <a routerLink="" (click)="openLink('dashboard/shopping-list')" class="navigation__link">Shopping List</a>
       </li>
       <li class="navigation__item">
-        <a routerLink="" class="navigation__link">Logout</a>
+        <a routerLink="" (click)="openLink('auth/logout')" class="navigation__link">Logout</a>
       </li>
     </ul>
   </nav>

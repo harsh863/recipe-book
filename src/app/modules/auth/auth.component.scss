@@ -1,0 +1,178 @@
+.auth-container {
+  user-select: none;
+  min-height: 550px !important;
+  overflow: scroll;
+  & .slide {
+    &-1{
+      background: #00548d;
+    }
+    &-2 {
+      background: #eb5e37;
+    }
+    &-3 {
+      background: #d9e2e9;
+    }
+    &-4 {
+      background: #fed24a;
+    }
+    &-5 {
+      background: #93b4b4;
+
+      & img {
+        transform: translate(-10px, 20px);
+        width: 90% !important;
+      }
+    }
+
+    & img {
+      //object-fit: cover;
+    }
+  }
+
+  & li{
+    border-radius: 50%;
+    margin: 0 5px;
+    background: white !important;
+    width: 7px;
+    height: 7px;
+    border: 1px dashed black !important;
+    cursor: unset;
+  }
+
+  & li.active {
+    border-radius: 15px;
+    margin: 0 7px;
+    width: 20px;
+    border: 1px dashed transparent !important;
+    background: black !important;
+  }
+
+  & .main-block {
+    .title {
+      margin-top: 5vh;
+      font-family: 'Pacifico', sans-serif;
+      font-size: 3.5em;
+      line-height: 1;
+      text-shadow: #EDEDED 3px 2px 0;
+      color: #656565;
+      user-select: none;
+
+      &:after {
+        content:"Recipe Book";
+        position: absolute;
+        word-break: break-all;
+        width: calc(100% + 20px);
+        left: 5px;
+        top: 5px;
+        background-image: -webkit-linear-gradient(left top, transparent 0%, transparent 25%, #555 25%, #555 50%, transparent 50%, transparent 75%, #555 75%);
+        background-size: 4px 4px;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        z-index: -5;
+        display: block;
+        text-shadow: none;
+      }
+    }
+
+    .welcome-text {
+      margin-top: 6vh;
+      font-size: 1.5rem;
+      font-weight: 500;
+      font-family: 'Montserrat', sans-serif;
+      color: #acacac;
+      user-select: none;
+    }
+
+    .auth-form {
+      width: 70%;
+      margin-top: 8vh;
+    }
+  }
+
+  & rb-sliding-arrow {
+    z-index: 11;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  & .mobile-title {
+    z-index: 100;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    & svg {
+      display: block;
+      font: 10.5em 'Montserrat';
+      width: 300px;
+      margin: 0 auto;
+
+      & .text-copy {
+        fill: none;
+        stroke: white;
+        stroke-dasharray: 10% 20%;
+        stroke-width: 7px;
+        stroke-dashoffset: 0;
+        animation: stroke-offset 4s infinite linear;
+
+        &:nth-child(1){
+          stroke: #4D163D;
+          animation-delay: -1s;
+        }
+
+        &:nth-child(2){
+          stroke: #840037;
+          animation-delay: -2s;
+        }
+
+        &:nth-child(3){
+          stroke: greenyellow;
+          animation-delay: -3s;
+        }
+
+        &:nth-child(4){
+          stroke: red;
+          animation-delay: -4s;
+        }
+
+        &:nth-child(5){
+          stroke: #FDB731;
+          animation-delay: -5s;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .auth-container{
+    .main-block {
+      .title {
+        font-size: 3rem;
+      }
+
+      .welcome-text {
+        margin-top: 7vh;
+        font-size: 1.2rem;
+      }
+      .auth-form{
+        margin-top: 7vh;
+        width: 85% !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .carousel {
+    width: 100vw !important;
+  }
+  .main-block {
+    width: 100vw !important;
+  }
+}
+
+@keyframes stroke-offset{
+  100% {stroke-dashoffset: -35%;}
+}

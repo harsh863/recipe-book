@@ -1,0 +1,17 @@
+<div class="input-block w-100 flex flex-column justify-content-start"
+     (focusin)="focused = true" (focusout)="focused = false">
+  <div class="label pl-1"
+       [ngClass]="{'focus': focused || control.value}">{{label}}</div>
+  <div class="input-group">
+    <input [type]="passwordVisible ? 'text' : type" [formControl]="control" [placeholder]="focused ? '' : placeholder" class="form-control">
+    <div class="input-group-append" *ngIf="type === 'password'">
+      <span class="input-group-text" (click)="passwordVisible = !passwordVisible">
+            <img *ngIf="!passwordVisible" src="../../../../../assets/icons/show.png"/>
+            <img *ngIf="passwordVisible" src="../../../../../assets/icons/hide.png"/>
+          </span>
+    </div>
+  </div>
+  <div class="error-block" *ngIf="control.touched && control.errors">
+    {{getErrorMessage()}}
+  </div>
+</div>

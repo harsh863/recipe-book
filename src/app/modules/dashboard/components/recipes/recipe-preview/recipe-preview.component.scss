@@ -1,0 +1,59 @@
+.recipe-preview-container {
+  & .title{
+    font-size: 2.5rem;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: .3px;
+  }
+
+  & .description {
+    font-size: 20px;
+    font-family: "Source Sans Pro",Times,serif;
+    font-weight: 500;
+    color: grey;
+  }
+
+  & .recipe-icon {
+    img {
+      max-width: 100%;
+      width: 100%;
+      display: block;
+      min-height: 350px;
+      position: relative;
+
+      &::after{
+        content: 'Failed to load Image...';
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Lato', sans-serif;
+        font-size: 1.3rem;
+        color: #5e5a5a;
+        top: 0;
+        font-weight: 800;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg,#f2f2f2 25%,#e6e6e6 37%,#f2f2f2 63%);
+        background-size: 400% 100%;
+        animation: imageLoading 1.5s ease infinite;
+      }
+    }
+  }
+
+  & .list-item {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 16px;
+    text-transform: capitalize;
+  }
+}
+
+@keyframes imageLoading {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}

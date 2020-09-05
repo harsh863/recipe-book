@@ -1,0 +1,46 @@
+<div class="auth-container container p-0 m-0 min-vw-100 min-vh-100 flex align-items-start justify-content-start position-relative"
+     [ngClass]="{'flex-column': !isDesktopMode}"
+     (window:resize)="onResize()">
+  <div id="carouselExampleIndicators" class="carousel slide carousel-fade min-vh-100 w-50" data-ride="carousel" *ngIf="!hideWelcomeWindow">
+    <ol class="carousel-indicators">
+      <li *ngFor="let i of carouselIndicators" data-target="#carouselExampleIndicators"
+          [ngClass]="{'active': activeCardIndex === i}"></li>
+    </ol>
+    <div class="carousel-inner w-100 min-vh-100">
+      <div class="carousel-item slide-{{i}} min-vh-100"
+           *ngFor="let i of [1, 2, 3, 4, 5]"
+           [ngClass]="{'active': activeCardIndex === i}">
+        <div class="flex justify-content-center align-items-center bg-transparent min-vh-100 w-100">
+          <img src="../../../assets/images/s-{{i}}.png" class="slide w-100" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="min-vh-100 w-50 flex flex-column align-items-center main-block"
+       *ngIf="isDesktopMode || hideWelcomeWindow || openMainBlock">
+    <div class="title position-relative">
+      Recipe Book
+    </div>
+    <div class="welcome-text text-center">Welcome to Recipe Book</div>
+    <div class="auth-form">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div class="mobile-title position-absolute" *ngIf="!isDesktopMode && !hideWelcomeWindow">
+    <svg viewBox="0 0 1100 300">
+      <symbol id="s-text">
+        <text text-anchor="middle" x="50%" y="80%">Recipe Book</text>
+      </symbol>
+      <g class = "g-ants">
+        <use xlink:href="#s-text" class="text-copy"></use>
+        <use xlink:href="#s-text" class="text-copy"></use>
+        <use xlink:href="#s-text" class="text-copy"></use>
+        <use xlink:href="#s-text" class="text-copy"></use>
+        <use xlink:href="#s-text" class="text-copy"></use>
+      </g>
+    </svg>
+  </div>
+  <rb-sliding-arrow class="position-absolute"
+                    (onClicked)="navigateToLogin()"
+                    *ngIf="!isDesktopMode && !hideWelcomeWindow"></rb-sliding-arrow>
+</div>

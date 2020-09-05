@@ -1,6 +1,6 @@
 <div class="recipe-container flex flex-column justify-content-start align-items-center">
   <div class="row w-100 flex justify-content-start align-items-center">
-    <button type="button" class="btn btn-info mr-3 mb-2" (click)="createNewRecipe()">Add New Recipe</button>
+    <button type="button" class="btn btn-success mr-3 mb-2" (click)="createNewRecipe()">Add New Recipe</button>
     <div class="btn-group mb-2" [ngClass]="{'show': isDropdownExpanded}">
       <button type="button" class="btn btn-danger">{{isPrivateMode ? 'Private': 'Public'}}</button>
       <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split"
@@ -14,7 +14,14 @@
       </div>
     </div>
   </div>
-  <div class="row w-100 flex justify-content-start align-items-center">
-    <rb-recipes-list class="w-100"></rb-recipes-list>
+  <div class="w-100 dropdown-divider mt-3 mb-2"></div>
+  <div class="row w-100 flex justify-content-between align-items-start pt-4">
+    <div class="col-lg-6 px-0">
+      <rb-recipes-list class="w-100" [isPrivateMode]="isPrivateMode"></rb-recipes-list>
+      <div class="row dropdown-divider mt-4 mb-4"></div>
+    </div>
+    <div class="px-0 col-lg-5 w-100">
+      <rb-recipe-preview></rb-recipe-preview>
+    </div>
   </div>
 </div>

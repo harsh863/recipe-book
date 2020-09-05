@@ -37,6 +37,11 @@
       & label {
         cursor: pointer;
         width: 45px;
+
+        & img {
+          width: 20px;
+          height: 20px;
+        }
         &::after{
           display: none;
         }
@@ -73,6 +78,19 @@
     padding: 4px;
     border-radius: 5px;
     max-width: 100%;
+  }
+
+  & quill-editor{
+    max-width: 100%;
+    ::ng-deep{
+      .ql-toolbar{
+        background: lavender;
+        border-radius: .25rem .25rem 0 0;
+      }
+      .ql-container{
+        border-radius: 0 0 .25rem .25rem;
+      }
+    }
   }
 }
 
