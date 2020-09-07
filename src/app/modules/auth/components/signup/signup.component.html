@@ -1,5 +1,11 @@
 <div class="signup-container w-100 flex flex-column justify-content-start align-items-center">
-  <form autofocus autocomplete="off" class="w-100 flex flex-column justify-content-start align-items-center">
+  <form (ngSubmit)="signUp()" autofocus
+        autocomplete="off" class="w-100 flex flex-column justify-content-start align-items-center">
+
+    <rb-custom-input class="w-100 mb-3"
+                     label="Username" [control]="control.username"
+                     placeholder="Username"></rb-custom-input>
+
     <rb-custom-input class="w-100 mb-3"
                      label="Email" [control]="control.email"
                      placeholder="Email"
@@ -11,7 +17,9 @@
                      type="password"></rb-custom-input>
 
     <div class="w-100 flex justify-content-center align-items-center align-items-center">
-      <button class="sign-up-btn" [disabled]="signupForm.invalid" type="submit">Sign Up</button>
+      <button class="sign-up-btn"
+              [ngClass]="{'btn-success': signupForm.valid}"
+              [disabled]="signupForm.invalid || loading" type="submit">Sign Up</button>
     </div>
   </form>
   <div class="w-100 flex flex-column justify-content-center">
@@ -20,7 +28,8 @@
       or
       <div class="row dropdown-divider" style="width: 120px; margin-left: 10px;"></div>
     </div>
-    <div class="sign-up-google flex flex-row justify-content-center align-items-center">
+    <div class="sign-up-google flex flex-row justify-content-center align-items-center"
+         (click)="registerWithGoogle()">
       <img src="../../../../../assets/icons/google.png"/> Sign Up with Google
     </div>
   </div>

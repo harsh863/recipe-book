@@ -13,6 +13,10 @@
     outline: 0;
     padding: 9px 50px;
     letter-spacing: .5px;
+
+    &:disabled{
+      cursor: not-allowed;
+    }
   }
 
   & .separator {
@@ -38,10 +42,14 @@
 
   & .footer {
     position: absolute;
-    bottom: 2vh;
+    bottom: 2.5vh;
     font-size: 16px;
     font-family: 'Quicksand', 'Lato', 'Montserrat', sans-serif;
     user-select: none;
+
+    p {
+      margin: 0 !important;
+    }
 
     a {
       color: #9db692;
@@ -67,18 +75,20 @@
   }
 }
 
-@media (max-height: 590px) {
-  .signup-container {
-    .sign-up-btn {
-      margin-top: 20px;
-    }
-
-    .separator {
-      margin-top: 2vh;
-    }
-
-    .sign-up-google{
-      margin-top: 1.5vh;
-    }
+@media (max-height: 800px) {
+  .sign-up-btn {
+    margin-top: 20px !important;
   }
+
+  .separator {
+    margin-top: 3vh !important;
+  }
+
+  .sign-up-google {
+    margin-top: 2.5vh !important;
+  }
+}
+
+.btn-success {
+  background: #28a745 !important;
 }

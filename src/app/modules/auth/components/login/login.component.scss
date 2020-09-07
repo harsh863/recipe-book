@@ -20,6 +20,10 @@
     padding: 9px 50px;
     letter-spacing: .5px;
     cursor: pointer;
+
+    &:disabled{
+      cursor: not-allowed;
+    }
   }
 
   & .separator {
@@ -89,4 +93,8 @@
       margin-top: 1.5vh;
     }
   }
+}
+
+.btn-success {
+  background: #28a745 !important;
 }

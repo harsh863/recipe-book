@@ -16,6 +16,7 @@ export class CustomInputComponent{
   @Input() placeholder: string;
   @Input() disabled = false;
   @Input() type: 'email' | 'text' | 'password' = 'text';
+  @Input() pattern: string;
   passwordVisible = false;
   focused = false;
 

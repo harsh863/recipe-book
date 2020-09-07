@@ -6,6 +6,7 @@ import {SignupComponent} from './components/signup/signup.component';
 import {LogoutComponent} from './components/logout/logout.component';
 import {AnonymousGuard} from '../../guards/anonymous.guard';
 import {AuthGuard} from '../../guards/auth.guard';
+import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   {
@@ -19,7 +20,10 @@ const routes: Routes = [
       },
       {
         path: 'signup', component: SignupComponent
-      }
+      },
+      {
+        path: 'forgot-password', component: ForgotPasswordComponent
+      },
     ]
   },
   {

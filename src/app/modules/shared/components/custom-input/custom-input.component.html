@@ -11,7 +11,7 @@
           </span>
     </div>
   </div>
-  <div class="error-block" *ngIf="control.touched && control.errors">
+  <div class="error-block" *ngIf="control.touched && control.errors && pattern !== control.value">
     {{getErrorMessage()}}
   </div>
 </div>

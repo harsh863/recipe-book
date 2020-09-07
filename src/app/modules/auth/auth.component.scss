@@ -1,6 +1,5 @@
 .auth-container {
   user-select: none;
-  min-height: 550px !important;
   overflow: scroll;
   & .slide {
     &-1{
@@ -23,10 +22,6 @@
         width: 90% !important;
       }
     }
-
-    & img {
-      //object-fit: cover;
-    }
   }
 
   & li{
@@ -48,7 +43,9 @@
   }
 
   & .main-block {
+    min-height: 650px !important;
     .title {
+      text-align: center;
       margin-top: 5vh;
       font-family: 'Pacifico', sans-serif;
       font-size: 3.5em;
@@ -60,8 +57,7 @@
       &:after {
         content:"Recipe Book";
         position: absolute;
-        word-break: break-all;
-        width: calc(100% + 20px);
+        width: 100%;
         left: 5px;
         top: 5px;
         background-image: -webkit-linear-gradient(left top, transparent 0%, transparent 25%, #555 25%, #555 50%, transparent 50%, transparent 75%, #555 75%);

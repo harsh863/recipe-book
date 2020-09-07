@@ -1,5 +1,6 @@
 <div class="login-container w-100 flex flex-column justify-content-start align-items-center">
-  <form autofocus autocomplete="off" class="w-100 flex flex-column justify-content-start align-items-center">
+  <form autofocus (ngSubmit)="signIn()"
+        autocomplete="off" class="w-100 flex flex-column justify-content-start align-items-center">
     <rb-custom-input class="w-100 mb-3"
                      label="Email" [control]="control.email"
                      placeholder="Email"
@@ -9,11 +10,13 @@
                      label="Password" [control]="control.password"
                      placeholder="Password"
                      type="password"></rb-custom-input>
-    <div class="w-100 flex justify-content-end align-items-center mt-2 forgot-password">
+    <div class="w-100 flex justify-content-end align-items-center mt-2 forgot-password" (click)="goToForgotPassword()">
       Forgot Password?
     </div>
     <div class="w-100 flex justify-content-center align-items-center align-items-center">
-      <button class="sign-in-btn" [disabled]="loginForm.invalid" type="submit">Sign In</button>
+      <button class="sign-in-btn"
+              [ngClass]="{'btn-success': loginForm.valid}"
+              [disabled]="loginForm.invalid || loading" type="submit">Sign In</button>
     </div>
   </form>
   <div class="w-100 flex flex-column justify-content-center">
@@ -23,7 +26,7 @@
       <div class="row dropdown-divider" style="width: 120px; margin-left: 10px;"></div>
     </div>
     <div class="sign-in-google flex flex-row justify-content-center align-items-center"
-         (click)="signIn()">
+         (click)="signInWithGoogle()">
       <img src="../../../../../assets/icons/google.png"/> Sign In with Google
     </div>
   </div>
