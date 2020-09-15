@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
-import {AUTH_TOKEN} from '../../../shared/constants/local-storage.constant';
+import {AuthManager} from '../../managers/auth.manager';
 
 @Component({
   selector: 'rb-logout',
@@ -8,11 +7,10 @@ import {AUTH_TOKEN} from '../../../shared/constants/local-storage.constant';
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(private _router: Router) { }
+  constructor(private _authManager: AuthManager) { }
 
   ngOnInit() {
-    localStorage.removeItem(AUTH_TOKEN);
-    this._router.navigate(['/']);
+    this._authManager.logout();
   }
 
 }

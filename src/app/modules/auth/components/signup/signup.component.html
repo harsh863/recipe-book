@@ -1,4 +1,5 @@
-<div class="signup-container w-100 flex flex-column justify-content-start align-items-center">
+<div class="signup-container w-100 flex flex-column justify-content-start align-items-center"
+     [ngClass]="{'pointer-none': (loading | async)}">
   <form (ngSubmit)="signUp()" autofocus
         autocomplete="off" class="w-100 flex flex-column justify-content-start align-items-center">
 
@@ -19,7 +20,7 @@
     <div class="w-100 flex justify-content-center align-items-center align-items-center">
       <button class="sign-up-btn"
               [ngClass]="{'btn-success': signupForm.valid}"
-              [disabled]="signupForm.invalid || loading" type="submit">Sign Up</button>
+              [disabled]="signupForm.invalid || (loading | async)" type="submit">Sign Up</button>
     </div>
   </form>
   <div class="w-100 flex flex-column justify-content-center">

@@ -10,18 +10,7 @@ import {Ingredient} from '../../models/ingredient.model';
 export class ShoppingComponent implements OnInit {
 
   constructor() { }
-
-  control = {
-    name: new FormControl(null, [Validators.required]),
-    quantity: new FormControl(null, [Validators.required]),
-    unit: new FormControl(null)
-  };
   filterControl = new FormControl(null);
-
-  ingredients: Ingredient[] = [
-    {name: 'Apple', quantity: 2, unit: 'kgs'},
-    {name: 'Apple', quantity: 2, unit: 'kgs'},
-  ];
 
   isFilterBarVisible = false;
 

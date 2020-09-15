@@ -1,0 +1,13 @@
+<div class="filter-bar flex flex-row justify-content-center align-items-center"
+     [ngClass]="{'prevent-shrink': control.value}">
+  <input type="text" [placeholder]="placeholder"
+         [formControl]="control">
+  <div class="search-button">
+    <img *ngIf="!control.value"
+         src="../../../../../assets/icons/search.png" alt="">
+    <img *ngIf="control.value"
+         (click)="control.reset()"
+         src="../../../../../assets/icons/clear-search.png"
+         alt="" style="transform: translateX(1px);">
+  </div>
+</div>

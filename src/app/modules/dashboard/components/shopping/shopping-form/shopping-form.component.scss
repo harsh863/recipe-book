@@ -1,0 +1,43 @@
+.shopping-form {
+
+  & .label {
+    margin-bottom: 3px;
+  }
+
+  & .row {
+    width: 100%;
+
+    & .name {
+      width: 50%;
+    }
+
+    & .qty,
+    .unit {
+      min-width: 100px;
+      width: 12%;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .row {
+    width: 100%;
+    flex-wrap: wrap;
+
+    & .name {
+      margin-right: 0 !important;
+      width: 100% !important;
+      margin-bottom: 10px;
+    }
+
+    & .qty,
+    .unit {
+      margin-right: 0 !important;
+      width: calc((100% - 1rem) / 2) !important;
+    }
+
+    & .qty {
+      margin-right: 1rem !important;
+    }
+  }
+}

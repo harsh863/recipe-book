@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'rb-recipes-home',
@@ -12,6 +13,7 @@ export class RecipesHomeComponent implements OnInit {
 
   isPrivateMode = false;
   isDropdownExpanded = false;
+  filterControl = new FormControl();
 
   ngOnInit() {
   }

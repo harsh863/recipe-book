@@ -14,3 +14,11 @@
 .flex {
   display: flex;
 }
+
+button:disabled{
+  cursor: not-allowed;
+}
+
+.pointer-none {
+  pointer-events: none;
+}

@@ -2,3 +2,11 @@
   width: 80vw;
   margin: 2rem auto 0;
 }
+
+
+@media (max-width: 680px) {
+  .filter {
+    margin-top: .7rem;
+    width: 100% !important;
+  }
+}

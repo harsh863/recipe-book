@@ -9,7 +9,7 @@
   <div class="row w-100 flex flex-column justify-content-start mb-3">
     <div class="label">Who can view this?</div>
     <div class="input-group">
-      <select class="custom-select">
+      <select class="custom-select" [formControl]="control.is_private">
         <option value="false">Anyone</option>
         <option value="true">Only Me</option>
       </select>

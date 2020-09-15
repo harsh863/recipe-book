@@ -1,0 +1,15 @@
+.shopping-list {
+  & .ing-info {
+    color: #555;
+    font-size: 14px;
+  }
+
+  & .delete {
+    cursor: pointer;
+
+    & img {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}

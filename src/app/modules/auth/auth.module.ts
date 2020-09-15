@@ -11,11 +11,12 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import {AuthService} from './services/auth.service';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
-
-
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import {AuthEffects} from './store/effects/auth.effects';
+import {AuthManager} from './managers/auth.manager';
 
 @NgModule({
-  declarations: [AuthComponent, LoginComponent, SignupComponent, LogoutComponent, ForgotPasswordComponent],
+  declarations: [AuthComponent, LoginComponent, SignupComponent, LogoutComponent, ForgotPasswordComponent, ResetPasswordComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
@@ -23,6 +24,6 @@ import {AngularFireAuth} from '@angular/fire/auth';
     ReactiveFormsModule,
     SharedModule
   ],
-  providers: [AuthService, AngularFirestore, AngularFireAuth]
+  providers: [AuthService, AngularFirestore, AngularFireAuth, AuthEffects, AuthManager]
 })
 export class AuthModule { }

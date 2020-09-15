@@ -1,0 +1,72 @@
+.snackbar{
+  position: absolute;
+  top: 30px;
+  right: 20px;
+  min-width: 280px;
+  width: 25vw;
+  max-width: 400px;
+  padding: 15px 12px;
+  border-radius: 4px;
+  transition: .3s all;
+  animation: slideIn 0.3s forwards linear;
+
+  .icon{
+    img {
+      width: 26px;
+      filter: invert(1);
+    }
+  }
+
+  .message {
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    max-width: calc(100% - 75px);
+  }
+
+  .clear {
+    cursor: pointer;
+    transform: translateY(-50%);
+    right: 10px;
+    top: 50%;
+
+    img {
+      width: 15px;
+    }
+  }
+}
+
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(200px);
+    opacity: 0;
+  }
+  40%{
+    transform: translateX(100px);
+    opacity: .7;
+  }
+  100%{
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .snackbar {
+    top: 15px;
+    right: 10px;
+    padding: 13px 10px;
+
+    .icon{
+      img {
+        width: 23px;
+      }
+    }
+
+    .message {
+      font-size: 16px;
+    }
+  }
+}

@@ -18,6 +18,9 @@ import {NgxStarRatingModule} from 'ngx-star-rating';
 import {QuillModule} from 'ngx-quill';
 import { RecipePreviewComponent } from './components/recipes/recipe-preview/recipe-preview.component';
 import {SharedModule} from '../shared/shared.module';
+import {ShoppingService} from './services/shopping.service';
+import { ShoppingFormComponent } from './components/shopping/shopping-form/shopping-form.component';
+import { ShoppingListComponent } from './components/shopping/shopping-list/shopping-list.component';
 
 const components = [DashboardComponent, HeaderComponent, RecipesComponent,
   RecipesListComponent, RecipeItemComponent, RecipeFormComponent, ShoppingComponent,
@@ -41,10 +44,10 @@ const modules = [CommonModule, DashboardRoutingModule, HttpClientModule,
       }
     }
   })];
-const services = [RecipeService, FileUploadService];
+const services = [RecipeService, FileUploadService, ShoppingService];
 
 @NgModule({
-  declarations: [...components],
+  declarations: [...components, ShoppingFormComponent, ShoppingListComponent],
     imports: [...modules],
   providers: [...services]
 })

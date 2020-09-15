@@ -1,7 +1,7 @@
 <div class="w-100 p-0">
   <div class="recipe-list w-100 flex flex-column justify-content-center align-items-start">
     <div class="recipe-item w-100 mb-2" *ngFor="let recipe of recipes; let i = index">
-      <rb-recipe-item [recipe]="recipe" [active]="i === 0"></rb-recipe-item>
+      <rb-recipe-item [recipe]="recipe" [active]="i === 0" [index]="i"></rb-recipe-item>
     </div>
   </div>
 </div>

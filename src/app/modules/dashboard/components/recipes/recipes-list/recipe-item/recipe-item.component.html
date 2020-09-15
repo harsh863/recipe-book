@@ -5,7 +5,7 @@
   <div class="recipe-info">
     <div class="recipe-title">{{recipe.name}}</div>
     <div class="w-100 flex justify-content-start align-items-center">
-      <ngx-star-rating class="recipe-rating" [(ngModel)]="recipe.rating" id="{{recipe.id}}" [disabled]="true"></ngx-star-rating >
+      <ngx-star-rating class="recipe-rating" [(ngModel)]="recipe.rating" id="{{index}}" [disabled]="true"></ngx-star-rating >
     </div>
     <div class="recipe-description">{{recipe.description}}</div>
   </div>

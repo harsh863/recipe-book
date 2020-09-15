@@ -1,0 +1,11 @@
+export enum AuthStoreActions {
+  LOGIN_START = '[Auth] -> LOGIN START',
+  LOGIN = '[Auth] -> LOGIN',
+  LOGIN_FAILED = '[Auth] -> LOGIN FAILED',
+  SIGNUP_START = '[Auth] -> SIGNUP START',
+  SIGNUP = '[Auth] -> SIGNUP',
+  SIGNUP_FAILED = '[Auth] -> SIGNUP FAILED',
+  AUTHENTICATE_WITH_GOOGLE = '[Auth] -> AUTHENTICATE WITH GOOGLE',
+  CLEAR_FAILED_REQUESTS = '[Auth] -> CLEAR FAILED REQUESTS',
+  LOGOUT = '[Auth] -> LOGOUT'
+}

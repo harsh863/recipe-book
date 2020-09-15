@@ -1,0 +1,6 @@
+<div class="shopping-list w-100 list-group">
+  <div class="list-group-item p-1 flex justify-content-between" *ngFor="let ingredient of ingredients">
+    <div class="ing-info flex align-items-center pl-2">{{ingredient.name}} ({{ingredient.quantity}} {{ingredient.unit}})</div>
+    <div class="delete"><img src="../../../../../../assets/icons/delete.png" alt="" style=""/></div>
+  </div>
+</div>

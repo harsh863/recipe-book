@@ -1,0 +1,7 @@
+<div class="snackbar flex justify-content-start align-items-center"
+[ngStyle]="{'background': getBackgroundColor(type)}">
+  <div class="icon mr-2"><img src="{{getIcon(type)}}" alt=""></div>
+  <div class="message">{{message}}</div>
+  <div class="clear flex align-items-center justify-content-center position-absolute"
+       (click)="onClose.next()"><img src="../../../../../assets/icons/close.png" alt=""></div>
+</div>

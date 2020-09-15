@@ -1,7 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FileUploadService} from '../../../services/file-upload.service';
+import {RecipeService} from '../../../services/recipe.service';
 
 @Component({
   selector: 'rb-recipe-form',
@@ -12,13 +13,14 @@ export class RecipeFormComponent implements OnInit {
 
   constructor(private _router: Router,
               private _activatedRoute: ActivatedRoute,
+              private _recipeService: RecipeService,
               private _fileUploadService: FileUploadService) { }
 
   control = {
     name: new FormControl(null, Validators.required),
     is_private: new FormControl(false),
     image_url: new FormControl(null, Validators.required),
-    description: new FormControl(),
+    description: new FormControl(null),
     recipe: new FormControl(null),
     ingredients: new FormArray([], Validators.required),
   };
@@ -28,6 +30,9 @@ export class RecipeFormComponent implements OnInit {
 
   ngOnInit() {
     this.addIngredientControl();
+    this._recipeService.fetchRecipes(true).subscribe(value => {
+      console.log(value);
+    });
   }
 
   addIngredientControl() {
@@ -40,7 +45,7 @@ export class RecipeFormComponent implements OnInit {
   }
 
   removeIngredientControl(index: number) {
-    if (this.control.ingredients.length === 1) {
+    if (this.control.ingredients.length === null) {
       return;
     }
     this.control.ingredients.removeAt(index);
@@ -55,8 +60,6 @@ export class RecipeFormComponent implements OnInit {
         if (value.file_url) {
           this.control.image_url.patchValue(value.file_url);
         }
-      }, error => {
-        console.log(error);
       });
     }
   }
@@ -66,6 +69,9 @@ export class RecipeFormComponent implements OnInit {
   }
 
   save() {
-    console.log(this.recipeForm.value);
+    this._recipeService.createRecipe(this.recipeForm.value).subscribe(_ => {
+      this.recipeForm.reset();
+      this._router.navigate(['recipes']);
+    });
   }
 }
