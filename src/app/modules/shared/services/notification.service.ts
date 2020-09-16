@@ -27,11 +27,11 @@ export class NotificationService {
     const domElem = (componentRef.hostView as EmbeddedViewRef<any>)
       .rootNodes[0] as HTMLElement;
     document.body.appendChild(domElem);
-    // const timer = setTimeout(_ => {
-    //   this.closeNotification(componentRef);
-    // }, 3500);
+    const timer = setTimeout(_ => {
+      this.closeNotification(componentRef);
+    }, 3500);
     componentRef.instance.onClose.subscribe(_ => {
-      // clearTimeout(timer);
+      clearTimeout(timer);
       this.closeNotification(componentRef);
     })
   }
