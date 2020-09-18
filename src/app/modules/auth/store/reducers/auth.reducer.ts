@@ -15,6 +15,7 @@ export const authReducer = (
     case AuthStoreActions.SIGNUP: return signUp(state, action.payload);
     case AuthStoreActions.SIGNUP_FAILED: return signUpFailed(state, action.payload);
     case AuthStoreActions.CLEAR_FAILED_REQUESTS: return clearActionsFailedState(state);
+    case AuthStoreActions.SAVE_USER: return saveUser(state, action.payload);
     case AuthStoreActions.LOGOUT: return getAuthStoreInitialState();
     default: return state;
   }
@@ -40,6 +41,9 @@ export const signUpFailed = (state: AuthStore, data: {message: string}): AuthSto
 
 export const clearActionsFailedState = (state: AuthStore): AuthStore =>
   ({ ...state, signUpFailed: false, signUpSuccess: false, logInFailed: false, logInSuccess: false, actionErrorMessage: null});
+
+export const saveUser = (state: AuthStore, data: {user: UserModel}): AuthStore =>
+  ({ ...state, user: data.user });
 
 export const getAuthStoreInitialState = (): AuthStore =>
   ({

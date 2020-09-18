@@ -22,3 +22,24 @@ button:disabled{
 .pointer-none {
   pointer-events: none;
 }
+
+ngx-spinner {
+  .overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .loading-text {
+      width: 100%;
+      padding: 20px;
+      text-align: center;
+      margin-top: 60px;
+
+      p {
+        font-size: 1.2rem;
+        font-family: 'Montserrat', 'Lato', sans-serif;
+        font-weight: 500;
+      }
+    }
+  }
+}

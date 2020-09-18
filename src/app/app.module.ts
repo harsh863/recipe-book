@@ -14,6 +14,12 @@ import {EffectsModule} from '@ngrx/effects';
 import {AuthEffects} from './modules/auth/store/effects/auth.effects';
 import {AuthService} from './modules/auth/services/auth.service';
 import {AngularFireAuth} from '@angular/fire/auth';
+import {LoggedInUserResolver} from './modules/auth/resolvers/logged-in-user.resolver';
+import {AuthManager} from './modules/auth/managers/auth.manager';
+import {LoggedInUserManager} from './modules/auth/managers/logged-in-user.manager';
+import {SharedModule} from './modules/shared/shared.module';
+import {NgxSpinnerModule, NgxSpinnerService} from 'ngx-spinner';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -25,12 +31,15 @@ import {AngularFireAuth} from '@angular/fire/auth';
     FormsModule,
     HttpClientModule,
     AngularFireStorageModule,
+    BrowserAnimationsModule,
+    NgxSpinnerModule,
     StoreModule.forRoot(appReducer),
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([AuthEffects]),
     AngularFireModule.initializeApp(environment.firebaseConfig, 'recipe-book'),
+    SharedModule,
   ],
-  providers: [AuthService, AngularFireAuth],
+  providers: [AuthService, AngularFireAuth,LoggedInUserResolver, LoggedInUserManager, NgxSpinnerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

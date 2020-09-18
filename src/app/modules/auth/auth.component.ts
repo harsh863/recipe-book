@@ -1,4 +1,6 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {NavigationEnd, NavigationStart, Router, RouterEvent} from '@angular/router';
+import {delay} from 'rxjs/operators';
 
 @Component({
   selector: 'rb-auth',
@@ -7,12 +9,21 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 })
 export class AuthComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
   activeCardIndex = 1;
   carouselIndicators = [1, 2, 3, 4, 5];
   isDesktopMode = true;
   hideWelcomeWindow = false;
+  isSignupMode = true;
   openMainBlock = false;  // this is just for UI effects
+
+  constructor(private _router: Router) {
+    _router.events.subscribe(routerEvent => {
+      if (routerEvent instanceof NavigationEnd) {
+        this.isSignupMode = _router.url.includes('signup');
+        document.body.scrollIntoView({behavior: 'auto'});
+      }
+    });
+  }
 
   ngOnInit() {
     this.onResize();

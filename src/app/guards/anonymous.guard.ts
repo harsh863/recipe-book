@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
-import {AUTH_TOKEN} from '../modules/shared/constants/local-storage.constant';
+import {map, tap} from 'rxjs/operators';
+import {noop, Observable} from 'rxjs';
+import {AuthManager} from '../modules/auth/managers/auth.manager';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnonymousGuard implements CanActivate  {
-  constructor(private _router: Router) {
+  constructor(private _router: Router,
+              private _authManager: AuthManager) {
   }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (!localStorage.getItem(AUTH_TOKEN)) {
-      return true;
-    }
-    this._router.navigate(['/']);
-    return false;
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    return this._authManager.isUserLoggedIn().pipe(map(val => {
+      val ? this._router.navigate(['/']) : noop();
+      return !val;
+    }));
   }
 }

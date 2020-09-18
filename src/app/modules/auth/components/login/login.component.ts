@@ -17,8 +17,8 @@ export class LoginComponent implements OnInit {
               private _authManager: AuthManager) { }
 
   control = {
-    email: new FormControl(null, [Validators.required, Validators.email]),
-    password: new FormControl(null, [Validators.required, Validators.minLength(6)])
+    email: new FormControl('test@test.com', [Validators.required, Validators.email]),
+    password: new FormControl('secret', [Validators.required, Validators.minLength(6)])
   };
   loginForm = new FormGroup(this.control);
   loading = this._authManager.selectLoginState('loggingIn');

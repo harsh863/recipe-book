@@ -21,6 +21,7 @@ import {SharedModule} from '../shared/shared.module';
 import {ShoppingService} from './services/shopping.service';
 import { ShoppingFormComponent } from './components/shopping/shopping-form/shopping-form.component';
 import { ShoppingListComponent } from './components/shopping/shopping-list/shopping-list.component';
+import {AngularFireDatabase} from '@angular/fire/database';
 
 const components = [DashboardComponent, HeaderComponent, RecipesComponent,
   RecipesListComponent, RecipeItemComponent, RecipeFormComponent, ShoppingComponent,
@@ -49,6 +50,6 @@ const services = [RecipeService, FileUploadService, ShoppingService];
 @NgModule({
   declarations: [...components, ShoppingFormComponent, ShoppingListComponent],
     imports: [...modules],
-  providers: [...services]
+  providers: [...services, AngularFireDatabase]
 })
 export class DashboardModule { }

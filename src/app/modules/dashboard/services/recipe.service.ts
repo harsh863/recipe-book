@@ -3,30 +3,29 @@ import {Recipe} from '../models/recipe.model';
 import {map} from 'rxjs/operators';
 import {firebaseInstance} from '../../../../main';
 import {from, Observable, Subject} from 'rxjs';
+import {LoggedInUserManager} from '../../auth/managers/logged-in-user.manager';
+import {UserModel} from '../../shared/models/user.model';
+import {AngularFireDatabase} from '@angular/fire/database';
 
 @Injectable()
 export class RecipeService {
 
-  database = firebaseInstance.database().ref('recipes');
+  loggedInUser: UserModel;
+  constructor(private _loggedInUserManager: LoggedInUserManager,
+              private _angularFireDatabase: AngularFireDatabase) {
+    this._loggedInUserManager.selectLoggedInUser().then(user => this.loggedInUser = user);
+  }
 
-  constructor() { }
-
-  createRecipe(recipe: Recipe): Observable<Recipe> {
-    return from(this.database.push(recipe))
+  createPrivateRecipe(recipe: Recipe): Observable<Recipe> {
+    const database = firebaseInstance.database().ref(`private-recipes/${this.loggedInUser.id}`);
+    return from(database.push(recipe))
       .pipe(map((val: any) => ({id: val.path.pieces_[1], ...recipe})));
   }
 
-  fetchRecipes(is_private = false): Observable<Recipe[]> {
-    let $recipes = new Subject<Recipe[]>();
-    this.database.orderByChild('is_private').equalTo(is_private).once('value', snapshotChanges => {
-      const val = snapshotChanges.val();
-      if (val) {
-        const recipes: Recipe[] = Object.entries(val).map((entry: [string, Recipe]) => ({...entry[1], id: entry[0]}));
-        $recipes.next(recipes);
-      } else {
-        $recipes.next([]);
-      }
-    });
-    return $recipes;
+  getPrivateRecipes() {
+    console.log(1);
+    this._angularFireDatabase.list('private-recipes').valueChanges().subscribe(i => {
+      console.log(2, i);
+    })
   }
 }

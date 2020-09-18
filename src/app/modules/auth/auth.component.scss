@@ -43,7 +43,6 @@
   }
 
   & .main-block {
-    min-height: 650px !important;
     .title {
       text-align: center;
       margin-top: 5vh;
@@ -171,4 +170,11 @@
 
 @keyframes stroke-offset{
   100% {stroke-dashoffset: -35%;}
+}
+
+.min-550 {
+  min-height: 550px !important;
+}
+.min-650 {
+  min-height: 650px !important;
 }

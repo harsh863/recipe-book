@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {AppComponent} from './app.component';
 import {AuthGuard} from './guards/auth.guard';
+import {LoggedInUserResolver} from './modules/auth/resolvers/logged-in-user.resolver';
 
 const routes: Routes = [
   {
@@ -9,7 +10,7 @@ const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule),
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard], resolve: [LoggedInUserResolver]
       },
       {
         path: 'auth',

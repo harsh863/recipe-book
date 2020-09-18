@@ -4,10 +4,12 @@ import {AppState} from '../../store/app.reducer';
 import {googleAuthenticationStarted, loginStarted, logout, signUpStarted} from '../store/actions/auth.action';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import {AuthService} from '../services/auth.service';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class AuthManager {
-  constructor(private _store: Store<AppState>) {
+  constructor(private _store: Store<AppState>,
+              private _authService: AuthService) {
   }
 
   login(email: string, password: string) {
@@ -36,5 +38,9 @@ export class AuthManager {
 
   logout() {
     this._store.dispatch(logout());
+  }
+
+  isUserLoggedIn(): Observable<boolean> {
+    return this._authService.selectLoggedInUser().pipe(map(user => !!user));
   }
 }

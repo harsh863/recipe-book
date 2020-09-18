@@ -16,7 +16,7 @@ import {NotificationService} from './services/notification.service';
   ],
   entryComponents: [SnackbarComponent],
   providers: [NotificationService],
-  exports: [CustomInputComponent, SlidingArrowComponent,
-    FilterBarComponent, SnackbarComponent]
+    exports: [CustomInputComponent, SlidingArrowComponent,
+        FilterBarComponent, SnackbarComponent]
 })
 export class SharedModule { }

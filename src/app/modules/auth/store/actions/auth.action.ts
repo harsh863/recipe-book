@@ -28,3 +28,9 @@ export const googleAuthenticationStarted = (): AuthStoreAction =>
 
 export const logout = (): AuthStoreAction =>
   ({ type: AuthStoreActions.LOGOUT });
+
+export const fetchLoggedInUser = (): AuthStoreAction =>
+  ({ type: AuthStoreActions.FETCH_LOGGED_IN_USER });
+
+export const saveUser = (user: UserModel): AuthStoreAction =>
+  ({ type: AuthStoreActions.SAVE_USER, payload: { user } });

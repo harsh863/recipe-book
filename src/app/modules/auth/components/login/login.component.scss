@@ -79,6 +79,12 @@
 }
 
 
+@media (max-width: 600px) {
+  .footer {
+    bottom: 0 !important;
+  }
+}
+
 @media (max-height: 590px) {
   .login-container {
     .sign-in-btn {
@@ -86,11 +92,11 @@
     }
 
     .separator {
-      margin-top: 2vh;
+      margin-top: 3vh;
     }
 
     .sign-in-google{
-      margin-top: 1.5vh;
+      margin-top: 2.5vh;
     }
   }
 }
