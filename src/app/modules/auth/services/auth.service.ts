@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {auth, User} from 'firebase';
 import {UserModel} from '../../shared/models/user.model';
-import {from, Observable} from 'rxjs';
+import {from, Observable, of} from 'rxjs';
 import {catchError, switchMap} from 'rxjs/operators';
 import {AuthErrorMessage} from '../enums/auth-error-message.enum';
 import {AuthErrorCode} from '../enums/auth-error-code.enum';
@@ -63,7 +63,10 @@ export class AuthService {
   }
 
   selectLoggedInUser(): Observable<UserModel> {
-    return this._angularFireAuth.authState.pipe(switchMap(value => from(this.parseUserInfo(value))));
+    return this._angularFireAuth.authState.pipe(
+      switchMap(value => from(this.parseUserInfo(value))),
+      catchError(err => from(Promise.reject({message: this.parseAuthErrors(err)})))
+    );
   }
 
   logout() {
@@ -76,7 +79,7 @@ export class AuthService {
     }
     return {
       id: firebaseUser.uid,
-      name: firebaseUser.displayName,
+      displayName: firebaseUser.displayName,
       email: firebaseUser.email,
       imageUrl: firebaseUser.photoURL,
       refreshToken: firebaseUser.refreshToken,

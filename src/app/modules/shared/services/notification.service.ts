@@ -2,8 +2,6 @@ import {
   ApplicationRef,
   ComponentFactoryResolver,
   Injectable,
-  ViewChild,
-  ViewContainerRef,
   Injector,
   EmbeddedViewRef,
   ComponentRef
@@ -17,7 +15,7 @@ export class NotificationService {
               private _injector: Injector) {
   }
 
-  show(message: string, type: 'error' | 'success' | 'warn' ) {
+  show(message: string, type: 'error' | 'success' | 'warn', autoClose = true) {
     const componentRef = this._componentFactoryResolver
       .resolveComponentFactory(SnackbarComponent)
       .create(this._injector);
@@ -28,7 +26,9 @@ export class NotificationService {
       .rootNodes[0] as HTMLElement;
     document.body.appendChild(domElem);
     const timer = setTimeout(_ => {
-      this.closeNotification(componentRef);
+      if (autoClose) {
+        this.closeNotification(componentRef);
+      }
     }, 3500);
     componentRef.instance.onClose.subscribe(_ => {
       clearTimeout(timer);

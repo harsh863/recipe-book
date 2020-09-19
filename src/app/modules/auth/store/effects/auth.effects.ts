@@ -3,7 +3,7 @@ import {AuthService} from '../../services/auth.service';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {AuthStoreActions} from '../../enums/auth-store-actions.enum';
 import {catchError, delay, map, switchMap, tap} from 'rxjs/operators';
-import {clearFailedRequests, login, loginFailed, saveUser, signUp, signUpFailed} from '../actions/auth.action';
+import {clearActionStates, login, loginFailed, saveUser, signUp, signUpFailed} from '../actions/auth.action';
 import {UserModel} from '../../../shared/models/user.model';
 import {of} from 'rxjs';
 import {AuthStoreAction} from '../../models/auth-store-action.model';
@@ -34,7 +34,7 @@ export class AuthEffects {
     switchMap((data: AuthStoreAction) => {
       return this._authService.signUp(data.payload.email, data.payload.password, data.payload.username)
         .pipe(
-          map((res: UserModel) => signUp(res)),
+          map(_ => signUp()),
           catchError(error => of(signUpFailed(error.message)))
         );
     })
@@ -53,9 +53,9 @@ export class AuthEffects {
 
   @Effect()
   authFailedRequests = this._actions$.pipe(
-    ofType(AuthStoreActions.LOGIN_FAILED || AuthStoreActions.SIGNUP_FAILED),
+    ofType(AuthStoreActions.LOGIN_FAILED || AuthStoreActions.SIGNUP_FAILED || AuthStoreActions.LOGIN || AuthStoreActions.SIGNUP),
     delay(4000),
-    map(_ => clearFailedRequests())
+    map(_ => clearActionStates())
   );
 
   @Effect()

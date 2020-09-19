@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../store/app.reducer';
-import {googleAuthenticationStarted, loginStarted, logout, signUpStarted} from '../store/actions/auth.action';
+import {googleAuthenticationStarted, startLogin, logout, startSignUp} from '../store/actions/auth.action';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {AuthService} from '../services/auth.service';
@@ -13,23 +13,11 @@ export class AuthManager {
   }
 
   login(email: string, password: string) {
-    this._store.dispatch(loginStarted(email, password));
-  }
-
-  selectLoginState(state: 'loggingIn' | 'logInSuccess' | 'logInFailed'): Observable<boolean> {
-    return this._store.select('auth').pipe(map(authState => authState[state]))
+    this._store.dispatch(startLogin(email, password));
   }
 
   signUp(email: string, password: string, username) {
-    this._store.dispatch(signUpStarted(email, password, username));
-  }
-
-  selectSignUpState(state: 'signingUp' | 'signUpSuccess' | 'signUpFailed'): Observable<boolean> {
-    return this._store.select('auth').pipe(map(authState => authState[state]));
-  }
-
-  getErrorMessage(): Observable<string> {
-    return this._store.select('auth').pipe(map(authState => authState.actionErrorMessage));
+    this._store.dispatch(startSignUp(email, password, username));
   }
 
   authenticateWithGoogle() {
@@ -38,6 +26,18 @@ export class AuthManager {
 
   logout() {
     this._store.dispatch(logout());
+  }
+
+  selectLoginState(state: 'loggingIn' | 'logInSuccess' | 'logInFailed'): Observable<boolean> {
+    return this._store.select('auth').pipe(map(authState => authState.actionStates[state]))
+  }
+
+  selectSignUpState(state: 'signingUp' | 'signUpSuccess' | 'signUpFailed'): Observable<boolean> {
+    return this._store.select('auth').pipe(map(authState => authState.actionStates[state]));
+  }
+
+  getErrorMessage(): Observable<string> {
+    return this._store.select('auth').pipe(map(authState => authState.actionStates.actionErrorMessage));
   }
 
   isUserLoggedIn(): Observable<boolean> {

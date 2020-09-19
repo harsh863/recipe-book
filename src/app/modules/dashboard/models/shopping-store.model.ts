@@ -1,6 +1,17 @@
 import {Ingredient} from './ingredient.model';
 
 export interface ShoppingStore {
-  ingredients: Ingredient[];
+  shoppingList: {
+    ingredients: Ingredient[];
+    isLoading: boolean;
+    isLoaded: boolean;
+  };
+  actionStates: {
+    ingredientAdded: boolean;
+    ingredientsAdded: boolean;
+    ingredientUpdated: boolean;
+    ingredientDeleted: boolean;
+    ingredientsDeleted: boolean;
+  };
   editedIngredient?: Ingredient;
 }

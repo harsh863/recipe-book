@@ -12,9 +12,10 @@ export const authReducer = (
     case AuthStoreActions.LOGIN: return login(state, action.payload);
     case AuthStoreActions.LOGIN_FAILED: return loginFailed(state, action.payload);
     case AuthStoreActions.SIGNUP_START: return startSignUp(state);
-    case AuthStoreActions.SIGNUP: return signUp(state, action.payload);
+    case AuthStoreActions.SIGNUP: return signUp(state);
     case AuthStoreActions.SIGNUP_FAILED: return signUpFailed(state, action.payload);
-    case AuthStoreActions.CLEAR_FAILED_REQUESTS: return clearActionsFailedState(state);
+    case AuthStoreActions.CLEAR_ACTION_STATES: return clearActionStates(state);
+    case AuthStoreActions.FETCH_LOGGED_IN_USER: return getLoggedInUser(state);
     case AuthStoreActions.SAVE_USER: return saveUser(state, action.payload);
     case AuthStoreActions.LOGOUT: return getAuthStoreInitialState();
     default: return state;
@@ -22,32 +23,71 @@ export const authReducer = (
 }
 
 export const startLogin = (state: AuthStore): AuthStore =>
-  ({ ...state, loggingIn: true, logInSuccess: false, logInFailed: false, actionErrorMessage: null});
+  ({
+    ...state,
+    loggedInUser: { ...state.loggedInUser, isLoading: true, isLoaded: false },
+    actionStates: { ...state.actionStates, loggingIn: true, logInSuccess: false, logInFailed: false, actionErrorMessage: null }
+  });
 
 export const login = (state: AuthStore, data: {user: UserModel}): AuthStore =>
-  ({ ...state, user: data.user, loggingIn: false, logInSuccess: true, logInFailed: false});
+  ({
+    ...state,
+    loggedInUser: { user: data.user, isLoaded: true, isLoading: false },
+    actionStates: { ...state.actionStates , loggingIn: false, logInSuccess: true, logInFailed: false}
+  });
 
 export const loginFailed = (state: AuthStore, data: {message: string}): AuthStore =>
-  ({ ...state, loggingIn: false, logInFailed: true, logInSuccess: false, actionErrorMessage: data.message});
+  ({
+    ...state,
+    loggedInUser: { ...state.loggedInUser, isLoaded: false, isLoading: false },
+    actionStates: { ...state.actionStates, loggingIn: false, logInFailed: true, logInSuccess: false, actionErrorMessage: data.message }
+  });
 
 export const startSignUp = (state: AuthStore): AuthStore =>
-  ({ ...state, signingUp: true, signUpSuccess: false, signUpFailed: false, actionErrorMessage: null});
+  ({
+    ...state,
+    actionStates: { ...state.actionStates, signingUp: true, signUpSuccess: false, signUpFailed: false, actionErrorMessage: null }
+  });
 
-export const signUp = (state: AuthStore, data: {user: UserModel}): AuthStore =>
-  ({ ...state, user: data.user, signingUp: false, signUpSuccess: true, signUpFailed: false});
+export const signUp = (state: AuthStore): AuthStore =>
+  ({
+    ...state,
+    actionStates: { ...state.actionStates, signingUp: false, signUpSuccess: true, signUpFailed: false }
+  });
 
 export const signUpFailed = (state: AuthStore, data: {message: string}): AuthStore =>
-  ({ ...state, signingUp: false, signUpFailed: true, signUpSuccess: false, actionErrorMessage: data.message});
+  ({
+    ...state,
+    actionStates: { ...state.actionStates, signingUp: false, signUpFailed: true, signUpSuccess: false, actionErrorMessage: data.message }
+  });
 
-export const clearActionsFailedState = (state: AuthStore): AuthStore =>
-  ({ ...state, signUpFailed: false, signUpSuccess: false, logInFailed: false, logInSuccess: false, actionErrorMessage: null});
+export const clearActionStates = (state: AuthStore): AuthStore =>
+  ({
+    ...state,
+    actionStates: getInitialActionStates()
+  });
+
+export const getLoggedInUser = (state: AuthStore): AuthStore =>
+  ({
+    ...state,
+    loggedInUser: {...state.loggedInUser, isLoading: true}
+  })
 
 export const saveUser = (state: AuthStore, data: {user: UserModel}): AuthStore =>
-  ({ ...state, user: data.user });
+  ({
+    ...state,
+    loggedInUser: { user: data.user, isLoaded: true, isLoading: false }
+  });
+
 
 export const getAuthStoreInitialState = (): AuthStore =>
   ({
-    user: null,
+    loggedInUser: { user: null, isLoaded: false, isLoading: false },
+    actionStates: getInitialActionStates()
+  });
+
+export const getInitialActionStates = () =>
+  ({
     loggingIn: false,
     logInSuccess: false,
     logInFailed: false,

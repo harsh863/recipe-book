@@ -1,7 +1,7 @@
 import {Store} from '@ngrx/store';
 import {AppState} from '../../store/app.reducer';
-import {filter, map, take} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {distinctUntilChanged, map, skipUntil, take} from 'rxjs/operators';
+import {combineLatest, Observable, zip} from 'rxjs';
 import {UserModel} from '../../shared/models/user.model';
 import {fetchLoggedInUser} from '../store/actions/auth.action';
 
@@ -10,14 +10,25 @@ export class LoggedInUserManager {
   }
 
   isLoggedInUserLoaded(): Observable<boolean> {
-    return this._store.select('auth').pipe(map(authState => !!authState.user));
+    return this._store.select('auth').pipe(map(authState => !!authState.loggedInUser.isLoaded));
   }
 
-  async selectLoggedInUser(): Promise<UserModel> {
-    const loaded = await this.isLoggedInUserLoaded().pipe(take(1)).toPromise();
-    if (!loaded) {
-      this._store.dispatch(fetchLoggedInUser());
-    }
-    return this._store.select('auth').pipe(filter(authState => !!authState.user), map(value => value.user), take(1)).toPromise();
+  isLoggedInUserLoading(): Observable<boolean> {
+    return this._store.select('auth').pipe(map(authState => !!authState.loggedInUser.isLoading));
   }
+
+  selectLoggedInUser(): Observable<UserModel> {
+    const $loaded = this.isLoggedInUserLoaded().pipe(distinctUntilChanged());
+    const $loading = this.isLoggedInUserLoading().pipe(distinctUntilChanged());
+    combineLatest([$loaded, $loading]).subscribe(value => {
+      if (!value[0] && !value[1]) {
+        this._store.dispatch(fetchLoggedInUser());
+      }
+    });
+    return this._store.select('auth').pipe(
+      skipUntil(this.isLoggedInUserLoaded()),
+      map(value => value.loggedInUser.user));
+  }
+
+
 }

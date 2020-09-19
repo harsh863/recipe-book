@@ -1,20 +1,26 @@
 import { Injectable } from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {noop, Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
+import {catchError, tap} from 'rxjs/operators';
 import {AuthManager} from '../modules/auth/managers/auth.manager';
+import {NotificationService} from '../modules/shared/services/notification.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
   constructor(private _router: Router,
+              private _notificationService: NotificationService,
               private _authManager: AuthManager) {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this._authManager.isUserLoggedIn().pipe(tap(val => {
       !val ? this._router.navigate(['auth']) : noop();
+      // @ts-ignore
+    }),catchError((err: {message: string}) => {
+      this._notificationService.show(err.message, 'error', false);
+      return;
     }));
   }
 }
