@@ -9,7 +9,7 @@ export class RandomSpinnerUtils {
     'ball-scale-ripple-multiple', 'ball-spin', 'ball-spin-clockwise',
     'ball-spin-clockwise-fade', 'ball-spin-clockwise-fade-rotating', 'ball-spin-fade',
     'ball-spin-fade-rotating', 'ball-spin-fade', 'ball-spin-rotate',
-    'ball-spin-clockwise-pin', 'ball-square-pin', 'ball-triangle-path', 'ball-zig-zag',
+    'ball-spin-clockwise-pin', 'ball-square-spin', 'ball-triangle-path', 'ball-zig-zag',
     'ball-zig-zag-deflect', 'cube-transition', 'fire', 'line-scale', 'line-scale-party',
     'line-scale-pulse-out', 'line-spin-clockwise-fade',
     'line-spin-clockwise-fade-rotating', 'line-spin-fade', 'line-spin-fade-rotating',

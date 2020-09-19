@@ -18,10 +18,6 @@ export class RecipesHomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  toggleDropdown() {
-    this.isDropdownExpanded = !this.isDropdownExpanded;
-  }
-
   toggleViewMode(value: boolean) {
     this.isPrivateMode = value;
     this.isDropdownExpanded = false;

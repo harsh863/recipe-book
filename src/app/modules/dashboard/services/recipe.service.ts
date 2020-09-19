@@ -11,7 +11,7 @@ export class RecipeService {
 
   loggedInUser: UserModel;
   constructor(private _loggedInUserManager: LoggedInUserManager,
-              private _angularFireDatabase: AngularFireDatabase) {
+              private _database: AngularFireDatabase) {
     this._loggedInUserManager.selectLoggedInUser().subscribe(user => {
       this.loggedInUser = user;
     });
@@ -24,23 +24,29 @@ export class RecipeService {
     if (!is_private) {
       updatedRecipe.userId = this.loggedInUser.id;
     }
-    return from(this._angularFireDatabase.list(path).push(recipe))
+    return from(this._database.list(path).push(recipe))
       .pipe(map((val: any) => ({id: val.path.pieces_[1], ...recipe})));
   }
 
   fetchRecipes(is_private = false): Observable<Recipe[]> {
     const path = is_private ? `private-recipes/${this.loggedInUser.id}` : 'public-recipes';
     let $recipes = new Subject<Recipe[]>();
-    this._angularFireDatabase.database.ref(path).once('value', snapshotChanges => {
+    this._database.database.ref(path).once('value', snapshotChanges => {
       const data: { [id: string]: Recipe } = snapshotChanges.val() || {};
       $recipes.next(Object.entries(data).map(entry => ({id: entry[0], ...entry[1]})) as Recipe[]);
     });
     return $recipes;
   }
 
+  updateRecipe(recipe: Recipe): Observable<any> {
+    const path = recipe.is_private ? `private-recipes/${this.loggedInUser.id}` : 'public-recipes';
+    return from(this._database.object(`${path}/${recipe.id}`).set(recipe))
+      .pipe(map(_ => ({message: 'updated successfully'})));
+  }
+
   deleteRecipe(recipeId: string, is_private = false): Observable<any> {
     const path = is_private ? `private-recipes/${this.loggedInUser.id}` : 'public-recipes';
-    return from(this._angularFireDatabase.list(`${path}/${recipeId}`).remove())
+    return from(this._database.list(`${path}/${recipeId}`).remove())
       .pipe(map(_ => ({ message: 'deleted successfully' })));
   }
 }

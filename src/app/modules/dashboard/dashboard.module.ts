@@ -22,6 +22,10 @@ import {ShoppingService} from './services/shopping.service';
 import { ShoppingFormComponent } from './components/shopping/shopping-form/shopping-form.component';
 import { ShoppingListComponent } from './components/shopping/shopping-list/shopping-list.component';
 import {AngularFireDatabase} from '@angular/fire/database';
+import {RecipeManager} from './managers/recipe.manager';
+import {RecipeEffects} from './store/effects/recipe.effect';
+import {RecipeResolver} from './resolvers/recipe.resolver';
+import {EffectsModule} from '@ngrx/effects';
 
 const components = [DashboardComponent, HeaderComponent, RecipesComponent,
   RecipesListComponent, RecipeItemComponent, RecipeFormComponent, ShoppingComponent,
@@ -44,12 +48,12 @@ const modules = [CommonModule, DashboardRoutingModule, HttpClientModule,
           ],
       }
     }
-  })];
+  }), EffectsModule.forFeature([RecipeEffects])];
 const services = [RecipeService, FileUploadService, ShoppingService];
 
 @NgModule({
   declarations: [...components, ShoppingFormComponent, ShoppingListComponent],
-    imports: [...modules],
-  providers: [...services, AngularFireDatabase]
+  imports: [...modules],
+  providers: [...services, AngularFireDatabase, RecipeManager, RecipeEffects, RecipeResolver]
 })
 export class DashboardModule { }

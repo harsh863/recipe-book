@@ -29,6 +29,9 @@ export const openEditWindow = (recipe: Recipe): RecipeStoreAction =>
 export const closeEditWindow = (): RecipeStoreAction =>
   ({ type: RecipeStoreActions.CLOSE_RECIPE_EDIT_WINDOW });
 
+export const clearActionStates = (): RecipeStoreAction =>
+  ({ type: RecipeStoreActions.CLEAR_ACTION_STATES })
+
 
 // below are the actions just for triggering [Recipe] effects
 
@@ -38,11 +41,11 @@ export const getPublicRecipes = (): RecipeStoreAction =>
 export const getPrivateRecipes = (): RecipeStoreAction =>
   ({ type: RecipeStoreActions.GET_PRIVATE_RECIPES });
 
-export const startRecipeAdd = (): RecipeStoreAction =>
-  ({ type: RecipeStoreActions.START_RECIPE_ADDITION });
+export const startRecipeAdd = (recipe: Recipe): RecipeStoreAction =>
+  ({ type: RecipeStoreActions.START_RECIPE_ADDITION, payload: { recipe } });
 
-export const startRecipeUpdate = (): RecipeStoreAction =>
-  ({ type: RecipeStoreActions.START_RECIPE_UPDATE });
+export const startRecipeUpdate = (recipe: Recipe): RecipeStoreAction =>
+  ({ type: RecipeStoreActions.START_RECIPE_UPDATE, payload: { recipe } });
 
-export const startRecipeDelete = (): RecipeStoreAction =>
-  ({ type: RecipeStoreActions.START_RECIPE_DELETION });
+export const startRecipeDelete = (recipeId: string): RecipeStoreAction =>
+  ({ type: RecipeStoreActions.START_RECIPE_DELETION, payload: { recipeId } });

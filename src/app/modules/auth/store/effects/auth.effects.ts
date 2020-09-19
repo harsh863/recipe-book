@@ -63,7 +63,9 @@ export class AuthEffects {
     ofType(AuthStoreActions.FETCH_LOGGED_IN_USER),
     switchMap(_ => {
       return this._authService.selectLoggedInUser().pipe(
-        map(user => saveUser(user))
+        map(user => {
+          return saveUser(user);
+        })
       )
     })
   )

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ShoppingService} from '../../../services/shopping.service';
 
 @Component({
   selector: 'rb-shopping-form',
@@ -8,7 +9,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class ShoppingFormComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cre: ShoppingService) { }
 
   control = {
     name: new FormControl(null, [Validators.required]),
@@ -23,5 +24,9 @@ export class ShoppingFormComponent implements OnInit {
 
   checkClearButtonValidity() {
     return (this.control.name.value || this.control.quantity.value || this.control.unit.value);
+  }
+
+  addIngredient() {
+    this.cre.addIngredient(this.ingredientForm.value).subscribe(i => console.log(i,1));
   }
 }

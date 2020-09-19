@@ -23,7 +23,8 @@
     </div>
   </div>
   <div class="row flex flex-row justify-content-start align-items-center mt-4">
-    <button type="button" [disabled]="ingredientForm.invalid" class="btn btn-outline-primary mr-2">Add</button>
+    <button type="button" [disabled]="ingredientForm.invalid"
+            (click)="addIngredient()" class="btn btn-outline-primary mr-2">Add</button>
     <button type="button" (click)="ingredientForm.reset()" [disabled]="!checkClearButtonValidity()" class="btn btn-outline-warning">Clear</button>
   </div>
 </div>

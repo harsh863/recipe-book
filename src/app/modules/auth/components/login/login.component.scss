@@ -1,6 +1,8 @@
 .login-container {
 
   & .forgot-password {
+    width: fit-content;
+    align-self: flex-end;
     cursor: pointer;
     color: #9db692;
     font-size: 14px;

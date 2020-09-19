@@ -67,8 +67,14 @@ export class RecipeFormComponent implements OnInit {
 
   save() {
     this._recipeService.createRecipe(this.recipeForm.value).subscribe(_ => {
-      this.recipeForm.reset();
+      // this.recipeForm.reset();
       // this._router.navigate(['dashboard/recipes']);
     });
+  }
+
+  resetRecipeForm() {
+    this.recipeForm.reset();
+    this.control.ingredients.setValue([]);
+    this.addIngredientControl();
   }
 }
