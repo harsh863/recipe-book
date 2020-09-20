@@ -31,7 +31,6 @@ export class RecipeManager {
     return this._store.select('recipe').pipe(map(recipeState => recipeState.actionStates[action]))
   }
 
-
   isRecipesLoaded(is_private = false): Observable<boolean> {
     return this._store.select('recipe').pipe(map(recipeState => recipeState[is_private ? 'privateRecipes' : 'publicRecipes'].isLoaded));
   }

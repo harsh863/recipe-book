@@ -9,10 +9,9 @@ import {FormControl} from '@angular/forms';
 })
 export class RecipesHomeComponent implements OnInit {
 
-  constructor(private _router: Router, private _activatedRoute: ActivatedRoute) { }
+  constructor(private _router: Router) { }
 
   isPrivateMode = false;
-  isDropdownExpanded = false;
   filterControl = new FormControl();
 
   ngOnInit() {
@@ -20,10 +19,11 @@ export class RecipesHomeComponent implements OnInit {
 
   toggleViewMode(value: boolean) {
     this.isPrivateMode = value;
-    this.isDropdownExpanded = false;
+    this.filterControl.reset();
+    console.log(value, this.isPrivateMode);
   }
 
   createNewRecipe() {
-    this._router.navigate(['new'], {relativeTo: this._activatedRoute});
+    this._router.navigate(['dashboard/recipes/new']);
   }
 }

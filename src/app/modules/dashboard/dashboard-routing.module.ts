@@ -5,18 +5,17 @@ import {RecipesComponent} from './components/recipes/recipes.component';
 import {RecipeFormComponent} from './components/recipes/recipe-form/recipe-form.component';
 import {ShoppingComponent} from './components/shopping/shopping.component';
 import {RecipesHomeComponent} from './components/recipes/recipes-home/recipes-home.component';
-import {RecipeResolver} from './resolvers/recipe.resolver';
 
 
 const routes: Routes = [
   {
-    path: '', component: DashboardComponent, children: [
+    path: '', component: DashboardComponent,
+    children: [
       {
         path: '', redirectTo: 'recipes', pathMatch: 'full',
       },
       {
-        path: 'recipes', component: RecipesComponent,
-        resolve: [RecipeResolver], children: [
+        path: 'recipes', component: RecipesComponent, children: [
           {
             path: '', component: RecipesHomeComponent
           },

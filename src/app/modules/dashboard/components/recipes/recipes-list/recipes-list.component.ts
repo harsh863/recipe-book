@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Recipe} from '../../../models/recipe.model';
-import {RecipeService} from '../../../services/recipe.service';
 import {RecipeManager} from '../../../managers/recipe.manager';
 
 @Component({
@@ -9,10 +8,16 @@ import {RecipeManager} from '../../../managers/recipe.manager';
   styleUrls: ['./recipes-list.component.scss']
 })
 export class RecipesListComponent implements OnInit {
+  @Input() set isPrivateMode(value: boolean) {
+    this._isPrivateMode = value;
+    this._recipeManager.selectRecipes(value).subscribe(recipes => {
+      this.recipes = [...recipes];
+    });
+  }
 
   constructor(private _recipeManager: RecipeManager) { }
 
-  @Input() isPrivateMode: boolean;
+  private _isPrivateMode: boolean;
   @Input() filterValue: string;
 
   // recipes: Recipe[] = [
@@ -27,9 +32,6 @@ export class RecipesListComponent implements OnInit {
   recipes: Recipe[] = [];
 
   ngOnInit() {
-    this._recipeManager.selectRecipes(true).subscribe(recipes => {
-      this.recipes = [...recipes];
-    });
   }
 
 }
