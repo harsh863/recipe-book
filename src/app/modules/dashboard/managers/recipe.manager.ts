@@ -17,11 +17,7 @@ export class RecipeManager {
 
   updateRecipe = (recipe: Recipe) => this._store.dispatch(recipeActions.startRecipeUpdate(recipe))
 
-  deleteRecipe = (recipeId: string) => this._store.dispatch(recipeActions.startRecipeDelete(recipeId))
-
-  openRecipe = (recipe: Recipe) => this._store.dispatch(recipeActions.openRecipe(recipe))
-
-  closeRecipe = () => this._store.dispatch(recipeActions.closeRecipe())
+  deleteRecipe = (recipeId: string, is_private: boolean) => this._store.dispatch(recipeActions.startRecipeDelete(recipeId, is_private))
 
   openRecipeEditForm = (recipe: Recipe) => this._store.dispatch(recipeActions.openEditWindow(recipe))
 
@@ -54,5 +50,9 @@ export class RecipeManager {
       filter(recipeState => recipeState[is_private ? 'privateRecipes' : 'publicRecipes'].isLoaded),
       map(recipeState => recipeState[is_private ? 'privateRecipes' : 'publicRecipes'].recipes)
     );
+  }
+
+  getEditedRecipe(): Observable<Recipe> {
+    return this._store.select('recipe').pipe(map(recipeState => recipeState.editedRecipe));
   }
 }

@@ -1,9 +1,29 @@
 .recipe-preview-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 60vw;
+  max-height: 90vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background: white;
+  padding: 20px 30px;
+  border-radius: 7px;
+  //clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px,
+  //  100% 100%, 100% 100%,
+  //  22px 100%, 0 calc(100% - 22px));
+
   & .title{
     font-size: 2.5rem;
     font-weight: bold;
     font-family: 'Montserrat', sans-serif;
     letter-spacing: .3px;
+  }
+
+  .recipe-block {
+    width: calc(100% - 1.5rem);
+    word-break: break-word;
   }
 
   & .description {
@@ -14,11 +34,13 @@
   }
 
   & .recipe-icon {
+    //max-width: 400px;
     img {
       max-width: 100%;
       width: 100%;
       display: block;
       min-height: 350px;
+      object-fit: cover;
       position: relative;
 
       &::after{
@@ -55,5 +77,126 @@
   }
   100% {
     background-position: 0 50%;
+  }
+}
+
+@media (max-width: 800px) {
+  .recipe-preview-container {
+    max-width: 90vw;
+    max-height: 95vh;
+  }
+}
+
+.close-modal {
+  justify-self: flex-end;
+  height: fit-content;
+  transform: translate(20px, -5px);
+  cursor: pointer;
+
+  img {
+    width: 22px;
+  }
+}
+
+.drop-btn {
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  width: 130px;
+}
+
+[contenteditable] {
+  outline: 0;
+}
+
+.menu-icon {
+  width: 8px;
+  object-fit: cover;
+  height: 28px;
+  transform: translateX(-12px) rotate(-90deg);
+}
+
+.confirm-modal-header {
+  & .confirm-modal-title {
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    color: #8F9CB5;
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+
+  & .close-icon {
+    width: 15px;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+  }
+}
+
+.confirm-modal-footer {
+  .cancel-btn {
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    color: white;
+    background: #b6bece;
+    border-radius: 0;
+  }
+
+  .delete-btn {
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    color: white;
+    border-radius: 0;
+    background: #FC7169;
+
+    &:focus,
+    &:active,
+    &::selection {
+      box-shadow: unset !important;
+    }
+  }
+}
+
+.confirm-modal-backdrop {
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,0.3);
+  position: absolute;
+}
+
+.progress-bar {
+  height: 4px;
+  background-color: rgba(252, 113, 105, 0.2);
+  overflow: hidden;
+
+  .progress-bar-value {
+    background-color: #FC7169;
+    animation: indeterminateAnimation 1s infinite linear;
+    transform-origin: 0 50%;
+  }
+}
+
+@keyframes indeterminateAnimation {
+  0% {
+    transform:  translateX(0) scaleX(0);
+  }
+  40% {
+    transform:  translateX(0) scaleX(0.4);
+  }
+  100% {
+    transform:  translateX(100%) scaleX(0.5);
+  }
+}
+
+.btn-outline-danger {
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  border-radius: 4px;
+  &:hover,
+  &:focus,
+  &:active{
+    border-color: #d54215 !important;
+    color: rgba(0, 0, 0, 0.95) !important;
+    background-color: rgba(213, 66, 21, 0.15) !important;
   }
 }

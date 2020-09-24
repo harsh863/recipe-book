@@ -26,12 +26,18 @@ import {RecipeManager} from './managers/recipe.manager';
 import {RecipeEffects} from './store/effects/recipe.effect';
 import {RecipeResolver} from './resolvers/recipe.resolver';
 import {EffectsModule} from '@ngrx/effects';
+import {NgbRatingModule} from '@ng-bootstrap/ng-bootstrap';
+import {ModalService} from './services/modal.service';
+import {ClickOutsideModule} from 'ng-click-outside';
+import {ShoppingEffects} from './store/effects/shopping.effect';
+import {ShoppingManager} from './managers/shopping.manager';
+import { ShoppingItemComponent } from './components/shopping/shopping-list/shopping-item/shopping-item.component';
 
 const components = [DashboardComponent, HeaderComponent, RecipesComponent,
   RecipesListComponent, RecipeItemComponent, RecipeFormComponent, ShoppingComponent,
   RecipesHomeComponent, MenuIconComponent, RecipePreviewComponent];
 const modules = [CommonModule, DashboardRoutingModule, HttpClientModule,
-  FormsModule, ReactiveFormsModule, NgxStarRatingModule, SharedModule,
+  FormsModule, ReactiveFormsModule, SharedModule,
   QuillModule.forRoot({
     theme: 'snow',
     modules: {
@@ -45,15 +51,17 @@ const modules = [CommonModule, DashboardRoutingModule, HttpClientModule,
             [{'indent': '-1'}, {'indent': '+1'}],
             [{'size': ['small', 'normal', 'large']}],
             [{color: []}, {'background': []}],
+            ['link','image', 'video']
           ],
       }
     }
-  }), EffectsModule.forFeature([RecipeEffects])];
+  }), EffectsModule.forFeature([RecipeEffects, ShoppingEffects])];
 const services = [RecipeService, FileUploadService, ShoppingService];
 
 @NgModule({
-  declarations: [...components, ShoppingFormComponent, ShoppingListComponent],
-  imports: [...modules],
-  providers: [...services, AngularFireDatabase, RecipeManager, RecipeEffects, RecipeResolver]
+  declarations: [...components, ShoppingFormComponent, ShoppingListComponent, ShoppingItemComponent],
+  imports: [...modules, NgbRatingModule, ClickOutsideModule],
+  entryComponents: [RecipePreviewComponent],
+  providers: [...services, AngularFireDatabase, RecipeManager,ShoppingEffects, ShoppingManager,RecipeEffects, RecipeResolver, ModalService]
 })
 export class DashboardModule { }

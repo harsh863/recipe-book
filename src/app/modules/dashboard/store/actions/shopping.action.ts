@@ -35,17 +35,17 @@ export const clearActionStates = (): ShoppingStoreAction =>
 export const getShoppingList = (): ShoppingStoreAction =>
   ({ type: ShoppingStoreActions.GET_SHOPPING_LIST });
 
-export const startIngredientAdd = (): ShoppingStoreAction =>
-  ({ type: ShoppingStoreActions.START_INGREDIENT_ADDITION });
+export const startIngredientAdd = (ingredient: Ingredient): ShoppingStoreAction =>
+  ({ type: ShoppingStoreActions.START_INGREDIENT_ADDITION, payload: { ingredient }  });
 
-export const startIngredientsAdd = (): ShoppingStoreAction =>
-  ({ type: ShoppingStoreActions.START_INGREDIENTS_ADDITION });
+export const startIngredientsAdd = (ingredients: Ingredient[]): ShoppingStoreAction =>
+  ({ type: ShoppingStoreActions.START_INGREDIENTS_ADDITION, payload: { ingredients }  });
 
-export const startIngredientDelete = (): ShoppingStoreAction =>
-  ({ type: ShoppingStoreActions.START_INGREDIENT_DELETION });
+export const startIngredientDelete = (id: string): ShoppingStoreAction =>
+  ({ type: ShoppingStoreActions.START_INGREDIENT_DELETION, payload: { id }  });
 
-export const startIngredientsDelete = (): ShoppingStoreAction =>
-  ({ type: ShoppingStoreActions.START_INGREDIENTS_DELETION });
+export const startIngredientsDelete = (ids: string[]): ShoppingStoreAction =>
+  ({ type: ShoppingStoreActions.START_INGREDIENTS_DELETION, payload: { ids }  });
 
 export const startIngredientUpdate = (ingredient: Ingredient): ShoppingStoreAction =>
   ({ type: ShoppingStoreActions.START_INGREDIENT_UPDATE, payload: { ingredient } });

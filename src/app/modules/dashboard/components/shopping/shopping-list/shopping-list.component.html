@@ -1,6 +1,28 @@
+<rb-filter-bar *ngIf="ingredients.length && !loading" class="w-100 mb-4 flex flex-row-reverse" placeholder="Search Item..." [control]="filterControl"></rb-filter-bar>
 <div class="shopping-list w-100 list-group">
-  <div class="list-group-item p-1 flex justify-content-between" *ngFor="let ingredient of ingredients">
-    <div class="ing-info flex align-items-center pl-2">{{ingredient.name}} ({{ingredient.quantity}} {{ingredient.unit}})</div>
-    <div class="delete"><img src="../../../../../../assets/icons/delete.png" alt="" style=""/></div>
+  <div class="list-group-item p-1"
+       [ngClass]="{'pointer-none': deleting}"
+       *ngFor="let ingredient of filteredIngredients; index as ingredientIndex">
+    <rb-shopping-item [ingredient]="ingredient"
+                      [ingredientIndex]="ingredientIndex"
+                      (onIngredientSelect)="onIngredientSelect($event, ingredient?.id)"
+    ></rb-shopping-item>
+  </div>
+  <div class="flex justify-content-start align-items-center mt-4" *ngIf="ingredients.length > 1">
+    <button type="button"
+            [disabled]="deleting"
+            (click)="deleteIngredients()"
+            class="btn btn-outline-danger bulk-delete-btn flex justify-content-center align-items-center">
+      <i *ngIf="deleting" class="fa fa-spinner fa-spin" style="margin-right: 5px;"></i>
+      Remove {{selectedIngredientsCount > 0 ? 'selected' : 'all'}} ingredients
+    </button>
+  </div>
+  <div *ngIf="!ingredients.length && !loading" class="empty-list-msg mt-2"
+       [ngStyle]="{'color': randomColor}">
+    You haven't added any item to your shopping list yet.
+  </div>
+  <div *ngIf="!filteredIngredients.length && ingredients.length && !loading" class="no-result-msg mt-2"
+       [ngStyle]="{'color': randomColor}">
+    No items found matching with your input.
   </div>
 </div>

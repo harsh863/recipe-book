@@ -17,7 +17,7 @@
     </div>
   </div>
   <div class="min-vh-100 w-50 flex flex-column align-items-center main-block"
-       [ngClass]="isSignupMode ? 'min-650' : 'min-550'"
+       [ngClass]="isSignupMode && !isDesktopMode ? 'min-650' : 'min-550'"
        *ngIf="isDesktopMode || hideWelcomeWindow || openMainBlock">
     <div class="title position-relative">
       Recipe Book

@@ -1,8 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {FileUploadService} from '../../../services/file-upload.service';
-import {RecipeService} from '../../../services/recipe.service';
+import {RecipeManager} from '../../../managers/recipe.manager';
+import {filter} from 'rxjs/operators';
+import {NotificationService} from '../../../../shared/services/notification.service';
+import {Recipe} from '../../../models/recipe.model';
 
 @Component({
   selector: 'rb-recipe-form',
@@ -12,24 +15,36 @@ import {RecipeService} from '../../../services/recipe.service';
 export class RecipeFormComponent implements OnInit {
 
   constructor(private _router: Router,
-              private _activatedRoute: ActivatedRoute,
-              private _recipeService: RecipeService,
-              private _fileUploadService: FileUploadService) { }
+              private _fileUploadService: FileUploadService,
+              private _notificationService: NotificationService,
+              private _recipeManager: RecipeManager) {
+
+    this.isEditMode = _router.url.includes('edit');
+    if(this.isEditMode) {
+      this.control.is_private.disable();
+    }
+    this.checkRouteValidity();
+  }
 
   control = {
     name: new FormControl(null, Validators.required),
     is_private: new FormControl(false),
     image_url: new FormControl(null, Validators.required),
     description: new FormControl(null),
-    recipe: new FormControl(null),
+    recipe: new FormControl(null, Validators.required),
     ingredients: new FormArray([], Validators.required),
   };
   recipeForm = new FormGroup(this.control);
-  uploading = false;
-  fileUploadProgress: number;
+  imageUploading = false;
+  imageUploadProgress: number;
+  isEditMode = false;
+  updatedRecipe: Recipe;
 
   ngOnInit() {
-    this.addIngredientControl();
+    if (!this.isEditMode) {
+      this.addIngredientControl();
+    }
+    this.handleActionStates();
   }
 
   addIngredientControl() {
@@ -42,18 +57,18 @@ export class RecipeFormComponent implements OnInit {
   }
 
   removeIngredientControl(index: number) {
-    if (this.control.ingredients.length === null) {
+    if (this.control.ingredients.length === 1) {
       return;
     }
     this.control.ingredients.removeAt(index);
   }
 
   onFileSelected(event) {
-    this.uploading = true;
+    this.imageUploading = true;
     if (event.target.files[0]) {
       this._fileUploadService.uploadFile(event.target.files[0]).subscribe(value => {
-        this.fileUploadProgress = value.progress;
-        this.uploading = !value.is_complete;
+        this.imageUploadProgress = value.progress;
+        this.imageUploading = !value.is_complete;
         if (value.file_url) {
           this.control.image_url.patchValue(value.file_url);
         }
@@ -62,19 +77,49 @@ export class RecipeFormComponent implements OnInit {
   }
 
   cancel() {
-    this._router.navigate(['../'], {relativeTo: this._activatedRoute});
+    this._recipeManager.closeRecipeEditForm();
+    this._router.navigate(['dashboard/recipes']);
   }
 
   save() {
-    this._recipeService.createRecipe(this.recipeForm.value).subscribe(_ => {
-      // this.recipeForm.reset();
-      // this._router.navigate(['dashboard/recipes']);
+    this.isEditMode ?
+      this._recipeManager.updateRecipe({...this.updatedRecipe, ...this.recipeForm.value}) :
+      this._recipeManager.addRecipe(this.recipeForm.value);
+  }
+
+  checkRouteValidity() {
+    if (this.isEditMode) {
+      this._recipeManager.getEditedRecipe().subscribe(recipe => {
+        if (recipe) {
+          this.fillEditedRecipeForm(recipe);
+        } else {
+          this._router.navigate(['dashboard/recipes']);
+        }
+      });
+    }
+  }
+
+  fillEditedRecipeForm(recipe: Recipe) {
+    this.updatedRecipe = {...recipe};
+    this.recipeForm.patchValue(recipe);
+    this.control.ingredients.reset();
+    recipe.ingredients.forEach(ingredient => {
+      this.control.ingredients.push(new FormGroup({
+        name: new FormControl(ingredient.name, Validators.required),
+        quantity: new FormControl(ingredient.quantity, Validators.required),
+        unit: new FormControl(ingredient.unit || '')
+      }));
     });
   }
 
-  resetRecipeForm() {
-    this.recipeForm.reset();
-    this.control.ingredients.setValue([]);
-    this.addIngredientControl();
+  handleActionStates() {
+    this._recipeManager.getActionState('recipeAdded').pipe(filter(i => !!i)).subscribe(_ => {
+      this._notificationService.show('Recipe created successfully', 'success');
+      this._router.navigate(['dashboard/recipes']);
+    });
+    this._recipeManager.getActionState('recipeUpdated').pipe(filter(i => !!i)).subscribe(_ => {
+      this._notificationService.show('Recipe updated successfully', 'success');
+      this._router.navigate(['dashboard/recipes']);
+    });
   }
 }

@@ -1,0 +1,14 @@
+.ing-info {
+  color: #555;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  cursor: pointer;
+}
+.delete {
+  cursor: pointer;
+
+  & img {
+    display: block;
+    width: 17px;
+  }
+}

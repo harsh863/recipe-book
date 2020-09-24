@@ -16,6 +16,5 @@ export interface RecipeStore {
     recipeUpdated: boolean;
     recipeDeleted: boolean;
   };
-  previewRecipe: Recipe;
   editedRecipe: Recipe;
 }

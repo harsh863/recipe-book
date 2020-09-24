@@ -55,16 +55,16 @@ export class RecipeEffects {
   deleteRecipe = this._actions$.pipe(
     ofType(RecipeStoreActions.START_RECIPE_DELETION),
     switchMap((data: RecipeStoreAction) => {
-      return this._recipeService.deleteRecipe(data.payload.recipeId).pipe(
-        map(_ => recipeActions.deleteRecipe(data.payload.recipeId))
+      return this._recipeService.deleteRecipe(data.payload.recipeId, data.payload.is_private).pipe(
+        map(_ => recipeActions.deleteRecipe(data.payload.recipeId, data.payload.is_private))
       );
     })
   )
 
-  @Effect({dispatch: false})
+  @Effect()
   clearActionState = this._actions$.pipe(
-    ofType(RecipeStoreActions.ADD_RECIPE || RecipeStoreActions.UPDATE_RECIPE || RecipeStoreActions.DELETE_RECIPE),
-    delay(5000),
+    ofType(RecipeStoreActions.ADD_RECIPE, RecipeStoreActions.UPDATE_RECIPE, RecipeStoreActions.DELETE_RECIPE),
+    delay(1000),
     map(_ => recipeActions.clearActionStates()),
   )
 }

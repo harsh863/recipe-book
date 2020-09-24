@@ -3,14 +3,13 @@
     <div class="flex justify-content-start align-items-center flex-wrap">
       <button type="button" class="btn btn-success mr-3 mb-2" (click)="createNewRecipe()">Add New Recipe</button>
       <div class="btn-group mb-2">
-        <button type="button" class="btn btn-danger">{{isPrivateMode ? 'Private': 'Public'}}</button>
-        <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split"
+        <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split flex justify-content-between align-items-center"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          <span class="sr-only">Toggle Dropdown</span>
+          {{isPrivateMode ? 'Private': 'Public'}} <span class="sr-only">Toggle Dropdown</span>
         </button>
-        <div class="dropdown-menu p-0" style="z-index: 500;">
-          <p class="dropdown-item m-0 py-2 btn" (click)="toggleViewMode(false)">Public</p>
-          <p class="dropdown-item m-0 py-2 btn" (click)="toggleViewMode(true)">Private</p>
+        <div class="dropdown-menu p-0" style="z-index: 500; width: fit-content; min-width: fit-content !important;">
+          <p class="drop-btn dropdown-item m-0 py-1 px-2" (click)="toggleViewMode(false)">Public</p>
+          <p class="drop-btn dropdown-item m-0 py-1 px-2" (click)="toggleViewMode(true)">Private</p>
         </div>
       </div>
     </div>
@@ -20,12 +19,9 @@
   </div>
   <div class="w-100 dropdown-divider mt-3 mb-2"></div>
   <div class="row w-100 flex justify-content-between align-items-start pt-4">
-    <div class="col-lg-6 px-0">
+    <div class="col-lg-12 px-0">
       <rb-recipes-list [filterValue]="filterControl.value" class="w-100" [isPrivateMode]="isPrivateMode"></rb-recipes-list>
       <div class="row dropdown-divider mt-4 mb-4"></div>
-    </div>
-    <div class="px-0 col-lg-5 w-100">
-      <rb-recipe-preview></rb-recipe-preview>
     </div>
   </div>
 </div>

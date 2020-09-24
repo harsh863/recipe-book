@@ -1,15 +1,17 @@
-.shopping-list {
-  & .ing-info {
-    color: #555;
-    font-size: 14px;
-  }
+.bulk-delete-btn {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: .1px;
+}
+.empty-list-msg,
+.no-result-msg{
+  font-family: 'Quicksand', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+}
 
-  & .delete {
-    cursor: pointer;
-
-    & img {
-      width: 30px;
-      height: 30px;
-    }
-  }
+.no-result-msg {
+  font-size: 20px;
 }

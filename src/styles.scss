@@ -2,6 +2,7 @@
 @import '~quill/dist/quill.core.css';
 @import '~quill/dist/quill.bubble.css';
 @import '~quill/dist/quill.snow.css';
+@import '~bootstrap/scss/bootstrap';
 
 *{
   margin: 0;
@@ -9,10 +10,13 @@
   &::-webkit-scrollbar{
     display: none;
   }
+  div, span , p{
+    user-select: none;
+  }
 }
 
 .flex {
-  display: flex;
+  display: flex !important;
 }
 
 button:disabled{
@@ -21,6 +25,16 @@ button:disabled{
 
 .pointer-none {
   pointer-events: none;
+}
+
+#overlayDiv {
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.3);
 }
 
 ngx-spinner {
@@ -41,5 +55,12 @@ ngx-spinner {
         font-weight: 500;
       }
     }
+  }
+}
+
+.recipe-block {
+  * {
+    width: 100%;
+    max-width: 100%;
   }
 }

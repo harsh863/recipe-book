@@ -52,8 +52,8 @@ export class AuthEffects {
   );
 
   @Effect()
-  authFailedRequests = this._actions$.pipe(
-    ofType(AuthStoreActions.LOGIN_FAILED || AuthStoreActions.SIGNUP_FAILED || AuthStoreActions.LOGIN || AuthStoreActions.SIGNUP),
+  clearActionStates = this._actions$.pipe(
+    ofType(AuthStoreActions.LOGIN_FAILED, AuthStoreActions.SIGNUP_FAILED, AuthStoreActions.LOGIN, AuthStoreActions.SIGNUP),
     delay(4000),
     map(_ => clearActionStates())
   );

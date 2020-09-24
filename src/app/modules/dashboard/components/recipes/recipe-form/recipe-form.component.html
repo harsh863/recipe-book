@@ -28,13 +28,13 @@
         </label>
       </div>
     </div>
-    <div class="progress mt-2" *ngIf="uploading" style="height: .6rem !important;">
+    <div class="progress mt-2" *ngIf="imageUploading" style="height: .6rem !important;">
       <div class="progress-bar progress-bar-striped progress-bar-animated bg-info"
            role="progressbar"
            aria-valuemin="0"
-           aria-valuemax="100" [ngStyle]="{'width': fileUploadProgress + '%'}"></div>
+           aria-valuemax="100" [ngStyle]="{'width': imageUploadProgress + '%'}"></div>
     </div>
-    <div class="w-100 flex mt-2 flex justify-content-start" *ngIf="!uploading && control.image_url.value">
+    <div class="w-100 flex mt-2 flex justify-content-start" *ngIf="!imageUploading && control.image_url.value">
       <img class="image-preview" src="{{control.image_url.value}}" alt="">
     </div>
   </div>

@@ -6,7 +6,7 @@
     <img *ngIf="!control.value"
          src="../../../../../assets/icons/search.png" alt="">
     <img *ngIf="control.value"
-         (click)="control.reset()"
+         (click)="control.setValue('', {onlySelf: false, emitEvent: true})"
          src="../../../../../assets/icons/clear-search.png"
          alt="" style="transform: translateX(1px);">
   </div>

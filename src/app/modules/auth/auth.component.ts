@@ -49,8 +49,11 @@ export class AuthComponent implements OnInit, AfterViewInit {
 
   startCarousel() {
     // @ts-ignore
-    $('.carousel').carousel({
-      interval: 3000
+    $(document).ready(function(){
+      // @ts-ignore
+      $('.carousel').carousel({
+        interval: 3000
+      })
     });
   }
 

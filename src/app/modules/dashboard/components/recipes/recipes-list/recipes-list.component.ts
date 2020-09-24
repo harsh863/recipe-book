@@ -8,30 +8,35 @@ import {RecipeManager} from '../../../managers/recipe.manager';
   styleUrls: ['./recipes-list.component.scss']
 })
 export class RecipesListComponent implements OnInit {
+
+  @Input() set filterValue(value: string) {
+    this._filterValue = value;
+    this.filter(value);
+  }
+
   @Input() set isPrivateMode(value: boolean) {
     this._isPrivateMode = value;
+    this.recipes = [];
+    this.filteredRecipes = [];
     this._recipeManager.selectRecipes(value).subscribe(recipes => {
       this.recipes = [...recipes];
+      this.filteredRecipes = [...recipes];
     });
   }
 
   constructor(private _recipeManager: RecipeManager) { }
 
   private _isPrivateMode: boolean;
-  @Input() filterValue: string;
-
-  // recipes: Recipe[] = [
-  //   {name: 'One Pot Thai-Style Rice Noodles', image_url: 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F3949345.jpg&w=272&h=272&c=sc&poi=face&q=85'
-  //     , description: 'Chicken, vegetables, and noodles prepared in a light tasting but full-flavored Asian-inspired sauce.', userId: 'vreger', ingredients: [], is_private: true, id: '1'},
-  //   {name: 'One Pot Thai-Style Rice Noodles', image_url: 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F3949345.jpg&w=272&h=272&c=sc&poi=face&q=85'
-  //     , description: 'Chicken, vegetables, and noodles prepared in a light tasting but full-flavored Asian-inspired sauce.', userId: 'vreger', ingredients: [], is_private: true, id: '2'},
-  //   {name: 'One Pot Thai-Style Rice Noodles', image_url: 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F3949345.jpg&w=272&h=272&c=sc&poi=face&q=85'
-  //     , description: 'Chicken, vegetables, and noodles prepared in a light tasting but full-flavored Asian-inspired sauce.', userId: 'vreger', ingredients: [], is_private: true, rating: 1, id: '3'}
-  // ];
+  private _filterValue: string;
 
   recipes: Recipe[] = [];
+  filteredRecipes: Recipe[] = [];
 
   ngOnInit() {
+  }
+
+  filter(value: string) {
+    this.filteredRecipes = this.recipes.filter(recipe => recipe.name.toLowerCase().includes((value + '').toLowerCase()));
   }
 
 }

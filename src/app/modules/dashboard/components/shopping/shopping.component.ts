@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {ShoppingService} from '../../services/shopping.service';
 
 @Component({
   selector: 'rb-shopping',
@@ -9,13 +8,8 @@ import {ShoppingService} from '../../services/shopping.service';
 })
 export class ShoppingComponent implements OnInit {
 
-  constructor(private cre: ShoppingService) { }
-  filterControl = new FormControl(null);
-
-  isFilterBarVisible = false;
-
+  constructor() { }
   ngOnInit() {
-    this.cre.fetchIngredients().subscribe(x => console.log(x));
   }
 
 }

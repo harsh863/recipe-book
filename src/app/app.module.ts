@@ -24,6 +24,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import {RecipeEffects} from './modules/dashboard/store/effects/recipe.effect';
 import {RecipeService} from './modules/dashboard/services/recipe.service';
 import {AngularFireDatabase} from '@angular/fire/database';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import {AngularFireDatabase} from '@angular/fire/database';
     AngularFireModule.initializeApp(environment.firebaseConfig, 'recipe-book'),
     SharedModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    NgbModule,
   ],
   providers: [AuthService, AngularFireAuth,LoggedInUserResolver, RecipeService, AngularFireDatabase, LoggedInUserManager, NgxSpinnerService],
   bootstrap: [AppComponent]

@@ -1,0 +1,16 @@
+.recipe-item {
+  width: calc(50% - 10px);
+}
+
+.recipe-list {
+  flex-direction: row;
+}
+
+@media (max-width: 1000px) {
+  .recipe-list {
+    flex-direction: column;
+  }
+  .recipe-item {
+    width: 100%;
+  }
+}

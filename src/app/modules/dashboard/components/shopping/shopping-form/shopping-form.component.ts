@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ShoppingService} from '../../../services/shopping.service';
+import {ShoppingManager} from '../../../managers/shopping.manager';
+import {filter} from 'rxjs/operators';
+import {NotificationService} from '../../../../shared/services/notification.service';
+import {Ingredient} from '../../../models/ingredient.model';
 
 @Component({
   selector: 'rb-shopping-form',
@@ -9,17 +12,27 @@ import {ShoppingService} from '../../../services/shopping.service';
 })
 export class ShoppingFormComponent implements OnInit {
 
-  constructor(private cre: ShoppingService) { }
+  constructor(private _shoppingManager: ShoppingManager,
+              private _notificationService: NotificationService) { }
 
   control = {
     name: new FormControl(null, [Validators.required]),
     quantity: new FormControl(null, [Validators.required]),
     unit: new FormControl(null)
   };
+  editMode = false;
+  editedIngredient: Ingredient;
+  loading = false;
 
   ingredientForm = new FormGroup(this.control);
 
   ngOnInit() {
+    this._shoppingManager.selectEditedIngredient().pipe(filter(i => !!i)).subscribe(ingredient => {
+      this.editMode = true;
+      this.editedIngredient = {...ingredient};
+      this.ingredientForm.patchValue(ingredient);
+    })
+    this.handleActionStates();
   }
 
   checkClearButtonValidity() {
@@ -27,6 +40,34 @@ export class ShoppingFormComponent implements OnInit {
   }
 
   addIngredient() {
-    this.cre.addIngredient(this.ingredientForm.value).subscribe(i => console.log(i,1));
+    this.loading = true;
+    this._shoppingManager.addIngredient(this.ingredientForm.value);
+  }
+
+  updateIngredient() {
+    this.loading = true;
+    this._shoppingManager.updateIngredient({...this.editedIngredient, ...this.ingredientForm.value});
+  }
+
+  handleActionStates() {
+    this._shoppingManager.getActionState('ingredientAdded').pipe(filter(i => !!i)).subscribe(_ => {
+      this._notificationService.show('Ingredient added successfully', 'success');
+      this.ingredientForm.reset();
+      this.loading = false;
+    });
+    this._shoppingManager.getActionState('ingredientUpdated').pipe(filter(i => !!i)).subscribe(_ => {
+      this._notificationService.show('Ingredient updated successfully', 'success');
+      this.cancelUpdate();
+    });
+  }
+
+  cancelUpdate(dispatchAction  = false) {
+    this.ingredientForm.reset();
+    this.editMode = false;
+    this.editedIngredient = null;
+    this.loading = false;
+    if (dispatchAction) {
+      this._shoppingManager.stopEditIngredient();
+    }
   }
 }

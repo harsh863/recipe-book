@@ -6,10 +6,11 @@ import { SlidingArrowComponent } from './components/sliding-arrow/sliding-arrow.
 import { FilterBarComponent } from './components/filter-bar/filter-bar.component';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import {NotificationService} from './services/notification.service';
+import { CheckboxComponent } from './components/checkbox/checkbox.component';
 
 
 @NgModule({
-  declarations: [CustomInputComponent, SlidingArrowComponent, FilterBarComponent, SnackbarComponent],
+  declarations: [CustomInputComponent, SlidingArrowComponent, FilterBarComponent, SnackbarComponent, CheckboxComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule
@@ -17,6 +18,6 @@ import {NotificationService} from './services/notification.service';
   entryComponents: [SnackbarComponent],
   providers: [NotificationService],
     exports: [CustomInputComponent, SlidingArrowComponent,
-        FilterBarComponent, SnackbarComponent]
+        FilterBarComponent, SnackbarComponent, CheckboxComponent]
 })
 export class SharedModule { }

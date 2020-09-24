@@ -74,7 +74,12 @@ export const updateIngredient = (state: ShoppingStore, data: { ingredient: Ingre
   const ingredients: Ingredient[] = [...state.shoppingList.ingredients];
   const index = ingredients.findIndex(ingredient => ingredient.id === data.ingredient.id);
   ingredients[index] = data.ingredient;
-  return { ...state, shoppingList: { ...state.shoppingList, ingredients } };
+  return {
+    ...state,
+    shoppingList: { ...state.shoppingList, ingredients },
+    actionStates: { ...getInitialActionStates(), ingredientUpdated: true },
+    editedIngredient: null
+  };
 }
 
 export const clearActionStates = (state: ShoppingStore): ShoppingStore =>

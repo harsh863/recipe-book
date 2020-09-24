@@ -9,6 +9,5 @@ export interface Recipe {
   recipe?: string; //TODO: change this to mandatory
   ingredients: Ingredient[];
   userId?: string;
-  rating?: number;
-  totalReviews?: number;
+  rating?: { [userId: string]: number };
 }

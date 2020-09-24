@@ -11,8 +11,6 @@ export const recipeReducer = (
     case RecipeStoreActions.SAVE_PUBLIC_RECIPES: return savePublicRecipe(state, action.payload);
     case RecipeStoreActions.GET_PRIVATE_RECIPES: return getPrivateRecipe(state);
     case RecipeStoreActions.SAVE_PRIVATE_RECIPES: return savePrivateRecipe(state, action.payload);
-    case RecipeStoreActions.OPEN_RECIPE: return openRecipe(state, action.payload);
-    case RecipeStoreActions.CLOSE_RECIPE: return closeRecipe(state);
     case RecipeStoreActions.ADD_RECIPE: return addRecipe(state, action.payload);
     case RecipeStoreActions.UPDATE_RECIPE: return updateRecipe(state, action.payload);
     case RecipeStoreActions.DELETE_RECIPE: return deleteRecipe(state, action.payload);
@@ -45,18 +43,6 @@ export const savePrivateRecipe = (state: RecipeStore, data: { recipes: Recipe[]}
   ({
     ...state,
     privateRecipes: { recipes: [...data.recipes], isLoaded: true, isLoading: false }
-  });
-
-export const openRecipe = (state: RecipeStore, data: { recipe: Recipe}): RecipeStore =>
-  ({
-    ...state,
-    previewRecipe: data.recipe
-  });
-
-export const closeRecipe = (state: RecipeStore): RecipeStore =>
-  ({
-    ...state,
-    previewRecipe: null
   });
 
 export const addRecipe = (state: RecipeStore, data: { recipe: Recipe}): RecipeStore => {
@@ -115,7 +101,6 @@ export const getRecipeInitialState = (): RecipeStore =>
       isLoading: false
     },
     actionStates: getInitialActionStates(),
-    previewRecipe: null,
     editedRecipe: null
   });
 

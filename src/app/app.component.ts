@@ -9,7 +9,6 @@ import {RandomColorUtils} from './utils/random-color.utils';
   template: `
     <router-outlet></router-outlet>
     <ngx-spinner
-      *ngIf="loading"
       bdColor="rgba(255, 255, 255, 1)"
       size="medium"
       [type]="spinner"
@@ -18,13 +17,10 @@ import {RandomColorUtils} from './utils/random-color.utils';
     </ngx-spinner>`,
 })
 export class AppComponent {
-  timer: any;
   spinner = RandomSpinnerUtils.getRandomSpinner();
   color = RandomColorUtils.getRandomColor();
-  loading = false;
 
   constructor(private _router: Router, private _spinner: NgxSpinnerService) {
-    this._spinner.show();
     _router.events.subscribe((routerEvent: RouterEvent) => {
       this.checkRouterEvent(routerEvent);
     });
@@ -33,11 +29,11 @@ export class AppComponent {
   checkRouterEvent(routerEvent: RouterEvent): void {
     RandomSpinnerUtils.getRandomSpinner();
     if (routerEvent instanceof NavigationStart) {
-      this.loading = true;
+      this._spinner.show();
     } else if (routerEvent instanceof NavigationEnd ||
       routerEvent instanceof NavigationCancel ||
       routerEvent instanceof NavigationError) {
-      this.loading = false;
+      this._spinner.hide();
     }
   }
 }

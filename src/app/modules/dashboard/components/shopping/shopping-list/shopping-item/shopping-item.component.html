@@ -1,0 +1,27 @@
+<div class="flex p-1 justify-content-between"
+     [ngClass]="{'pointer-none': deleting}">
+
+  <div class="flex justify-content-start align-items-center">
+
+    <rb-checkbox
+      [index]="ingredientIndex"
+      [control]="control" class="mr-1"></rb-checkbox>
+
+    <div (click)="updateIngredient()"
+         class="ing-info flex align-items-center ml-2">
+      {{ingredient.name | titlecase}} ({{ingredient.quantity}} {{ingredient.unit}})
+    </div>
+  </div>
+
+  <div class="spinner-border align-self-center" role="status"
+       style="width: 17px; height: 17px; border-width: 1px;"
+       *ngIf="deleting">
+    <span class="sr-only">Loading...</span>
+  </div>
+
+  <div class="delete" *ngIf="!deleting"
+       (click)="deleteIngredient()">
+    <img src="../../../../../../../assets/svgs/delete.svg" alt="">
+  </div>
+
+</div>

@@ -1,12 +1,32 @@
-<div class="recipe" [ngClass]="{'active-recipe': active}">
+<div class="recipe" (click)="openRecipe()">
   <div class="recipe-icon">
     <img src="{{recipe.image_url}}" alt="{{recipe.name}}" class="h-100">
   </div>
   <div class="recipe-info">
     <div class="recipe-title">{{recipe.name}}</div>
     <div class="w-100 flex justify-content-start align-items-center">
-      <ngx-star-rating class="recipe-rating" [(ngModel)]="recipe.rating" id="{{index}}" [disabled]="true"></ngx-star-rating >
+      <ngb-rating
+        class="recipe-rating flex flex-row"
+        [contentEditable]="false"
+        [rate]="getRecipeRating(recipe.rating)"
+        [starTemplate]="starRate"
+        [readonly]="true"
+        [max]="5"
+      ></ngb-rating>
+      <div class="h-100 flex justify-content-end align-items-end"
+           style="font-size: 16px; margin-left: 8px; font-family: 'Lato', sans-serif; font-weight: 500"
+      >( {{getTotalReviews(recipe.rating)}} )</div>
     </div>
     <div class="recipe-description">{{recipe.description}}</div>
   </div>
 </div>
+
+<ng-template #starRate let-fill="fill" let-index="index">
+  <span class="star" (click)="rateRecipe($event, index + 1)">
+    <span class="half"
+          [class.worst]="index < 1 && getRecipeRating(recipe.rating) <= 1"
+          [class.average]="getRecipeRating(recipe.rating) > 1 && getRecipeRating(recipe.rating) <= 3 && index < 3"
+          [class.good]="getRecipeRating(recipe.rating) > 3"
+          [style.width.%]="fill">&#9733;</span>&#9733;
+  </span>
+</ng-template>

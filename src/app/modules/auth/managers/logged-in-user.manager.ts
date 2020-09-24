@@ -1,6 +1,6 @@
 import {Store} from '@ngrx/store';
 import {AppState} from '../../store/app.reducer';
-import {distinctUntilChanged, map, skipUntil, take} from 'rxjs/operators';
+import {distinctUntilChanged, filter, map, skipUntil, take} from 'rxjs/operators';
 import {combineLatest, Observable, zip} from 'rxjs';
 import {UserModel} from '../../shared/models/user.model';
 import {fetchLoggedInUser} from '../store/actions/auth.action';
@@ -27,6 +27,7 @@ export class LoggedInUserManager {
     });
     return this._store.select('auth').pipe(
       skipUntil(this.isLoggedInUserLoaded()),
+      filter(value => !!value.loggedInUser.user),
       map(value => value.loggedInUser.user));
   }
 

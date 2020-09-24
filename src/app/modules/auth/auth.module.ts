@@ -14,16 +14,18 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import {AuthEffects} from './store/effects/auth.effects';
 import {AuthManager} from './managers/auth.manager';
+import {NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [AuthComponent, LoginComponent, SignupComponent, LogoutComponent, ForgotPasswordComponent, ResetPasswordComponent],
-  imports: [
-    CommonModule,
-    AuthRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    SharedModule
-  ],
+    imports: [
+        CommonModule,
+        AuthRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        SharedModule,
+        NgbCarouselModule
+    ],
   providers: [AuthService, AngularFirestore, AngularFireAuth, AuthEffects, AuthManager]
 })
 export class AuthModule { }

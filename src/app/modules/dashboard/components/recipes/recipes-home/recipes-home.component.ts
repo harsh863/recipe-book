@@ -9,7 +9,12 @@ import {FormControl} from '@angular/forms';
 })
 export class RecipesHomeComponent implements OnInit {
 
-  constructor(private _router: Router) { }
+  constructor(private _router: Router,
+              private _activatedRoute: ActivatedRoute) {
+    _activatedRoute.queryParams.subscribe(queryParams => {
+      this.isPrivateMode = !!queryParams.is_private;
+    });
+  }
 
   isPrivateMode = false;
   filterControl = new FormControl();
@@ -18,9 +23,12 @@ export class RecipesHomeComponent implements OnInit {
   }
 
   toggleViewMode(value: boolean) {
-    this.isPrivateMode = value;
+    if (value) {
+      this._router.navigate(['dashboard/recipes'], {queryParams: {is_private: true}})
+    } else {
+      this._router.navigate(['dashboard/recipes'])
+    }
     this.filterControl.reset();
-    console.log(value, this.isPrivateMode);
   }
 
   createNewRecipe() {
