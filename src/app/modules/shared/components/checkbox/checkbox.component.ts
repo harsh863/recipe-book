@@ -9,7 +9,7 @@ import {FormControl} from '@angular/forms';
 export class CheckboxComponent implements OnInit {
 
   constructor() { }
-  @Input() control: FormControl;
+  @Input() control: FormControl = new FormControl();
   @Input() index: number;
 
   ngOnInit() {

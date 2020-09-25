@@ -5,4 +5,23 @@
       <rb-recipe-item [recipe]="recipe"></rb-recipe-item>
     </div>
   </div>
+
+  <div *ngIf="!recipes.length && !loading" class="empty-list-msg mt-2"
+       [ngStyle]="{'color': randomColor}">{{
+    isPrivateMode ?
+      "You haven't added any recipe to your recipe list yet" :
+      "It seems no one has added any public recipe yet."
+    }}
+    <div class="mt-3">{{
+      isPrivateMode ?
+        "Start creating the recipe by clicking" :
+        "Be the first one to create a public recipe on our platform by clicking"
+      }}
+      <a routerLink="new">here</a>
+    </div>
+  </div>
+  <div *ngIf="!filteredRecipes.length && recipes.length && !loading" class="no-result-msg mt-2"
+       [ngStyle]="{'color': randomColor}">
+    No recipes found matching with your input.
+  </div>
 </div>

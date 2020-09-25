@@ -5,10 +5,10 @@
        *ngFor="let ingredient of filteredIngredients; index as ingredientIndex">
     <rb-shopping-item [ingredient]="ingredient"
                       [ingredientIndex]="ingredientIndex"
-                      (onIngredientSelect)="onIngredientSelect($event, ingredient?.id)"
+                      (onIngredientSelect)="onIngredientSelect($event, ingredient.id)"
     ></rb-shopping-item>
   </div>
-  <div class="flex justify-content-start align-items-center mt-4" *ngIf="ingredients.length > 1">
+  <div class="flex justify-content-start align-items-center mt-4" *ngIf="ingredients.length > 0">
     <button type="button"
             [disabled]="deleting"
             (click)="deleteIngredients()"

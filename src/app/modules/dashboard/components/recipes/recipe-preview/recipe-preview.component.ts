@@ -7,6 +7,8 @@ import {filter} from 'rxjs/operators';
 import {NotificationService} from '../../../../shared/services/notification.service';
 import {ShoppingService} from '../../../services/shopping.service';
 import {ShoppingManager} from '../../../managers/shopping.manager';
+import {FormControl, FormGroup} from '@angular/forms';
+import {Ingredient} from '../../../models/ingredient.model';
 
 @Component({
   selector: 'rb-recipe-preview',
@@ -23,9 +25,21 @@ export class RecipePreviewComponent implements OnInit {
   recipe: Recipe;
   onClose = new Subject<boolean>();
   deletingRecipe = false;
+  addingIngredient = false;
+  control = {};
+  ingredientsForm = new FormGroup(this.control);
+  selectedIngredientsCount = 0;
+
 
   ngOnInit() {
     this.handleActionState();
+    this.recipe.ingredients.forEach((ingredient, index) => {
+      this.control[index] = new FormControl(false);
+    });
+    this.ingredientsForm = new FormGroup(this.control);
+    this.ingredientsForm.valueChanges.subscribe(val => {
+      this.selectedIngredientsCount = Object.values(val).filter(i => !!i).length;
+    })
   }
 
   shouldApplyMargin(): boolean {
@@ -51,11 +65,23 @@ export class RecipePreviewComponent implements OnInit {
       this.onClose.next();
     });
     this._shoppingManager.getActionState('ingredientsAdded').pipe(filter(i => !!i)).subscribe(_ => {
+      this.addingIngredient = false;
       this._notificationService.show('Ingredients added successfully to Shopping List', 'success');
+      this.ingredientsForm.reset();
     });
   }
 
   addIngredients() {
-    this._shoppingManager.addIngredients(this.recipe.ingredients);
+    this.addingIngredient = true;
+    let ingredients: Ingredient[] = [];
+    Object.entries(this.ingredientsForm.value).forEach(entry => {
+      if (entry[1]) {
+        ingredients.push(this.recipe.ingredients[entry[0]])
+      }
+    });
+    if (ingredients.length === 0) {
+      ingredients = [...this.recipe.ingredients];
+    }
+    this._shoppingManager.addIngredients(ingredients);
   }
 }

@@ -1,7 +1,14 @@
 <div class="snackbar flex justify-content-start align-items-center"
 [ngStyle]="{'background': getBackgroundColor(type)}">
-  <div class="icon mr-2"><img src="{{getIcon(type)}}" alt=""></div>
-  <div class="message">{{message}}</div>
+  <div class="icon mr-2">
+    <img [ngStyle]="{'filter': type !== 'info' ? 'invert(1)' : 'unset'}"
+         src="{{getIcon(type)}}" alt="">
+  </div>
+  <div class="message"
+       [ngStyle]="{'color': type === 'info' ? '#4d5371' : 'white'}">{{message}}</div>
   <div class="clear flex align-items-center justify-content-center position-absolute"
-       (click)="onClose.next()"><img src="../../../../../assets/icons/close.png" alt=""></div>
+       (click)="onClose.next()">
+    <img *ngIf="type !== 'info'" src="../../../../../assets/icons/close.png" alt="">
+    <img *ngIf="type === 'info'" src="../../../../../assets/icons/cross-blue.png" alt="">
+  </div>
 </div>

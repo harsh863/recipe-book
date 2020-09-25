@@ -36,6 +36,7 @@ export class RecipeFormComponent implements OnInit {
   };
   recipeForm = new FormGroup(this.control);
   imageUploading = false;
+  loading = false;
   imageUploadProgress: number;
   isEditMode = false;
   updatedRecipe: Recipe;
@@ -66,10 +67,12 @@ export class RecipeFormComponent implements OnInit {
   onFileSelected(event) {
     this.imageUploading = true;
     if (event.target.files[0]) {
+      this._notificationService.show('Uploading image, please do not terminate the process', 'warn');
       this._fileUploadService.uploadFile(event.target.files[0]).subscribe(value => {
         this.imageUploadProgress = value.progress;
         this.imageUploading = !value.is_complete;
         if (value.file_url) {
+          this._notificationService.show('Image uploaded successfully', 'info');
           this.control.image_url.patchValue(value.file_url);
         }
       });
@@ -82,6 +85,7 @@ export class RecipeFormComponent implements OnInit {
   }
 
   save() {
+    this.loading = true;
     this.isEditMode ?
       this._recipeManager.updateRecipe({...this.updatedRecipe, ...this.recipeForm.value}) :
       this._recipeManager.addRecipe(this.recipeForm.value);

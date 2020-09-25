@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Recipe} from '../../../models/recipe.model';
 import {RecipeManager} from '../../../managers/recipe.manager';
+import {RandomColorUtils} from '../../../../../utils/random-color.utils';
 
 @Component({
   selector: 'rb-recipes-list',
@@ -18,10 +19,16 @@ export class RecipesListComponent implements OnInit {
     this._isPrivateMode = value;
     this.recipes = [];
     this.filteredRecipes = [];
+    this.loading = true;
     this._recipeManager.selectRecipes(value).subscribe(recipes => {
       this.recipes = [...recipes];
+      this.loading = false;
       this.filteredRecipes = [...recipes];
     });
+  }
+
+  get isPrivateMode(): boolean {
+    return this._isPrivateMode;
   }
 
   constructor(private _recipeManager: RecipeManager) { }
@@ -31,6 +38,8 @@ export class RecipesListComponent implements OnInit {
 
   recipes: Recipe[] = [];
   filteredRecipes: Recipe[] = [];
+  loading = true;
+  randomColor = RandomColorUtils.getRandomColor();
 
   ngOnInit() {
   }

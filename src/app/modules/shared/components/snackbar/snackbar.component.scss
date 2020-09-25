@@ -1,20 +1,17 @@
 .snackbar{
   z-index: 100000;
-  position: fixed;
-  top: 30px;
-  right: 20px;
   min-width: 280px;
   width: 25vw;
   max-width: 400px;
   padding: 15px 12px;
   border-radius: 4px;
   transition: .3s all;
+  margin-bottom: 10px;
   animation: slideIn 0.3s forwards linear;
 
   .icon{
     img {
       width: 26px;
-      filter: invert(1);
     }
   }
 
@@ -24,6 +21,8 @@
     font-weight: 700;
     font-family: 'Montserrat', sans-serif;
     max-width: calc(100% - 75px);
+    word-break: break-word;
+    transform: translateY(1px);
   }
 
   .clear {

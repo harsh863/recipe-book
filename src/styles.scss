@@ -37,6 +37,15 @@ button:disabled{
   background: rgba(0,0,0,0.3);
 }
 
+#notifOverlay {
+  position: fixed;
+  z-index: 10001;
+  top: 30px;
+  right: 20px;
+  width: fit-content;
+  height: fit-content;
+}
+
 ngx-spinner {
   .overlay {
     display: flex;

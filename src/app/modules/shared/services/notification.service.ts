@@ -15,7 +15,7 @@ export class NotificationService {
               private _injector: Injector) {
   }
 
-  show(message: string, type: 'error' | 'success' | 'warn', autoClose = true) {
+  show(message: string, type: 'error' | 'success' | 'warn' | 'info', autoClose = true) {
     const componentRef = this._componentFactoryResolver
       .resolveComponentFactory(SnackbarComponent)
       .create(this._injector);
@@ -24,7 +24,20 @@ export class NotificationService {
     this._appRef.attachView(componentRef.hostView);
     const domElem = (componentRef.hostView as EmbeddedViewRef<any>)
       .rootNodes[0] as HTMLElement;
-    document.body.appendChild(domElem);
+
+    // this is to create stack of snackbar(s) into view
+    const isOverlayAlreadyOpened = !!document.getElementById('notifOverlay');
+    if (isOverlayAlreadyOpened) {
+      const notifOverlay = document.getElementById('notifOverlay');
+      notifOverlay.appendChild(domElem);
+    } else {
+      const notifOverlay = document.createElement('div');
+      notifOverlay.id = 'notifOverlay';
+      notifOverlay.appendChild(domElem);
+      document.body.appendChild(notifOverlay);
+    }
+
+    // below code is to handle the close event of snackbar / trigger autoClose of snackbar
     const timer = setTimeout(_ => {
       if (autoClose) {
         this.closeNotification(componentRef);
