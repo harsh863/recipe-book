@@ -17,7 +17,10 @@
     <div class="w-100 flex justify-content-center align-items-center align-items-center">
       <button class="sign-in-btn"
               [ngClass]="{'btn-success': loginForm.valid}"
-              [disabled]="loginForm.invalid || (loading | async)" type="submit">Sign In</button>
+              [disabled]="loginForm.invalid || (loading | async)" type="submit">
+        <i *ngIf="(loading | async)" class="fa fa-spinner fa-spin" style="margin-right: 5px;"></i>
+        Sign In
+      </button>
     </div>
   </form>
   <div class="w-100 flex flex-column justify-content-center">

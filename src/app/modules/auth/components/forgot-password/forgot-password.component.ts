@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import {AuthService} from '../../../core/services/auth.service';
+import {NotificationService} from '../../../core/services/notification.service';
 
 @Component({
   selector: 'rb-forgot-password',
@@ -9,7 +10,8 @@ import {AuthService} from '../../../core/services/auth.service';
 })
 export class ForgotPasswordComponent implements OnInit {
 
-  constructor(private _authService: AuthService) { }
+  constructor(private _authService: AuthService,
+              private _notificationService: NotificationService) { }
 
   emailControl = new FormControl(null, [Validators.required, Validators.email]);
   loading = false;
@@ -21,7 +23,11 @@ export class ForgotPasswordComponent implements OnInit {
     this.loading = true;
     this._authService.sendPasswordResetEmail(this.emailControl.value).subscribe(_ => {
       this.loading = false;
+      this._notificationService.show(`A password reset email has been sent to ${this.emailControl.value}. Please check it for further instructions`, 'success');
       this.emailControl.reset();
+    }, error => {
+      this.loading = false;
+      this._notificationService.show(error.message, 'error');
     });
   }
 

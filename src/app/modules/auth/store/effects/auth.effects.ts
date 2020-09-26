@@ -8,12 +8,14 @@ import {UserModel} from '../../../shared/models/user.model';
 import {of} from 'rxjs';
 import {AuthStoreAction} from '../../models/auth-store-action.model';
 import {Router} from '@angular/router';
+import {NotificationService} from '../../../core/services/notification.service';
 
 @Injectable()
 export class AuthEffects {
   constructor(private _authService: AuthService,
               private _router: Router,
               private _ngZone: NgZone,
+              private _notificationService: NotificationService,
               private _actions$: Actions) {
   }
 
@@ -82,6 +84,7 @@ export class AuthEffects {
     ofType(AuthStoreActions.LOGOUT),
     tap(_ => {
       this._authService.logout().then(_ => {
+        this._notificationService.show('Logged Out', 'info');
         this._ngZone.run(_ => this._router.navigate(['/']))
       });
     })
