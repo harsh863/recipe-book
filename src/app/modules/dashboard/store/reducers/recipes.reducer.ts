@@ -3,9 +3,8 @@ import {RecipeStoreAction} from '../../models/recipe-store-action.model';
 import {Recipe} from '../../models/recipe.model';
 import {RecipeStoreActions} from '../../enums/recipe-store-actions.enum';
 
-export const recipeReducer = (
-  state: RecipeStore = getRecipeInitialState(),
-  action: RecipeStoreAction): RecipeStore => {
+export function recipeReducer( state: RecipeStore = getRecipeInitialState(), action: RecipeStoreAction): RecipeStore {
+
   switch (action.type) {
     case RecipeStoreActions.GET_PUBLIC_RECIPES: return getPublicRecipe(state);
     case RecipeStoreActions.SAVE_PUBLIC_RECIPES: return savePublicRecipe(state, action.payload);
@@ -21,31 +20,31 @@ export const recipeReducer = (
   }
 }
 
-export const getPublicRecipe = (state: RecipeStore): RecipeStore =>
+const getPublicRecipe = (state: RecipeStore): RecipeStore =>
   ({
     ...state,
     publicRecipes: { recipes: [], isLoaded: false, isLoading: true }
   });
 
-export const savePublicRecipe = (state: RecipeStore, data: { recipes: Recipe[]}): RecipeStore =>
+const savePublicRecipe = (state: RecipeStore, data: { recipes: Recipe[]}): RecipeStore =>
   ({
     ...state,
     publicRecipes: { recipes: [...data.recipes], isLoaded: true, isLoading: false }
   });
 
-export const getPrivateRecipe = (state: RecipeStore): RecipeStore =>
+const getPrivateRecipe = (state: RecipeStore): RecipeStore =>
   ({
     ...state,
     privateRecipes: { recipes: [], isLoaded: false, isLoading: true }
   });
 
-export const savePrivateRecipe = (state: RecipeStore, data: { recipes: Recipe[]}): RecipeStore =>
+const savePrivateRecipe = (state: RecipeStore, data: { recipes: Recipe[]}): RecipeStore =>
   ({
     ...state,
     privateRecipes: { recipes: [...data.recipes], isLoaded: true, isLoading: false }
   });
 
-export const addRecipe = (state: RecipeStore, data: { recipe: Recipe}): RecipeStore => {
+const addRecipe = (state: RecipeStore, data: { recipe: Recipe}): RecipeStore => {
   const updatedState = {...state};
   const key = data.recipe.is_private ? 'privateRecipes' : 'publicRecipes';
   updatedState[key] = {...updatedState[key], recipes: [...updatedState[key].recipes, data.recipe] }
@@ -53,7 +52,7 @@ export const addRecipe = (state: RecipeStore, data: { recipe: Recipe}): RecipeSt
   return updatedState;
 }
 
-export const updateRecipe = (state: RecipeStore, data: { recipe: Recipe}): RecipeStore => {
+const updateRecipe = (state: RecipeStore, data: { recipe: Recipe}): RecipeStore => {
   const updatedState = {...state};
   const key = data.recipe.is_private ? 'privateRecipes' : 'publicRecipes';
   const updated_recipes = [...updatedState[key].recipes].map(recipe => recipe.id === data.recipe.id ? data.recipe : recipe);
@@ -63,7 +62,7 @@ export const updateRecipe = (state: RecipeStore, data: { recipe: Recipe}): Recip
   return updatedState;
 }
 
-export const deleteRecipe = (state: RecipeStore, data: { recipeId: string, is_private: boolean }) => {
+const deleteRecipe = (state: RecipeStore, data: { recipeId: string, is_private: boolean }) => {
   const updatedState = {...state};
   const key = data.is_private ? 'privateRecipes' : 'publicRecipes';
   updatedState[key] = { ...updatedState[key], recipes: [...updatedState[key].recipes].filter(recipe => recipe.id !== data.recipeId) };
@@ -71,25 +70,25 @@ export const deleteRecipe = (state: RecipeStore, data: { recipeId: string, is_pr
   return updatedState;
 }
 
-export const openRecipeEditForm = (state: RecipeStore, data: { recipe: Recipe}): RecipeStore =>
+const openRecipeEditForm = (state: RecipeStore, data: { recipe: Recipe}): RecipeStore =>
   ({
     ...state,
     editedRecipe: data.recipe
   });
 
-export const closeRecipeEditForm = (state: RecipeStore): RecipeStore =>
+const closeRecipeEditForm = (state: RecipeStore): RecipeStore =>
   ({
     ...state,
     editedRecipe: null
   });
 
-export const clearActionStates = (state: RecipeStore): RecipeStore =>
+const clearActionStates = (state: RecipeStore): RecipeStore =>
   ({
     ...state,
     actionStates: getInitialActionStates()
   });
 
-export const getRecipeInitialState = (): RecipeStore =>
+const getRecipeInitialState = (): RecipeStore =>
   ({
     privateRecipes: {
       recipes: [],
@@ -105,7 +104,7 @@ export const getRecipeInitialState = (): RecipeStore =>
     editedRecipe: null
   });
 
-export const getInitialActionStates = () =>
+const getInitialActionStates = () =>
   ({
     recipeAdded: false,
     recipeDeleted: false,

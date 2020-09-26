@@ -3,9 +3,8 @@ import {ShoppingStoreAction} from '../../models/shopping-store-action.model';
 import {ShoppingStoreActions} from '../../enums/shopping-store-actions.enum';
 import {Ingredient} from '../../models/ingredient.model';
 
-export const shoppingReducer = (
-  state: ShoppingStore = getShoppingInitialState(),
-  action: ShoppingStoreAction): ShoppingStore => {
+export function shoppingReducer ( state: ShoppingStore = getShoppingInitialState(), action: ShoppingStoreAction): ShoppingStore {
+
   switch (action.type) {
     case ShoppingStoreActions.GET_SHOPPING_LIST: return startLoadingShoppingList(state);
     case ShoppingStoreActions.SAVE_SHOPPING_LIST: return saveShoppingList(state, action.payload);
@@ -21,33 +20,33 @@ export const shoppingReducer = (
   }
 }
 
-export const startLoadingShoppingList = (state: ShoppingStore): ShoppingStore =>
+const startLoadingShoppingList = (state: ShoppingStore): ShoppingStore =>
   ({
     ...state,
     shoppingList: { ...state.shoppingList, isLoading: true , isLoaded: false }
   });
 
-export const saveShoppingList = (state: ShoppingStore, data: {ingredients: Ingredient[]}): ShoppingStore =>
+const saveShoppingList = (state: ShoppingStore, data: {ingredients: Ingredient[]}): ShoppingStore =>
   ({
     ...state,
     shoppingList: { isLoading: false, isLoaded: true, ingredients: data.ingredients }
   });
 
-export const addIngredient = (state: ShoppingStore, data: { ingredient: Ingredient }): ShoppingStore =>
+const addIngredient = (state: ShoppingStore, data: { ingredient: Ingredient }): ShoppingStore =>
   ({
     ...state,
     shoppingList: { ...state.shoppingList, ingredients: [...state.shoppingList.ingredients, data.ingredient] },
     actionStates: { ...state.actionStates, ingredientAdded: true }
   });
 
-export const addIngredients = (state: ShoppingStore, data: { ingredients: Ingredient[] }): ShoppingStore =>
+const addIngredients = (state: ShoppingStore, data: { ingredients: Ingredient[] }): ShoppingStore =>
   ({
     ...state,
     shoppingList: { ...state.shoppingList, ingredients: [...state.shoppingList.ingredients, ...data.ingredients] },
     actionStates: { ...state.actionStates, ingredientsAdded: true }
   });
 
-export const deleteIngredient = (state: ShoppingStore, data: { id: string }): ShoppingStore =>
+const deleteIngredient = (state: ShoppingStore, data: { id: string }): ShoppingStore =>
   ({
     ...state,
     shoppingList: { ...state.shoppingList, ingredients: [...state.shoppingList.ingredients].filter(ingredient => ingredient.id !== data.id) },
@@ -55,7 +54,7 @@ export const deleteIngredient = (state: ShoppingStore, data: { id: string }): Sh
     editedIngredient: state.editedIngredient ? (state.editedIngredient.id === data.id ? null : { ...state.editedIngredient }) : null
   });
 
-export const deleteIngredients = (state: ShoppingStore, data: { ids: string[] }): ShoppingStore =>
+const deleteIngredients = (state: ShoppingStore, data: { ids: string[] }): ShoppingStore =>
   ({
     ...state,
     shoppingList: { ...state.shoppingList, ingredients: [...state.shoppingList.ingredients].filter(ingredient => !data.ids.includes(ingredient.id)) },
@@ -63,13 +62,13 @@ export const deleteIngredients = (state: ShoppingStore, data: { ids: string[] })
     editedIngredient: state.editedIngredient ? (data.ids.includes(state.editedIngredient.id) ? null : { ...state.editedIngredient }) : null
   });
 
-export const startIngredientUpdate = (state: ShoppingStore, data: { ingredient: Ingredient }): ShoppingStore =>
+const startIngredientUpdate = (state: ShoppingStore, data: { ingredient: Ingredient }): ShoppingStore =>
   ({
     ...state,
     editedIngredient: data.ingredient
   });
 
-export const updateIngredient = (state: ShoppingStore, data: { ingredient: Ingredient }): ShoppingStore => {
+const updateIngredient = (state: ShoppingStore, data: { ingredient: Ingredient }): ShoppingStore => {
   const ingredients: Ingredient[] = [...state.shoppingList.ingredients];
   const index = ingredients.findIndex(ingredient => ingredient.id === data.ingredient.id);
   ingredients[index] = data.ingredient;
@@ -81,27 +80,27 @@ export const updateIngredient = (state: ShoppingStore, data: { ingredient: Ingre
   };
 }
 
-export const clearActionStates = (state: ShoppingStore): ShoppingStore =>
+const clearActionStates = (state: ShoppingStore): ShoppingStore =>
   ({
     ...state,
     actionStates: getInitialActionStates()
   });
 
-export const stopIngredientUpdate = (state: ShoppingStore): ShoppingStore =>
+const stopIngredientUpdate = (state: ShoppingStore): ShoppingStore =>
   ({
     ...state,
     editedIngredient: null
   });
 
-export const getShoppingInitialState = (): ShoppingStore =>
+const getShoppingInitialState = (): ShoppingStore =>
   ({
     shoppingList: getInitialShoppingList(),
     actionStates: getInitialActionStates(),
     editedIngredient: null
   });
 
-export const getInitialShoppingList = () =>
+const getInitialShoppingList = () =>
   ({ ingredients: [], isLoaded: false, isLoading: false });
 
-export const getInitialActionStates = () =>
+const getInitialActionStates = () =>
   ({ ingredientAdded: false, ingredientsAdded: false, ingredientUpdated: false, ingredientDeleted: false, ingredientsDeleted: false });

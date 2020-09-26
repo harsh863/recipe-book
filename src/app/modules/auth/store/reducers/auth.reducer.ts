@@ -3,9 +3,7 @@ import {AuthStoreAction} from '../../models/auth-store-action.model';
 import {AuthStoreActions} from '../../enums/auth-store-actions.enum';
 import {UserModel} from '../../../shared/models/user.model';
 
-export const authReducer = (
-  state: AuthStore = getAuthStoreInitialState(),
-  action: AuthStoreAction): AuthStore => {
+export function authReducer(state: AuthStore = getAuthStoreInitialState(), action: AuthStoreAction): AuthStore {
 
   switch (action.type) {
     case AuthStoreActions.LOGIN_START || AuthStoreActions.AUTHENTICATE_WITH_GOOGLE: return startLogin(state);
@@ -22,71 +20,71 @@ export const authReducer = (
   }
 }
 
-export const startLogin = (state: AuthStore): AuthStore =>
+const startLogin = (state: AuthStore): AuthStore =>
   ({
     ...state,
     loggedInUser: { ...state.loggedInUser, isLoading: true, isLoaded: false },
     actionStates: { ...state.actionStates, loggingIn: true, logInSuccess: false, logInFailed: false, actionErrorMessage: null }
   });
 
-export const login = (state: AuthStore, data: {user: UserModel}): AuthStore =>
+const login = (state: AuthStore, data: {user: UserModel}): AuthStore =>
   ({
     ...state,
     loggedInUser: { user: data.user, isLoaded: true, isLoading: false },
     actionStates: { ...state.actionStates , loggingIn: false, logInSuccess: true, logInFailed: false}
   });
 
-export const loginFailed = (state: AuthStore, data: {message: string}): AuthStore =>
+const loginFailed = (state: AuthStore, data: {message: string}): AuthStore =>
   ({
     ...state,
     loggedInUser: { ...state.loggedInUser, isLoaded: false, isLoading: false },
     actionStates: { ...state.actionStates, loggingIn: false, logInFailed: true, logInSuccess: false, actionErrorMessage: data.message }
   });
 
-export const startSignUp = (state: AuthStore): AuthStore =>
+const startSignUp = (state: AuthStore): AuthStore =>
   ({
     ...state,
     actionStates: { ...state.actionStates, signingUp: true, signUpSuccess: false, signUpFailed: false, actionErrorMessage: null }
   });
 
-export const signUp = (state: AuthStore): AuthStore =>
+const signUp = (state: AuthStore): AuthStore =>
   ({
     ...state,
     actionStates: { ...state.actionStates, signingUp: false, signUpSuccess: true, signUpFailed: false }
   });
 
-export const signUpFailed = (state: AuthStore, data: {message: string}): AuthStore =>
+const signUpFailed = (state: AuthStore, data: {message: string}): AuthStore =>
   ({
     ...state,
     actionStates: { ...state.actionStates, signingUp: false, signUpFailed: true, signUpSuccess: false, actionErrorMessage: data.message }
   });
 
-export const clearActionStates = (state: AuthStore): AuthStore =>
+const clearActionStates = (state: AuthStore): AuthStore =>
   ({
     ...state,
     actionStates: getInitialActionStates()
   });
 
-export const getLoggedInUser = (state: AuthStore): AuthStore =>
+const getLoggedInUser = (state: AuthStore): AuthStore =>
   ({
     ...state,
     loggedInUser: {...state.loggedInUser, isLoading: true}
   })
 
-export const saveUser = (state: AuthStore, data: {user: UserModel}): AuthStore =>
+const saveUser = (state: AuthStore, data: {user: UserModel}): AuthStore =>
   ({
     ...state,
     loggedInUser: { user: data.user, isLoaded: true, isLoading: false }
   });
 
 
-export const getAuthStoreInitialState = (): AuthStore =>
+const getAuthStoreInitialState = (): AuthStore =>
   ({
     loggedInUser: { user: null, isLoaded: false, isLoading: false },
     actionStates: getInitialActionStates()
   });
 
-export const getInitialActionStates = () =>
+const getInitialActionStates = () =>
   ({
     loggingIn: false,
     logInSuccess: false,
