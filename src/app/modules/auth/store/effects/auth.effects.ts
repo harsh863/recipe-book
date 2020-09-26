@@ -54,7 +54,7 @@ export class AuthEffects {
   @Effect()
   clearActionStates = this._actions$.pipe(
     ofType(AuthStoreActions.LOGIN_FAILED, AuthStoreActions.SIGNUP_FAILED, AuthStoreActions.LOGIN, AuthStoreActions.SIGNUP),
-    delay(4000),
+    delay(500),
     map(_ => clearActionStates())
   );
 
