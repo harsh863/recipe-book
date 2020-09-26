@@ -3,22 +3,23 @@ import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {FileUploadService} from '../../../services/file-upload.service';
 import {RecipeManager} from '../../../managers/recipe.manager';
-import {filter} from 'rxjs/operators';
+import {filter, takeUntil} from 'rxjs/operators';
 import {NotificationService} from '../../../../shared/services/notification.service';
 import {Recipe} from '../../../models/recipe.model';
+import {UnsubscribeAbstract} from '../../../../shared/components/unsubscribe/unsubscribe.component';
 
 @Component({
   selector: 'rb-recipe-form',
   templateUrl: './recipe-form.component.html',
   styleUrls: ['./recipe-form.component.scss']
 })
-export class RecipeFormComponent implements OnInit {
+export class RecipeFormComponent extends UnsubscribeAbstract  implements OnInit {
 
   constructor(private _router: Router,
               private _fileUploadService: FileUploadService,
               private _notificationService: NotificationService,
               private _recipeManager: RecipeManager) {
-
+    super();
     this.isEditMode = _router.url.includes('edit');
     if(this.isEditMode) {
       this.control.is_private.disable();
@@ -65,6 +66,7 @@ export class RecipeFormComponent implements OnInit {
   }
 
   onFileSelected(event) {
+    console.log(event);
     this.imageUploading = true;
     if (event.target.files[0]) {
       this._notificationService.show('Uploading image, please do not terminate the process', 'warn');
@@ -93,7 +95,7 @@ export class RecipeFormComponent implements OnInit {
 
   checkRouteValidity() {
     if (this.isEditMode) {
-      this._recipeManager.getEditedRecipe().subscribe(recipe => {
+      this._recipeManager.getEditedRecipe().pipe(takeUntil(this.destroyed$)).subscribe(recipe => {
         if (recipe) {
           this.fillEditedRecipeForm(recipe);
         } else {
@@ -117,11 +119,11 @@ export class RecipeFormComponent implements OnInit {
   }
 
   handleActionStates() {
-    this._recipeManager.getActionState('recipeAdded').pipe(filter(i => !!i)).subscribe(_ => {
+    this._recipeManager.getActionState('recipeAdded').pipe(filter(i => !!i), takeUntil(this.destroyed$)).subscribe(_ => {
       this._notificationService.show('Recipe created successfully', 'success');
       this._router.navigate(['dashboard/recipes']);
     });
-    this._recipeManager.getActionState('recipeUpdated').pipe(filter(i => !!i)).subscribe(_ => {
+    this._recipeManager.getActionState('recipeUpdated').pipe(filter(i => !!i), takeUntil(this.destroyed$)).subscribe(_ => {
       this._notificationService.show('Recipe updated successfully', 'success');
       this._router.navigate(['dashboard/recipes']);
     });

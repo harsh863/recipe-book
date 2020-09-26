@@ -54,14 +54,16 @@ export const deleteIngredient = (state: ShoppingStore, data: { id: string }): Sh
   ({
     ...state,
     shoppingList: { ...state.shoppingList, ingredients: [...state.shoppingList.ingredients].filter(ingredient => ingredient.id !== data.id) },
-    actionStates: { ...state.actionStates, ingredientDeleted: true }
+    actionStates: { ...state.actionStates, ingredientDeleted: true },
+    editedIngredient: state.editedIngredient ? (state.editedIngredient.id === data.id ? null : { ...state.editedIngredient }) : null
   });
 
 export const deleteIngredients = (state: ShoppingStore, data: { ids: string[] }): ShoppingStore =>
   ({
     ...state,
     shoppingList: { ...state.shoppingList, ingredients: [...state.shoppingList.ingredients].filter(ingredient => !data.ids.includes(ingredient.id)) },
-    actionStates: { ...state.actionStates, ingredientsDeleted: true }
+    actionStates: { ...state.actionStates, ingredientsDeleted: true },
+    editedIngredient: state.editedIngredient ? (data.ids.includes(state.editedIngredient.id) ? null : { ...state.editedIngredient }) : null
   });
 
 export const startIngredientUpdate = (state: ShoppingStore, data: { ingredient: Ingredient }): ShoppingStore =>

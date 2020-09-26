@@ -1,19 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ShoppingManager} from '../../../managers/shopping.manager';
-import {filter} from 'rxjs/operators';
+import {filter, takeUntil} from 'rxjs/operators';
 import {NotificationService} from '../../../../shared/services/notification.service';
 import {Ingredient} from '../../../models/ingredient.model';
+import {UnsubscribeAbstract} from '../../../../shared/components/unsubscribe/unsubscribe.component';
 
 @Component({
   selector: 'rb-shopping-form',
   templateUrl: './shopping-form.component.html',
   styleUrls: ['./shopping-form.component.scss']
 })
-export class ShoppingFormComponent implements OnInit {
+export class ShoppingFormComponent extends UnsubscribeAbstract implements OnInit {
 
   constructor(private _shoppingManager: ShoppingManager,
-              private _notificationService: NotificationService) { }
+              private _notificationService: NotificationService) {
+    super();
+  }
 
   control = {
     name: new FormControl(null, [Validators.required]),
@@ -27,10 +30,14 @@ export class ShoppingFormComponent implements OnInit {
   ingredientForm = new FormGroup(this.control);
 
   ngOnInit() {
-    this._shoppingManager.selectEditedIngredient().pipe(filter(i => !!i)).subscribe(ingredient => {
-      this.editMode = true;
-      this.editedIngredient = {...ingredient};
-      this.ingredientForm.patchValue(ingredient);
+    this._shoppingManager.selectEditedIngredient().pipe(takeUntil(this.destroyed$)).subscribe(ingredient => {
+      if (ingredient) {
+        this.editMode = true;
+        this.editedIngredient = {...ingredient};
+        this.ingredientForm.patchValue(ingredient);
+      } else {
+        this.cancelUpdate();
+      }
     })
     this.handleActionStates();
   }
@@ -50,12 +57,12 @@ export class ShoppingFormComponent implements OnInit {
   }
 
   handleActionStates() {
-    this._shoppingManager.getActionState('ingredientAdded').pipe(filter(i => !!i)).subscribe(_ => {
+    this._shoppingManager.getActionState('ingredientAdded').pipe(filter(i => !!i), takeUntil(this.destroyed$)).subscribe(_ => {
       this._notificationService.show('Ingredient added successfully', 'success');
       this.ingredientForm.reset();
       this.loading = false;
     });
-    this._shoppingManager.getActionState('ingredientUpdated').pipe(filter(i => !!i)).subscribe(_ => {
+    this._shoppingManager.getActionState('ingredientUpdated').pipe(filter(i => !!i), takeUntil(this.destroyed$)).subscribe(_ => {
       this._notificationService.show('Ingredient updated successfully', 'success');
       this.cancelUpdate();
     });

@@ -8,7 +8,7 @@
   <div class="navigation__background"></div>
 
   <nav class="navigation__nav" [ngClass]="{'disable': !drawerControl.value}">
-    <ul class="navigation__list">
+    <ul class="navigation__list flex flex-column justify-content-center align-items-center">
       <li class="navigation__item">
         <a routerLink="" (click)="goToRecipes()" class="navigation__link">Recipes</a>
       </li>

@@ -58,7 +58,8 @@ export const updateRecipe = (state: RecipeStore, data: { recipe: Recipe}): Recip
   const key = data.recipe.is_private ? 'privateRecipes' : 'publicRecipes';
   const updated_recipes = [...updatedState[key].recipes].map(recipe => recipe.id === data.recipe.id ? data.recipe : recipe);
   updatedState[key] = {...updatedState[key], recipes: updated_recipes}
-  updatedState.actionStates = {...updatedState.actionStates, recipeUpdated: true }
+  updatedState.actionStates = {...updatedState.actionStates, recipeUpdated: true };
+  updatedState.editedRecipe = null;
   return updatedState;
 }
 

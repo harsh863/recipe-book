@@ -10,7 +10,8 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
 
 
 @NgModule({
-  declarations: [CustomInputComponent, SlidingArrowComponent, FilterBarComponent, SnackbarComponent, CheckboxComponent],
+  declarations: [CustomInputComponent, SlidingArrowComponent, FilterBarComponent, SnackbarComponent,
+    CheckboxComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule

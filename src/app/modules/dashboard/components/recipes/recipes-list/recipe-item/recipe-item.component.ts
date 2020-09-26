@@ -4,15 +4,16 @@ import {ModalService} from '../../../../services/modal.service';
 import {RecipePreviewComponent} from '../../recipe-preview/recipe-preview.component';
 import {RecipeManager} from '../../../../managers/recipe.manager';
 import {LoggedInUserManager} from '../../../../../auth/managers/logged-in-user.manager';
-import {filter, take} from 'rxjs/operators';
+import {filter, takeUntil} from 'rxjs/operators';
 import {NotificationService} from '../../../../../shared/services/notification.service';
+import {UnsubscribeAbstract} from '../../../../../shared/components/unsubscribe/unsubscribe.component';
 
 @Component({
   selector: 'rb-recipe-item',
   templateUrl: './recipe-item.component.html',
   styleUrls: ['./recipe-item.component.scss']
 })
-export class RecipeItemComponent implements OnInit {
+export class RecipeItemComponent extends UnsubscribeAbstract implements OnInit {
 
   @Input() recipe: Recipe;
   loggedInUserId: string;
@@ -22,11 +23,12 @@ export class RecipeItemComponent implements OnInit {
               private _recipeManager: RecipeManager,
               private _notificationService: NotificationService,
               private _loggedInUserManager: LoggedInUserManager) {
+    super();
     this._loggedInUserManager.selectLoggedInUser().subscribe(user => this.loggedInUserId = user.id);
   }
 
   ngOnInit() {
-    this._recipeManager.getActionState('recipeUpdated').pipe(filter(i => !!i && this.isRated), take(1)).subscribe(_ => {
+    this._recipeManager.getActionState('recipeUpdated').pipe(filter(i => !!i && this.isRated), takeUntil(this.destroyed$)).subscribe(_ => {
       this._notificationService.show('Your response has been recorded successfully', 'success');
       this.isRated = false;
     });

@@ -3,19 +3,21 @@ import {Ingredient} from '../../../models/ingredient.model';
 import {ShoppingManager} from '../../../managers/shopping.manager';
 import {noop} from 'rxjs';
 import {NotificationService} from '../../../../shared/services/notification.service';
-import {filter} from 'rxjs/operators';
+import {filter, takeUntil} from 'rxjs/operators';
 import {FormControl} from '@angular/forms';
 import {RandomColorUtils} from '../../../../../utils/random-color.utils';
+import {UnsubscribeAbstract} from '../../../../shared/components/unsubscribe/unsubscribe.component';
 
 @Component({
   selector: 'rb-shopping-list',
   templateUrl: './shopping-list.component.html',
   styleUrls: ['./shopping-list.component.scss']
 })
-export class ShoppingListComponent implements OnInit {
+export class ShoppingListComponent extends UnsubscribeAbstract implements OnInit {
 
   constructor(private _shoppingManager: ShoppingManager,
               private _notificationService: NotificationService) {
+    super();
   }
 
   filterControl = new FormControl(null);
@@ -30,7 +32,7 @@ export class ShoppingListComponent implements OnInit {
 
 
   ngOnInit() {
-    this._shoppingManager.selectIngredients().subscribe(ingredients => {
+    this._shoppingManager.selectIngredients().pipe(takeUntil(this.destroyed$)).subscribe(ingredients => {
       this.loading = false;
       this.ingredients = [...ingredients];
       this.filteredIngredients = [...ingredients];
@@ -56,7 +58,7 @@ export class ShoppingListComponent implements OnInit {
   }
 
   handleActionStates() {
-    this._shoppingManager.getActionState('ingredientsDeleted').pipe(filter(i => !!i)).subscribe(_ => {
+    this._shoppingManager.getActionState('ingredientsDeleted').pipe(filter(i => !!i), takeUntil(this.destroyed$)).subscribe(_ => {
       this.deleting = false;
       this.selectedIngredientsCount = 0;
       this._notificationService.show(`${Object.keys(this.ingredientCheckSheet).length > 0 && Object.keys(this.ingredientCheckSheet).length !== this.previousIngredientsCount ? 'Selected' : 'All'} ingredients removed successfully`, 'success');
