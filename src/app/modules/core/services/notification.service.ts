@@ -6,7 +6,7 @@ import {
   EmbeddedViewRef,
   ComponentRef
 } from '@angular/core';
-import {SnackbarComponent} from '../components/snackbar/snackbar.component';
+import {SnackbarComponent} from '../../shared/components/snackbar/snackbar.component';
 
 @Injectable()
 export class NotificationService {

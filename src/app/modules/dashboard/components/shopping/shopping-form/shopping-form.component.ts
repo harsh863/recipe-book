@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ShoppingManager} from '../../../managers/shopping.manager';
 import {filter, takeUntil} from 'rxjs/operators';
-import {NotificationService} from '../../../../shared/services/notification.service';
+import {NotificationService} from '../../../../core/services/notification.service';
 import {Ingredient} from '../../../models/ingredient.model';
 import {UnsubscribeAbstract} from '../../../../shared/components/unsubscribe/unsubscribe.component';
 

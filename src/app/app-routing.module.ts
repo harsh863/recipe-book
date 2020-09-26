@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {AppComponent} from './app.component';
 import {AuthGuard} from './guards/auth.guard';
-import {LoggedInUserResolver} from './modules/auth/resolvers/logged-in-user.resolver';
+import {LoggedInUserResolver} from './modules/core/resolvers/logged-in-user.resolver';
 
 const routes: Routes = [
   {

@@ -4,12 +4,12 @@ import {Recipe} from '../../../models/recipe.model';
 import {Router} from '@angular/router';
 import {RecipeManager} from '../../../managers/recipe.manager';
 import {filter, takeUntil} from 'rxjs/operators';
-import {NotificationService} from '../../../../shared/services/notification.service';
+import {NotificationService} from '../../../../core/services/notification.service';
 import {ShoppingManager} from '../../../managers/shopping.manager';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Ingredient} from '../../../models/ingredient.model';
 import {UnsubscribeAbstract} from '../../../../shared/components/unsubscribe/unsubscribe.component';
-import {LoggedInUserManager} from '../../../../auth/managers/logged-in-user.manager';
+import {LoggedInUserManager} from '../../../../core/managers/logged-in-user.manager';
 import {UserModel} from '../../../../shared/models/user.model';
 
 @Component({

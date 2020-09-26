@@ -4,8 +4,8 @@ import {auth, User} from 'firebase';
 import {UserModel} from '../../shared/models/user.model';
 import {from, Observable, of} from 'rxjs';
 import {catchError, switchMap} from 'rxjs/operators';
-import {AuthErrorMessage} from '../enums/auth-error-message.enum';
-import {AuthErrorCode} from '../enums/auth-error-code.enum';
+import {AuthErrorMessage} from '../../auth/enums/auth-error-message.enum';
+import {AuthErrorCode} from '../../auth/enums/auth-error-code.enum';
 
 @Injectable()
 export class AuthService {

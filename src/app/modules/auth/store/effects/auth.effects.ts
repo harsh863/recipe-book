@@ -1,5 +1,5 @@
 import {Injectable, NgZone} from '@angular/core';
-import {AuthService} from '../../services/auth.service';
+import {AuthService} from '../../../core/services/auth.service';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {AuthStoreActions} from '../../enums/auth-store-actions.enum';
 import {catchError, delay, map, switchMap, tap} from 'rxjs/operators';

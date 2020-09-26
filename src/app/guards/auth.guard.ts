@@ -3,7 +3,7 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTre
 import {noop, Observable} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {AuthManager} from '../modules/auth/managers/auth.manager';
-import {NotificationService} from '../modules/shared/services/notification.service';
+import {NotificationService} from '../modules/core/services/notification.service';
 
 @Injectable({
   providedIn: 'root'

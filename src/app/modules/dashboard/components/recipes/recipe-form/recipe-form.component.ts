@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 import {FileUploadService} from '../../../services/file-upload.service';
 import {RecipeManager} from '../../../managers/recipe.manager';
 import {filter, takeUntil} from 'rxjs/operators';
-import {NotificationService} from '../../../../shared/services/notification.service';
+import {NotificationService} from '../../../../core/services/notification.service';
 import {Recipe} from '../../../models/recipe.model';
 import {UnsubscribeAbstract} from '../../../../shared/components/unsubscribe/unsubscribe.component';
 

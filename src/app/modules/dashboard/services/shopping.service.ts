@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {LoggedInUserManager} from '../../auth/managers/logged-in-user.manager';
+import {LoggedInUserManager} from '../../core/managers/logged-in-user.manager';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {UserModel} from '../../shared/models/user.model';
 import {Ingredient} from '../models/ingredient.model';

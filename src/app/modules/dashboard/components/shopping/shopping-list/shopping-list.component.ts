@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Ingredient} from '../../../models/ingredient.model';
 import {ShoppingManager} from '../../../managers/shopping.manager';
 import {noop} from 'rxjs';
-import {NotificationService} from '../../../../shared/services/notification.service';
+import {NotificationService} from '../../../../core/services/notification.service';
 import {filter, takeUntil} from 'rxjs/operators';
 import {FormControl} from '@angular/forms';
 import {RandomColorUtils} from '../../../../../utils/random-color.utils';

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthManager} from '../../managers/auth.manager';
-import {NotificationService} from '../../../shared/services/notification.service';
+import {NotificationService} from '../../../core/services/notification.service';
 import {filter, take, takeUntil} from 'rxjs/operators';
 import {UnsubscribeAbstract} from '../../../shared/components/unsubscribe/unsubscribe.component';
 

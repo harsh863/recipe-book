@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Recipe} from '../models/recipe.model';
 import {map} from 'rxjs/operators';
 import {from, Observable, Subject} from 'rxjs';
-import {LoggedInUserManager} from '../../auth/managers/logged-in-user.manager';
+import {LoggedInUserManager} from '../../core/managers/logged-in-user.manager';
 import {UserModel} from '../../shared/models/user.model';
 import {AngularFireDatabase} from '@angular/fire/database';
 

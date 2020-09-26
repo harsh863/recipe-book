@@ -4,7 +4,7 @@ import {AppState} from '../../../store/app.reducer';
 import {googleAuthenticationStarted, startLogin, logout, startSignUp} from '../store/actions/auth.action';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {AuthService} from '../services/auth.service';
+import {AuthService} from '../../core/services/auth.service';
 
 @Injectable({providedIn: 'root'})
 export class AuthManager {

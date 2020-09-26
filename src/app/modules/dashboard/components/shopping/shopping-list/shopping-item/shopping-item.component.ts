@@ -3,7 +3,7 @@ import {Ingredient} from '../../../../models/ingredient.model';
 import {FormControl} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {ShoppingManager} from '../../../../managers/shopping.manager';
-import {NotificationService} from '../../../../../shared/services/notification.service';
+import {NotificationService} from '../../../../../core/services/notification.service';
 import {filter, takeUntil} from 'rxjs/operators';
 import {UnsubscribeAbstract} from '../../../../../shared/components/unsubscribe/unsubscribe.component';
 

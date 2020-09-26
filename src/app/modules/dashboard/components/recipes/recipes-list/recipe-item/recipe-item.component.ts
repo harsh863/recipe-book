@@ -3,9 +3,9 @@ import {Recipe} from '../../../../models/recipe.model';
 import {ModalService} from '../../../../services/modal.service';
 import {RecipePreviewComponent} from '../../recipe-preview/recipe-preview.component';
 import {RecipeManager} from '../../../../managers/recipe.manager';
-import {LoggedInUserManager} from '../../../../../auth/managers/logged-in-user.manager';
+import {LoggedInUserManager} from '../../../../../core/managers/logged-in-user.manager';
 import {filter, takeUntil} from 'rxjs/operators';
-import {NotificationService} from '../../../../../shared/services/notification.service';
+import {NotificationService} from '../../../../../core/services/notification.service';
 import {UnsubscribeAbstract} from '../../../../../shared/components/unsubscribe/unsubscribe.component';
 
 @Component({

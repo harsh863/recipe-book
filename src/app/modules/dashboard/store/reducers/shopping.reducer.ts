@@ -2,12 +2,10 @@ import {ShoppingStore} from '../../models/shopping-store.model';
 import {ShoppingStoreAction} from '../../models/shopping-store-action.model';
 import {ShoppingStoreActions} from '../../enums/shopping-store-actions.enum';
 import {Ingredient} from '../../models/ingredient.model';
-import {AuthStoreActions} from '../../../auth/enums/auth-store-actions.enum';
-import {AuthStoreAction} from '../../../auth/models/auth-store-action.model';
 
 export const shoppingReducer = (
   state: ShoppingStore = getShoppingInitialState(),
-  action: ShoppingStoreAction | AuthStoreAction): ShoppingStore => {
+  action: ShoppingStoreAction): ShoppingStore => {
   switch (action.type) {
     case ShoppingStoreActions.GET_SHOPPING_LIST: return startLoadingShoppingList(state);
     case ShoppingStoreActions.SAVE_SHOPPING_LIST: return saveShoppingList(state, action.payload);
@@ -19,7 +17,6 @@ export const shoppingReducer = (
     case ShoppingStoreActions.UPDATE_INGREDIENT: return updateIngredient(state, action.payload);
     case ShoppingStoreActions.CLOSE_INGREDIENT_EDIT_FORM: return stopIngredientUpdate(state);
     case ShoppingStoreActions.CLEAR_ACTION_STATES: return clearActionStates(state);
-    case AuthStoreActions.LOGOUT: return getShoppingInitialState();
     default: return state;
   }
 }
