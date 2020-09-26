@@ -15,13 +15,11 @@ import {AuthEffects} from './modules/auth/store/effects/auth.effects';
 import {AuthService} from './modules/auth/services/auth.service';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {LoggedInUserResolver} from './modules/auth/resolvers/logged-in-user.resolver';
-import {AuthManager} from './modules/auth/managers/auth.manager';
 import {LoggedInUserManager} from './modules/auth/managers/logged-in-user.manager';
 import {SharedModule} from './modules/shared/shared.module';
 import {NgxSpinnerModule, NgxSpinnerService} from 'ngx-spinner';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import {RecipeEffects} from './modules/dashboard/store/effects/recipe.effect';
 import {RecipeService} from './modules/dashboard/services/recipe.service';
 import {AngularFireDatabase} from '@angular/fire/database';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -39,7 +37,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     NgxSpinnerModule,
     StoreModule.forRoot(appReducer),
-    StoreDevtoolsModule.instrument(),
+    StoreDevtoolsModule.instrument({logOnly: !environment.production}),
     EffectsModule.forRoot([AuthEffects]),
     AngularFireModule.initializeApp(environment.firebaseConfig, 'recipe-book'),
     SharedModule,

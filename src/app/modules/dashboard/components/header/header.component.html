@@ -1,7 +1,7 @@
 <div class="header flex flex-row justify-content-between" (window:resize)="onResize()">
   <dl-menu-icon *ngIf="!isDesktopMode"></dl-menu-icon>
   <div class="app-logo">
-    <img src="../../../../../assets/images/recipe-logo.png" alt="">
+    <img src="../../../../../assets/images/logo/icon-512x512.png" alt="">
   </div>
   <div *ngIf="isDesktopMode" class="menu-items flex flex-row">
     <a routerLinkActive="active" routerLink="recipes" (click)="goToRecipes()" class="menu-item flex align-items-center text-decoration-none">Recipe</a>

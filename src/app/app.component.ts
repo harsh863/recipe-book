@@ -20,7 +20,8 @@ export class AppComponent {
   spinner = RandomSpinnerUtils.getRandomSpinner();
   color = RandomColorUtils.getRandomColor();
 
-  constructor(private _router: Router, private _spinner: NgxSpinnerService) {
+  constructor(private _router: Router,
+              private _spinner: NgxSpinnerService) {
     _router.events.subscribe((routerEvent: RouterEvent) => {
       this.checkRouterEvent(routerEvent);
     });
