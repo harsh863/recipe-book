@@ -24,8 +24,8 @@ export class RecipeService {
     if (!is_private) {
       updatedRecipe.userId = this.loggedInUser.id;
     }
-    return from(this._database.list(path).push(recipe))
-      .pipe(map((val: any) => ({id: val.path.pieces_[is_private ? 2 : 1], ...recipe})));
+    return from(this._database.list(path).push(updatedRecipe))
+      .pipe(map((val: any) => ({id: val.path.pieces_[is_private ? 2 : 1], ...updatedRecipe})));
   }
 
   fetchRecipes(is_private = false): Observable<Recipe[]> {

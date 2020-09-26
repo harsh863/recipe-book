@@ -17,7 +17,6 @@ import {SharedModule} from '../shared/shared.module';
 import {ShoppingService} from './services/shopping.service';
 import { ShoppingFormComponent } from './components/shopping/shopping-form/shopping-form.component';
 import { ShoppingListComponent } from './components/shopping/shopping-list/shopping-list.component';
-import {AngularFireDatabase} from '@angular/fire/database';
 import {RecipeManager} from './managers/recipe.manager';
 import {RecipeEffects} from './store/effects/recipe.effect';
 import {RecipeResolver} from './resolvers/recipe.resolver';
@@ -28,6 +27,7 @@ import {ClickOutsideModule} from 'ng-click-outside';
 import {ShoppingEffects} from './store/effects/shopping.effect';
 import {ShoppingManager} from './managers/shopping.manager';
 import { ShoppingItemComponent } from './components/shopping/shopping-list/shopping-item/shopping-item.component';
+import {ShoppingResolver} from './resolvers/shopping.resolver';
 
 const modules = [DashboardRoutingModule, SharedModule,
   QuillModule.forRoot(), ClickOutsideModule, NgbRatingModule,
@@ -42,7 +42,7 @@ const components = [DashboardComponent, HeaderComponent, MenuIconComponent,
 const services = [RecipeService, ShoppingService, FileUploadService, ModalService];
 const managers = [RecipeManager, ShoppingManager];
 const effects = [ShoppingEffects, RecipeEffects];
-const resolvers = [RecipeResolver];
+const resolvers = [RecipeResolver, ShoppingResolver];
 const entryComponents = [RecipePreviewComponent];
 
 @NgModule({

@@ -29,7 +29,6 @@ export class AppComponent {
   }
 
   checkRouterEvent(routerEvent: RouterEvent): void {
-    RandomSpinnerUtils.getRandomSpinner();
     if (routerEvent instanceof NavigationStart) {
       this._spinner.show();
     } else if (routerEvent instanceof NavigationEnd ||

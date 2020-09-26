@@ -6,7 +6,6 @@ import {RecipeFormComponent} from './components/recipes/recipe-form/recipe-form.
 import {ShoppingComponent} from './components/shopping/shopping.component';
 import {RecipesHomeComponent} from './components/recipes/recipes-home/recipes-home.component';
 
-
 const routes: Routes = [
   {
     path: '', component: DashboardComponent,
