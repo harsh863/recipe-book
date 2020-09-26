@@ -66,9 +66,8 @@ export class RecipeFormComponent extends UnsubscribeAbstract  implements OnInit 
   }
 
   onFileSelected(event) {
-    console.log(event);
-    this.imageUploading = true;
     if (event.target.files[0]) {
+      this.imageUploading = true;
       this._notificationService.show('Uploading image, please do not terminate the process', 'warn');
       this._fileUploadService.uploadFile(event.target.files[0]).subscribe(value => {
         this.imageUploadProgress = value.progress;
@@ -127,5 +126,23 @@ export class RecipeFormComponent extends UnsubscribeAbstract  implements OnInit 
       this._notificationService.show('Recipe updated successfully', 'success');
       this._router.navigate(['dashboard/recipes']);
     });
+  }
+
+  getQuillModules() {
+    return {
+      toolbar: {
+        container:
+          [
+            ['bold', 'italic', 'underline', 'strike'],
+            ['blockquote', 'code-block'],
+            [{'list': 'ordered'}, {'list': 'bullet'}],
+            [{'script': 'sub'}, {'script': 'super'}],
+            [{'indent': '-1'}, {'indent': '+1'}],
+            [{'size': ['small', 'normal', 'large']}],
+            [{color: []}, {'background': []}],
+            ['link','image', 'video']
+          ],
+      }
+    };
   }
 }

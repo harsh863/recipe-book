@@ -1,5 +1,5 @@
 import {Store} from '@ngrx/store';
-import {AppState} from '../../store/app.reducer';
+import {AppState} from '../../../store/app.reducer';
 import {distinctUntilChanged, filter, map, skipUntil, take} from 'rxjs/operators';
 import {combineLatest, Observable, zip} from 'rxjs';
 import {UserModel} from '../../shared/models/user.model';

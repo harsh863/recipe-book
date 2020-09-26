@@ -15,6 +15,7 @@ import {RandomColorUtils} from './utils/random-color.utils';
       [color]="color">
       <p [ngStyle]="{'color': color}">Please wait!!, while we are building your store...</p>
     </ngx-spinner>`,
+  providers: [NgxSpinnerService]
 })
 export class AppComponent {
   spinner = RandomSpinnerUtils.getRandomSpinner();

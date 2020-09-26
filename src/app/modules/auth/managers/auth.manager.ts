@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {AppState} from '../../store/app.reducer';
+import {AppState} from '../../../store/app.reducer';
 import {googleAuthenticationStarted, startLogin, logout, startSignUp} from '../store/actions/auth.action';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';

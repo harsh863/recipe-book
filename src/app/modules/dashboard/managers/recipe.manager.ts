@@ -1,4 +1,4 @@
-import {AppState} from '../../store/app.reducer';
+import {AppState} from '../../../store/app.reducer';
 import {Store} from '@ngrx/store';
 import * as recipeActions from '../store/actions/recipes.action';
 import {Recipe} from '../models/recipe.model';

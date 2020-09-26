@@ -50,6 +50,7 @@
     <div class="label">Recipe</div>
     <quill-editor
       placeholder="Enter your recipe here."
+      [modules]="getQuillModules()"
       [styles]="{'height': '250px', 'max-width': '100%', 'width': '100%'}"
       [formControl]="control.recipe">
     </quill-editor>

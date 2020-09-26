@@ -1,5 +1,5 @@
 import {Store} from '@ngrx/store';
-import {AppState} from '../../store/app.reducer';
+import {AppState} from '../../../store/app.reducer';
 import * as shoppingActions from '../store/actions/shopping.action';
 import {Ingredient} from '../models/ingredient.model';
 import {distinctUntilChanged, filter, map} from 'rxjs/operators';
