@@ -4,7 +4,9 @@ import * as recipeActions from '../store/actions/recipes.action';
 import {Recipe} from '../models/recipe.model';
 import {combineLatest, Observable} from 'rxjs';
 import {distinctUntilChanged, filter, map} from 'rxjs/operators';
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class RecipeManager {
 
   constructor(private _store: Store<AppState>) {}

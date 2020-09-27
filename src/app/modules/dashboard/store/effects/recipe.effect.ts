@@ -5,7 +5,9 @@ import {delay, map, switchMap} from 'rxjs/operators';
 import {Recipe} from '../../models/recipe.model';
 import * as recipeActions from '../actions/recipes.action';
 import {RecipeStoreAction} from '../../models/recipe-store-action.model';
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class RecipeEffects {
   constructor(private _recipeService: RecipeService,
               private _actions$: Actions) {

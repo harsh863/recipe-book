@@ -7,7 +7,6 @@ import {RandomColorUtils} from './utils/random-color.utils';
 @Component({
   selector: 'rb-root',
   templateUrl: './app.component.html',
-  providers: [NgxSpinnerService]
 })
 export class AppComponent {
   spinner = RandomSpinnerUtils.getRandomSpinner();

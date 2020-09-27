@@ -5,7 +5,9 @@ import {delay, map, switchMap} from 'rxjs/operators';
 import {Ingredient} from '../../models/ingredient.model';
 import * as shoppingActions from '../actions/shopping.action';
 import {ShoppingStoreAction} from '../../models/shopping-store-action.model';
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class ShoppingEffects {
   constructor(private _shoppingService: ShoppingService,
               private _actions$: Actions) {

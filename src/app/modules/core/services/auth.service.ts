@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {auth, User} from 'firebase';
 import {UserModel} from '../../shared/models/user.model';
-import {from, Observable, of} from 'rxjs';
+import {from, Observable} from 'rxjs';
 import {catchError, switchMap} from 'rxjs/operators';
 import {AuthErrorMessage} from '../../auth/enums/auth-error-message.enum';
 import {AuthErrorCode} from '../../auth/enums/auth-error-code.enum';

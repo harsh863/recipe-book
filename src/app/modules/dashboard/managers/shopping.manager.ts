@@ -4,8 +4,9 @@ import * as shoppingActions from '../store/actions/shopping.action';
 import {Ingredient} from '../models/ingredient.model';
 import {distinctUntilChanged, filter, map} from 'rxjs/operators';
 import {combineLatest, Observable} from 'rxjs';
-import * as recipeActions from '../store/actions/recipes.action';
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class ShoppingManager {
   constructor(private _store: Store<AppState>) {
   }
