@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {NavigationEnd, NavigationStart, Router, RouterEvent} from '@angular/router';
-import {delay} from 'rxjs/operators';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
   selector: 'rb-auth',
