@@ -6,10 +6,14 @@ import {RecipeFormComponent} from './components/recipes/recipe-form/recipe-form.
 import {ShoppingComponent} from './components/shopping/shopping.component';
 import {RecipesHomeComponent} from './components/recipes/recipes-home/recipes-home.component';
 import {RecipeResolver} from './resolvers/recipe.resolver';
+import {ShoppingResolver} from './resolvers/shopping.resolver';
 
 const routes: Routes = [
   {
-    path: '', component: DashboardComponent,
+    path: '', component: DashboardComponent, resolve: {
+      recipe: RecipeResolver,
+      shopping: ShoppingResolver
+    },
     children: [
       {
         path: '', redirectTo: 'recipes', pathMatch: 'full',

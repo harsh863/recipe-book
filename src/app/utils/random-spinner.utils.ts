@@ -2,7 +2,7 @@ export class RandomSpinnerUtils {
   private static spinners: string[] = [
     'ball-8bits', 'ball-atom', 'ball-beat', 'ball-circus',
     'ball-climbing-dot', 'ball-clip-rotate', 'ball-clip-rotate-multiple',
-    'ball-clip-rotate-pulse', 'ball-elastic-dots', 'ball-fall', 'ball-fusion',
+    'ball-clip-rotate-pulse', 'ball-elastic-dots', 'ball-fall',
     'ball-grid-beat', 'ball-grid-pulse', 'ball-newton-cradle', 'ball-pulse',
     'ball-pulse-rise', 'ball-pulse-sync', 'ball-rotate', 'ball-running-dots',
     'ball-scale', 'ball-scale-multiple', 'ball-scale-pulse', 'ball-scale-ripple',
