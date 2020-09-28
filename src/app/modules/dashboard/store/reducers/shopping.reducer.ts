@@ -2,8 +2,10 @@ import {ShoppingStore} from '../../models/shopping-store.model';
 import {ShoppingStoreAction} from '../../models/shopping-store-action.model';
 import {ShoppingStoreActions} from '../../enums/shopping-store-actions.enum';
 import {Ingredient} from '../../models/ingredient.model';
+import {AuthStoreAction} from '../../../auth/models/auth-store-action.model';
+import {AuthStoreActions} from '../../../auth/enums/auth-store-actions.enum';
 
-export function shoppingReducer ( state: ShoppingStore = getShoppingInitialState(), action: ShoppingStoreAction): ShoppingStore {
+export function shoppingReducer ( state: ShoppingStore = getShoppingInitialState(), action: ShoppingStoreAction | AuthStoreAction): ShoppingStore {
 
   switch (action.type) {
     case ShoppingStoreActions.GET_SHOPPING_LIST: return startLoadingShoppingList(state);
@@ -16,6 +18,7 @@ export function shoppingReducer ( state: ShoppingStore = getShoppingInitialState
     case ShoppingStoreActions.UPDATE_INGREDIENT: return updateIngredient(state, action.payload);
     case ShoppingStoreActions.CLOSE_INGREDIENT_EDIT_FORM: return stopIngredientUpdate(state);
     case ShoppingStoreActions.CLEAR_ACTION_STATES: return clearActionStates(state);
+    case AuthStoreActions.LOGIN: return getShoppingInitialState();
     default: return state;
   }
 }

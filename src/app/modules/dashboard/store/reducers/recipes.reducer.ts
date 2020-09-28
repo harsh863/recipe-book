@@ -2,8 +2,10 @@ import {RecipeStore} from '../../models/recipe-store.model';
 import {RecipeStoreAction} from '../../models/recipe-store-action.model';
 import {Recipe} from '../../models/recipe.model';
 import {RecipeStoreActions} from '../../enums/recipe-store-actions.enum';
+import {AuthStoreAction} from '../../../auth/models/auth-store-action.model';
+import {AuthStoreActions} from '../../../auth/enums/auth-store-actions.enum';
 
-export function recipeReducer( state: RecipeStore = getRecipeInitialState(), action: RecipeStoreAction): RecipeStore {
+export function recipeReducer( state: RecipeStore = getRecipeInitialState(), action: RecipeStoreAction | AuthStoreAction): RecipeStore {
 
   switch (action.type) {
     case RecipeStoreActions.GET_PUBLIC_RECIPES: return getPublicRecipe(state);
@@ -16,6 +18,7 @@ export function recipeReducer( state: RecipeStore = getRecipeInitialState(), act
     case RecipeStoreActions.OPEN_RECIPE_EDIT_WINDOW: return openRecipeEditForm(state, action.payload);
     case RecipeStoreActions.CLOSE_RECIPE_EDIT_WINDOW: return closeRecipeEditForm(state);
     case RecipeStoreActions.CLEAR_ACTION_STATES: return clearActionStates(state);
+    case AuthStoreActions.LOGIN: return getRecipeInitialState();
     default: return state;
   }
 }
