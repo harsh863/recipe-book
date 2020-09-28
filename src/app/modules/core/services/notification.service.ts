@@ -15,7 +15,7 @@ export class NotificationService {
               private _injector: Injector) {
   }
 
-  show(message: string, type: 'error' | 'success' | 'warn' | 'info', autoClose = true) {
+  show(message: string, type: 'error' | 'success' | 'warn' | 'info', autoClose = true): ComponentRef<SnackbarComponent> {
     const componentRef = this._componentFactoryResolver
       .resolveComponentFactory(SnackbarComponent)
       .create(this._injector);
@@ -46,10 +46,11 @@ export class NotificationService {
     componentRef.instance.onClose.subscribe(_ => {
       clearTimeout(timer);
       this.closeNotification(componentRef);
-    })
+    });
+    return componentRef;
   }
 
-  private closeNotification(componentRef: ComponentRef<SnackbarComponent>) {
+  closeNotification(componentRef: ComponentRef<SnackbarComponent>) {
     this._appRef.detachView(componentRef.hostView);
     componentRef.destroy();
   }

@@ -58,10 +58,6 @@ export class AuthService {
     return from(firebaseUser.sendEmailVerification());
   }
 
-  verifyResetToken(code: string): Observable<any> {
-    return from(this._angularFireAuth.auth.verifyPasswordResetCode(code));
-  }
-
   selectLoggedInUser(): Observable<UserModel> {
     return this._angularFireAuth.authState.pipe(
       switchMap(value => from(this.parseUserInfo(value))),
@@ -82,7 +78,6 @@ export class AuthService {
       displayName: firebaseUser.displayName,
       email: firebaseUser.email,
       imageUrl: firebaseUser.photoURL,
-      refreshToken: firebaseUser.refreshToken,
       idToken: await firebaseUser.getIdToken()
     }
   }
