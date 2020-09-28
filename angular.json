@@ -17,6 +17,15 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "firebase",
+              "@firebase/app",
+              "@firebase/database",
+              "@firebase/storage",
+              "@firebase/performance",
+              "@firebase/remote-config",
+              "@firebase/component"
+            ],
             "outputPath": "dist/recipe-book",
             "index": "src/index.html",
             "main": "src/main.ts",
