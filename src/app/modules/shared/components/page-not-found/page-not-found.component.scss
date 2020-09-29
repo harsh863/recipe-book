@@ -1,0 +1,251 @@
+@media (max-width: 600px) {
+  .not-found-container {
+    & .number {
+      font-size: 9rem !important;
+    }
+
+    & .illustration {
+      width: 8rem !important;
+
+      & .circle {
+        height: 8rem !important;
+      }
+
+      & .clip {
+        height: 9.2rem !important;
+
+        & .eyes {
+          top: -.75rem !important;
+          left: 1.1rem !important;
+          width: calc(100% - 2rem) !important;
+        }
+
+        & .rosyCheeks {
+          top: .9rem !important;
+          width: .8rem !important;
+
+          &-left {
+            left: .8rem !important;
+          }
+
+          &-right {
+            right: .5rem !important;
+          }
+        }
+
+        & .mouth {
+          top: 2.6rem !important;
+          width: 1.4rem !important;
+        }
+      }
+    }
+
+    & .go-home-btn {
+      font-size: 1.2rem !important;
+      font-weight: 800 !important;
+      padding: .5rem 1.3rem !important;
+    }
+  }
+}
+
+@media (max-width: 380px) {
+  .not-found-container {
+    & .number {
+      font-size: 8rem !important;
+    }
+
+    & .illustration {
+      margin: 0 1.4rem !important;
+      width: 7.5rem !important;
+
+      & .circle {
+        height: 7.4rem !important;
+      }
+
+      & .clip {
+        height: 8.4rem !important;
+
+        & .eyes {
+          top: -.75rem !important;
+          left: 1.1rem !important;
+          width: calc(100% - 2rem) !important;
+        }
+
+        & .rosyCheeks {
+          top: .9rem !important;
+          width: .8rem !important;
+
+          &-left {
+            left: .8rem !important;
+          }
+
+          &-right {
+            right: .5rem !important;
+          }
+        }
+
+        & .mouth {
+          top: 2.6rem !important;
+          width: 1.4rem !important;
+        }
+      }
+    }
+  }
+}
+
+
+.not-found-container {
+  background-color: whitesmoke;
+  & .number {
+    font-weight: 900;
+    font-size: 15rem;
+    line-height: 1;
+    font-family: 'Lato', sans-serif;
+  }
+
+  & .illustration {
+    position: relative;
+    width: 12.2rem;
+    margin: 0 2.1rem;
+
+    & .circle {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 11.4rem;
+      border-radius: 50%;
+      background-color: #293b49;
+    }
+
+    & .clip {
+      position: absolute;
+      bottom: 0.3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      overflow: hidden;
+      width: 100%;
+      height: 13rem;
+      border-radius: 0 0 50% 50%;
+
+      & .paper {
+        position: absolute;
+        bottom: -0.3rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 2rem);
+        height: calc(100% - .6rem);
+        border: 0.3rem solid #293b49;
+        background-color: white;
+        border-radius: 0.8rem;
+
+        & .face {
+          position: relative;
+          margin-top: 2.3rem;
+
+          & .eyes {
+            position: absolute;
+            top: 0;
+            left: 2.4rem;
+            width: 4.6rem;
+            height: 0.8rem;
+
+            & .eye {
+              position: absolute;
+              bottom: 0;
+              width: 0.8rem;
+              height: 0.8rem;
+              border-radius: 50%;
+              background-color: #293b49;
+              animation-name: eye;
+              animation-duration: 4s;
+              animation-iteration-count: infinite;
+              animation-timing-function: ease-in-out;
+
+              &-left {
+                left: 0;
+              }
+
+              &-right {
+                right: 0;
+              }
+            }
+
+          }
+
+          & .rosyCheeks {
+            position: absolute;
+            top: 1.6rem;
+            width: 1rem;
+            height: 0.2rem;
+            border-radius: 50%;
+            background-color: #fdabaf;
+
+            &-left {
+              left: 1.4rem;
+            }
+
+            &-right {
+              right: 1.4rem;
+            }
+          }
+
+          & .mouth {
+            position: absolute;
+            top: 3.1rem;
+            left: 50%;
+            width: 1.6rem;
+            height: 0.2rem;
+            border-radius: 0.1rem;
+            transform: translateX(-50%);
+            background-color: #293b49;
+          }
+        }
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: -0.7rem;
+          right: -0.7rem;
+          width: 1.4rem;
+          height: 1rem;
+          background-color: whitesmoke;
+          border-bottom: 0.3rem solid #293b49;
+          transform: rotate(45deg);
+        }
+      }
+    }
+  }
+
+  & .not-found-text {
+    margin-top: 50px;
+    font-family: 'Quicksand', 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  & .go-home-btn {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 800;
+    padding: .8rem 2rem;
+  }
+}
+
+@keyframes eye {
+  0% {
+    height: 0.8rem;
+  }
+  50% {
+    height: 0.8rem;
+  }
+  52% {
+    height: 0.1rem;
+  }
+  54% {
+    height: 0.8rem;
+  }
+  100% {
+    height: 0.8rem;
+  }
+}

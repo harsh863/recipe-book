@@ -38,6 +38,7 @@ export class AuthService {
     return from(this._angularFireAuth.auth.signInWithEmailAndPassword(email, password))
       .pipe(switchMap(res => {
         if (!res.user.emailVerified) {
+          this.logout().then();
           return Promise.reject({message: AuthErrorMessage.EMAIL_NOT_VERIFIED})
         }
         return from(this.parseUserInfo(res.user));
