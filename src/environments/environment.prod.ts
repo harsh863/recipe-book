@@ -1,13 +1,13 @@
 export const environment = {
   production: true,
   firebaseConfig: {
-    apiKey: "AIzaSyAHEDD3M9qNVNuHQ8IzRtSj-12dyVfib0Q",
-    authDomain: "recipe-book-3229e.firebaseapp.com",
-    databaseURL: "https://recipe-book-3229e.firebaseio.com",
-    projectId: "recipe-book-3229e",
-    storageBucket: "recipe-book-3229e.appspot.com",
-    messagingSenderId: "274688407704",
-    appId: "1:274688407704:web:cbdbab1c5df665fc7738ed",
-    measurementId: "G-DDZX1TR2BJ"
+    apiKey: "AIzaSyBdnkBWoloHO9T3aNGenURjlDZW724hHj0",
+    authDomain: "recipe-book-14b63.firebaseapp.com",
+    databaseURL: "https://recipe-book-14b63.firebaseio.com",
+    projectId: "recipe-book-14b63",
+    storageBucket: "recipe-book-14b63.appspot.com",
+    messagingSenderId: "548020584394",
+    appId: "1:548020584394:web:93ff36229a3a61138b9933",
+    measurementId: "G-K6XCMQKEEG"
   }
 };

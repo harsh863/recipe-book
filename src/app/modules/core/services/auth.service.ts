@@ -37,14 +37,14 @@ export class AuthService {
   signIn(email: string, password: string): Observable<UserModel> {
     return from(this._angularFireAuth.auth.signInWithEmailAndPassword(email, password))
       .pipe(switchMap(res => {
-        // if (!res.user.emailVerified) {
-        //   return Promise.reject({message: AuthErrorMessage.EMAIL_NOT_VERIFIED})
-        // }
+        if (!res.user.emailVerified) {
+          return Promise.reject({message: AuthErrorMessage.EMAIL_NOT_VERIFIED})
+        }
         return from(this.parseUserInfo(res.user));
       }), catchError(err => {
-        // if (err.message === AuthErrorMessage.EMAIL_NOT_VERIFIED) {
-        //   return from(Promise.reject(err));
-        // }
+        if (err.message === AuthErrorMessage.EMAIL_NOT_VERIFIED) {
+          return from(Promise.reject(err));
+        }
         return from(Promise.reject({message: this.parseAuthErrors(err)}))
         }
       ));
