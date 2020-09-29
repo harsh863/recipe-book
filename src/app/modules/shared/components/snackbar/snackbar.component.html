@@ -7,7 +7,7 @@
   <div class="message"
        [ngStyle]="{'color': type === 'info' ? '#4d5371' : 'white'}">{{message}}</div>
   <div class="clear flex align-items-center justify-content-center position-absolute"
-       (click)="onClose.next()">
+       (click)="$event.stopPropagation() || onClose.next()">
     <img *ngIf="type !== 'info'" src="../../../../../assets/icons/close.png" alt="">
     <img *ngIf="type === 'info'" src="../../../../../assets/icons/cross-blue.png" alt="">
   </div>
