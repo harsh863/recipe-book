@@ -18,7 +18,7 @@ export function shoppingReducer ( state: ShoppingStore = getShoppingInitialState
     case ShoppingStoreActions.UPDATE_INGREDIENT: return updateIngredient(state, action.payload);
     case ShoppingStoreActions.CLOSE_INGREDIENT_EDIT_FORM: return stopIngredientUpdate(state);
     case ShoppingStoreActions.CLEAR_ACTION_STATES: return clearActionStates(state);
-    case AuthStoreActions.LOGIN: return getShoppingInitialState();
+    case AuthStoreActions.LOGOUT: return getShoppingInitialState();
     default: return state;
   }
 }

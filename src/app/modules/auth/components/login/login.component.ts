@@ -47,10 +47,6 @@ export class LoginComponent extends UnsubscribeAbstract implements OnInit {
   }
 
   handleLoginState() {
-    this._authManager.selectLoginState('logInSuccess').pipe(filter(v => !!v), takeUntil(this.destroyed$)).subscribe(_ => {
-      this.loginForm.reset();
-      this._router.navigate(['dashboard']);
-    });
     this._authManager.selectLoginState('logInFailed').pipe(filter(v => !!v), takeUntil(this.destroyed$)).subscribe(async _ => {
       const errorMessage = await this._authManager.getErrorMessage().pipe(take(1)).toPromise();
       this._notificationService.show(errorMessage, 'error');

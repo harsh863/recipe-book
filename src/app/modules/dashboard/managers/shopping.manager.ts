@@ -2,7 +2,7 @@ import {Store} from '@ngrx/store';
 import {AppState} from '../../../store/app.reducer';
 import * as shoppingActions from '../store/actions/shopping.action';
 import {Ingredient} from '../models/ingredient.model';
-import {distinctUntilChanged, filter, map} from 'rxjs/operators';
+import {distinctUntilChanged, filter, map, take} from 'rxjs/operators';
 import {combineLatest, Observable} from 'rxjs';
 import { Injectable } from "@angular/core";
 
@@ -46,16 +46,18 @@ export class ShoppingManager {
   }
 
   selectIngredients(): Observable<Ingredient[]> {
-    const $loaded = this.isShoppingListLoaded().pipe(distinctUntilChanged());
-    const $loading = this.isShoppingListLoading().pipe(distinctUntilChanged());
-    combineLatest([$loaded, $loading]).subscribe(value => {
-      if (!value[0] && !value[1]) {
-        this._store.dispatch(shoppingActions.getShoppingList());
-      }
-    });
+    this.handleShoppingListFetch();
     return this._store.select('shopping').pipe(
       filter(shoppingState => shoppingState.shoppingList.isLoaded),
       map(shoppingState => shoppingState.shoppingList.ingredients)
     );
+  }
+
+  async handleShoppingListFetch() {
+    const loaded = await this.isShoppingListLoaded().pipe(distinctUntilChanged(), take(1)).toPromise();
+    const loading = await this.isShoppingListLoading().pipe(distinctUntilChanged(), take(1)).toPromise();
+    if (!loaded && !loading) {
+      this._store.dispatch(shoppingActions.getShoppingList());
+    }
   }
 }

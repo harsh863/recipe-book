@@ -80,6 +80,12 @@ export class AuthEffects {
   );
 
   @Effect({dispatch: false})
+  authLoginSuccess = this._actions$.pipe(
+    ofType(AuthStoreActions.LOGIN),
+    tap(() => this._ngZone.run(_ => this._router.navigate(['dashboard'])))
+  );
+
+  @Effect({dispatch: false})
   authLogout = this._actions$.pipe(
     ofType(AuthStoreActions.LOGOUT),
     tap(_ => {

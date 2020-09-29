@@ -1,7 +1,7 @@
 import {Store} from '@ngrx/store';
 import {AppState} from '../../../store/app.reducer';
 import {distinctUntilChanged, filter, map, skipUntil, take} from 'rxjs/operators';
-import {combineLatest, Observable, zip} from 'rxjs';
+import {combineLatest, Observable} from 'rxjs';
 import {UserModel} from '../../shared/models/user.model';
 import {fetchLoggedInUser} from '../../auth/store/actions/auth.action';
 import {Injectable} from '@angular/core';
@@ -20,18 +20,18 @@ export class LoggedInUserManager {
   }
 
   selectLoggedInUser(): Observable<UserModel> {
-    const $loaded = this.isLoggedInUserLoaded().pipe(distinctUntilChanged());
-    const $loading = this.isLoggedInUserLoading().pipe(distinctUntilChanged());
-    combineLatest([$loaded, $loading]).subscribe(value => {
-      if (!value[0] && !value[1]) {
-        this._store.dispatch(fetchLoggedInUser());
-      }
-    });
+    this.handleUserFetch();
     return this._store.select('auth').pipe(
       skipUntil(this.isLoggedInUserLoaded()),
       filter(value => !!value.loggedInUser.user),
       map(value => value.loggedInUser.user));
   }
 
-
+  async handleUserFetch() {
+    const loaded = await this.isLoggedInUserLoaded().pipe(distinctUntilChanged(), take(1)).toPromise();
+    const loading = await this.isLoggedInUserLoading().pipe(distinctUntilChanged(), take(1)).toPromise();
+    if (!loaded && !loading) {
+      this._store.dispatch(fetchLoggedInUser());
+    }
+  }
 }

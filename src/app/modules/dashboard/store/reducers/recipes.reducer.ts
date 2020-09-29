@@ -18,7 +18,7 @@ export function recipeReducer( state: RecipeStore = getRecipeInitialState(), act
     case RecipeStoreActions.OPEN_RECIPE_EDIT_WINDOW: return openRecipeEditForm(state, action.payload);
     case RecipeStoreActions.CLOSE_RECIPE_EDIT_WINDOW: return closeRecipeEditForm(state);
     case RecipeStoreActions.CLEAR_ACTION_STATES: return clearActionStates(state);
-    case AuthStoreActions.LOGIN: return getRecipeInitialState();
+    case AuthStoreActions.LOGOUT: return getRecipeInitialState();
     default: return state;
   }
 }

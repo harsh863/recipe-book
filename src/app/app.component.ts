@@ -33,6 +33,7 @@ export class AppComponent {
     } else if (routerEvent instanceof NavigationEnd ||
       routerEvent instanceof NavigationCancel ||
       routerEvent instanceof NavigationError) {
+      ReferenceUtils.LoadingSpinner = null;
       this._spinner.hide();
     }
   }

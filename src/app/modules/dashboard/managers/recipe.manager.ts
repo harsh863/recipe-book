@@ -3,17 +3,13 @@ import {Store} from '@ngrx/store';
 import * as recipeActions from '../store/actions/recipes.action';
 import {Recipe} from '../models/recipe.model';
 import {combineLatest, Observable} from 'rxjs';
-import {distinctUntilChanged, filter, map} from 'rxjs/operators';
+import {distinctUntilChanged, filter, map, take} from 'rxjs/operators';
 import { Injectable } from "@angular/core";
 
 @Injectable()
 export class RecipeManager {
 
   constructor(private _store: Store<AppState>) {}
-
-  fetchPrivateRecipes = () => this._store.dispatch(recipeActions.getPrivateRecipes())
-
-  fetchPublicRecipes = () => this._store.dispatch(recipeActions.getPublicRecipes())
 
   addRecipe = (recipe: Recipe) => this._store.dispatch(recipeActions.startRecipeAdd(recipe))
 
@@ -38,20 +34,22 @@ export class RecipeManager {
   }
 
   selectRecipes(is_private = false): Observable<Recipe[]> {
-    const $loaded = this.isRecipesLoaded(is_private).pipe(distinctUntilChanged());
-    const $loading = this.isRecipesLoading(is_private).pipe(distinctUntilChanged());
-    combineLatest([$loaded, $loading]).subscribe(value => {
-      if (!value[0] && !value[1]) {
-        this._store.dispatch(is_private ?
-          recipeActions.getPrivateRecipes() :
-          recipeActions.getPublicRecipes()
-        );
-      }
-    });
+    this.handleRecipeFetch(is_private);
     return this._store.select('recipe').pipe(
       filter(recipeState => recipeState[is_private ? 'privateRecipes' : 'publicRecipes'].isLoaded),
       map(recipeState => recipeState[is_private ? 'privateRecipes' : 'publicRecipes'].recipes)
     );
+  }
+
+  async handleRecipeFetch(is_private: boolean) {
+    const loaded = await this.isRecipesLoaded(is_private).pipe(distinctUntilChanged(), take(1)).toPromise();
+    const loading = await this.isRecipesLoading(is_private).pipe(distinctUntilChanged(), take(1)).toPromise();
+    if (!loaded && !loading) {
+      this._store.dispatch(is_private ?
+        recipeActions.getPrivateRecipes() :
+        recipeActions.getPublicRecipes()
+      );
+    }
   }
 
   getEditedRecipe(): Observable<Recipe> {
