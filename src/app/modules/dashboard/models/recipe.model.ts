@@ -6,7 +6,7 @@ export interface Recipe {
   is_private: boolean;
   image_url: string;
   description: string;
-  recipe?: string; //TODO: change this to mandatory
+  recipe: string;
   ingredients: Ingredient[];
   userId?: string;
   rating?: { [userId: string]: number };
