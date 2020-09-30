@@ -10,7 +10,8 @@ export class ShoppingResolver implements Resolve<Ingredient[]> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<Ingredient[]> {
-    return this._shoppingManager.selectIngredients().pipe(take(1)).toPromise();
+    return this._shoppingManager.selectIngredients().pipe(take(1)).toPromise()
+      .catch(_ => Promise.reject([]));
   }
 
 }

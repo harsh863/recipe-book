@@ -10,7 +10,8 @@ export class LoggedInUserResolver implements Resolve<UserModel>{
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<UserModel> {
-    return this._loggedInUserManager.selectLoggedInUser().pipe(take(1)).toPromise();
+    return this._loggedInUserManager.selectLoggedInUser().pipe(take(1)).toPromise()
+      .catch(_ => Promise.reject({}));
   }
 
 }

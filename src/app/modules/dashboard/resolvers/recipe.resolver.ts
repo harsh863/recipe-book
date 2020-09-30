@@ -13,6 +13,6 @@ export class RecipeResolver implements Resolve<Recipe[][]> {
     return forkJoin([
       this._recipesManager.selectRecipes().pipe(take(1)),
       this._recipesManager.selectRecipes(true).pipe(take(1))
-    ]).pipe(take(1)).toPromise();
+    ]).pipe(take(1)).toPromise().catch(_ => Promise.reject([]));
   }
 }
