@@ -19,6 +19,7 @@ export class AppComponent {
               private _spinner: NgxSpinnerService,
               private _notificationService: NotificationService) {
     this.handleConnectivityStatus();
+    console.clear();
     _router.events.subscribe((routerEvent: RouterEvent) => {
       this.checkRouterEvent(routerEvent);
     });
