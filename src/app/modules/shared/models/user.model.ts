@@ -3,5 +3,6 @@ export interface UserModel {
   displayName: string;
   email: string;
   imageUrl: string;
+  refreshToken: string;
   idToken: string;
 }

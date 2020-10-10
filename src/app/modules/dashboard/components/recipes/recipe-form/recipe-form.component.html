@@ -1,12 +1,9 @@
 <div class="recipe-form-container flex flex-column align-items-center mt-5 mb-3"
      [ngClass]="{'pointer-none': loading}">
-  <div class="row w-100 flex flex-column justify-content-start mb-3">
-    <div class="label">Recipe Name</div>
-    <div class="input-group">
-      <input type="text" class="form-control"
-             placeholder="Recipe Name" [formControl]="control.name">
-    </div>
-  </div>
+
+  <rb-input class="w-100 mb-3" label="Recipe Name" [control]="control.name"
+            appearance="outlined" placeholder="Recipe Name"></rb-input>
+
   <div class="row w-100 flex flex-column justify-content-start mb-3">
     <div class="label">Who can view this?</div>
     <div class="input-group">
@@ -16,62 +13,50 @@
       </select>
     </div>
   </div>
-  <div class="row w-100 flex flex-column justify-content-start mb-3 image-block">
-    <div class="label">Image Url</div>
-    <div class="input-group">
-      <input type="text" class="form-control"
-             placeholder="Image Url" [formControl]="control.image_url">
-      <div class="custom-file">
-        <input type="file" class="custom-file-input" accept="image/*"
-               id="inputGroupFile04"  (change)="onFileSelected($event)">
-        <label class="custom-file-label" for="inputGroupFile04">
-          <img src="../../../../../../assets/icons/add-image.png"/>
-        </label>
-      </div>
-    </div>
+
+  <div class="row w-100 flex flex-column justify-content-start mb-3">
+    <rb-input class="w-100" type="file" label="Image Url" placeholder="Image Url" appearance="outlined"
+              [control]="control.image_url" (onFileSelected)="onFileSelected($event)"></rb-input>
+
     <div class="progress mt-2" *ngIf="imageUploading" style="height: .6rem !important;">
       <div class="progress-bar progress-bar-striped progress-bar-animated bg-info"
            role="progressbar"
            aria-valuemin="0"
            aria-valuemax="100" [ngStyle]="{'width': imageUploadProgress + '%'}"></div>
     </div>
+
     <div class="w-100 flex mt-2 flex justify-content-start" *ngIf="!imageUploading && control.image_url.value">
       <img class="image-preview" src="{{control.image_url.value}}" alt="">
     </div>
   </div>
-  <div class="row w-100 flex flex-column justify-content-start mb-3">
-    <div class="label">Description</div>
-    <div class="input-group">
-      <textarea type="text" class="form-control"
-                placeholder="Description" [formControl]="control.description"></textarea>
-    </div>
-  </div>
-  <div class="row w-100 flex flex-column justify-content-start mb-3">
-    <div class="label">Recipe</div>
-    <quill-editor
-      placeholder="Enter your recipe here."
-      [modules]="getQuillModules()"
-      [styles]="{'height': '250px', 'max-width': '100%', 'width': '100%'}"
-      [formControl]="control.recipe">
-    </quill-editor>
-  </div>
+
+  <rb-input class="w-100 mb-3" label="Description" [control]="control.description"
+            appearance="outlined" inputType="textarea" placeholder="Description"></rb-input>
+
+  <rb-input class="w-100 mb-3" label="Recipe"
+            [control]="control.recipe" inputType="quill"
+            appearance="outlined" placeholder="Enter your recipe here."></rb-input>
+
   <div class="row w-100 flex flex-column justify-content-start mb-5">
     <div class="label">Ingredients</div>
-    <div class="ingredient flex flex-row justify-content-between mb-2" *ngFor="let ingredient of control.ingredients.controls; let i = index">
-      <input type="text"
-             class="ingredient-name form-control text-truncate"
-             placeholder="Ingredient Name"
-             [formControl]="control.ingredients.controls[i].get('name')">
+    <div class="ingredient flex flex-row justify-content-between mb-2"
+         *ngFor="let ingredient of control.ingredients.controls; let i = index">
 
-      <input type="number"
-             class="ingredient-qty form-control mr-2 ml-2 text-truncate"
-             placeholder="Quantity"
-             [formControl]="control.ingredients.controls[i].get('quantity')">
+      <rb-input class="ingredient-name"
+                [control]="ingredient.get('name')"
+                appearance="outlined"
+                placeholder="Ingredient Name"></rb-input>
 
-      <input type="text"
-             class="ingredient-unit form-control mr-2 text-truncate"
-             placeholder="Unit"
-             [formControl]="control.ingredients.controls[i].get('unit')">
+      <rb-input class="ingredient-qty mr-2 ml-2"
+                type="number"
+                [control]="ingredient.get('quantity')"
+                appearance="outlined"
+                placeholder="Quantity"></rb-input>
+
+      <rb-input class="ingredient-unit mr-2"
+                [control]="ingredient.get('unit')"
+                appearance="outlined"
+                placeholder="Unit"></rb-input>
 
       <div class="ingredient-remove">
         <button type="button" (click)="removeIngredientControl(i)" class="btn btn-dark">X</button>
@@ -81,6 +66,7 @@
       <button type="button" class="btn btn-primary" (click)="addIngredientControl()">+</button>
     </div>
   </div>
+
   <div class="row w-100 flex justify-content-end align-items-center">
     <button type="button" class="btn btn-danger mr-3" (click)="cancel()">Cancel</button>
     <button type="button" class="save-btn btn btn-success" [disabled]="recipeForm.invalid" (click)="save()">
@@ -88,4 +74,5 @@
       {{isEditMode ? 'Update' : 'Save'}}
     </button>
   </div>
+
 </div>

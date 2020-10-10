@@ -2,15 +2,15 @@
      [ngClass]="{'pointer-none': (loading | async)}">
   <form autofocus (ngSubmit)="signIn()"
         autocomplete="off" class="w-100 flex flex-column justify-content-start align-items-center">
-    <rb-custom-input class="w-100 mb-3"
-                     label="Email" [control]="control.email"
-                     placeholder="Email"
-                     type="email"></rb-custom-input>
+    <rb-input class="w-100 mb-3"
+              label="Email" [control]="control.email"
+              placeholder="Email"
+              type="email"></rb-input>
 
-    <rb-custom-input class="w-100"
-                     label="Password" [control]="control.password"
-                     placeholder="Password"
-                     type="password"></rb-custom-input>
+    <rb-input class="w-100"
+              label="Password" [control]="control.password"
+              placeholder="Password"
+              type="password"></rb-input>
     <div class="flex justify-content-end align-items-center mt-2 forgot-password" (click)="goToForgotPassword()">
       Forgot Password?
     </div>

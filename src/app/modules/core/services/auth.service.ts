@@ -79,6 +79,7 @@ export class AuthService {
       displayName: firebaseUser.displayName,
       email: firebaseUser.email,
       imageUrl: firebaseUser.photoURL,
+      refreshToken: firebaseUser.refreshToken,
       idToken: await firebaseUser.getIdToken()
     }
   }

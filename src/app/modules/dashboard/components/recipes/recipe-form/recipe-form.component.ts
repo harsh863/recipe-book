@@ -127,22 +127,4 @@ export class RecipeFormComponent extends UnsubscribeAbstract  implements OnInit 
       this._router.navigate(['dashboard/recipes']);
     });
   }
-
-  getQuillModules() {
-    return {
-      toolbar: {
-        container:
-          [
-            ['bold', 'italic', 'underline', 'strike'],
-            ['blockquote', 'code-block'],
-            [{'list': 'ordered'}, {'list': 'bullet'}],
-            [{'script': 'sub'}, {'script': 'super'}],
-            [{'indent': '-1'}, {'indent': '+1'}],
-            [{'size': ['small', 'normal', 'large']}],
-            [{color: []}, {'background': []}],
-            ['link','image', 'video']
-          ],
-      }
-    };
-  }
 }

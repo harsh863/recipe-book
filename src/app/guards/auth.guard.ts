@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
-import {noop, Observable} from 'rxjs';
+import {noop, Observable, of} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {AuthManager} from '../modules/auth/managers/auth.manager';
 import {NotificationService} from '../modules/core/services/notification.service';
@@ -19,7 +19,8 @@ export class AuthGuard implements CanActivate {
       !val ? this._router.navigate(['auth']) : noop();
       // @ts-ignore
     }), catchError(err => {
-      return;
+      console.log(err);
+      // return of(true);
     }));
   }
 }

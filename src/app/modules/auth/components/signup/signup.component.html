@@ -3,19 +3,19 @@
   <form (ngSubmit)="signUp()" autofocus
         autocomplete="off" class="w-100 flex flex-column justify-content-start align-items-center">
 
-    <rb-custom-input class="w-100 mb-3"
-                     label="Username" [control]="control.username"
-                     placeholder="Username"></rb-custom-input>
+    <rb-input class="w-100 mb-3"
+              label="Username" [control]="control.username"
+              placeholder="Username"></rb-input>
 
-    <rb-custom-input class="w-100 mb-3"
-                     label="Email" [control]="control.email"
-                     placeholder="Email"
-                     type="email"></rb-custom-input>
+    <rb-input class="w-100 mb-3"
+              label="Email" [control]="control.email"
+              placeholder="Email"
+              type="email"></rb-input>
 
-    <rb-custom-input class="w-100 mb-3"
-                     label="Password" [control]="control.password"
-                     placeholder="Password"
-                     type="password"></rb-custom-input>
+    <rb-input class="w-100 mb-3"
+              label="Password" [control]="control.password"
+              placeholder="Password"
+              type="password"></rb-input>
 
     <div class="w-100 flex justify-content-center align-items-center align-items-center">
       <button class="sign-up-btn"

@@ -11,7 +11,6 @@ import { RecipesHomeComponent } from './components/recipes/recipes-home/recipes-
 import { MenuIconComponent } from './components/header/menu-icon/menu-icon.component';
 import {RecipeService} from './services/recipe.service';
 import {FileUploadService} from './services/file-upload.service';
-import {QuillModule} from 'ngx-quill';
 import { RecipePreviewComponent } from './components/recipes/recipe-preview/recipe-preview.component';
 import {SharedModule} from '../shared/shared.module';
 import {ShoppingService} from './services/shopping.service';
@@ -30,8 +29,7 @@ import { ShoppingItemComponent } from './components/shopping/shopping-list/shopp
 import {ShoppingResolver} from './resolvers/shopping.resolver';
 
 const modules = [DashboardRoutingModule, SharedModule,
-  QuillModule.forRoot(), ClickOutsideModule, NgbRatingModule,
-  EffectsModule.forFeature([RecipeEffects, ShoppingEffects])
+  ClickOutsideModule, NgbRatingModule, EffectsModule.forFeature([RecipeEffects, ShoppingEffects])
 ];
 
 const components = [DashboardComponent, HeaderComponent, MenuIconComponent,

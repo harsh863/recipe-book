@@ -3,50 +3,10 @@
   width: 80vw;
 
   & .label {
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
     margin-bottom: 4px;
-  }
-
-  & textarea{
-    &::-webkit-scrollbar {
-      display: unset !important;
-      width: 8px !important;
-    }
-    &::-webkit-scrollbar-track {
-      background: lightgray;
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: gray;
-      border-radius: 20px;
-      border: 1px solid lightgray;
-    }
-
-  }
-
-  & .image-block {
-    input[type='text'] {
-      width: calc(100% - 45px);
-    }
-
-    & .custom-file {
-      cursor: pointer;
-      width: 45px;
-
-      & input {
-        width: 45px;
-      }
-      & label {
-        cursor: pointer;
-        width: 45px;
-
-        & img {
-          width: 20px;
-          height: 20px;
-        }
-        &::after{
-          display: none;
-        }
-      }
-    }
+    line-height: 20px;
   }
 
   & .ingredient {
@@ -67,30 +27,11 @@
     }
   }
 
-  & .save-btn {
-    &:disabled {
-      cursor: not-allowed;
-    }
-  }
-
   & .image-preview {
     border: 1px dashed grey;
     padding: 4px;
     border-radius: 5px;
     max-width: 100%;
-  }
-
-  & quill-editor{
-    max-width: 100%;
-    ::ng-deep{
-      .ql-toolbar{
-        background: lavender;
-        border-radius: .25rem .25rem 0 0;
-      }
-      .ql-container{
-        border-radius: 0 0 .25rem .25rem;
-      }
-    }
   }
 }
 
@@ -103,7 +44,7 @@
       justify-content: flex-start !important;
       &-name {
         width: 100% !important;
-        margin-bottom: 10px;
+        margin-bottom: 1.1rem;
       }
       &-qty{
         margin-left: 0 !important;

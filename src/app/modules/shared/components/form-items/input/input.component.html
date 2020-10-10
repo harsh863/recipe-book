@@ -1,0 +1,71 @@
+<div class="input-block w-100 flex flex-column justify-content-start"
+     (focusin)="focused = true" (focusout)="focused = false">
+
+  <!--   FOR STANDARD INPUT-->
+  <div class="w-100 flex flex-column justify-content-start standard-input" *ngIf="appearance === 'standard'">
+    <div class="label pl-1" [ngClass]="{'focus': focused || control.value}">{{label}}</div>
+
+    <div class="input-group">
+      <input [type]="passwordVisible ? 'text' : type"
+             [formControl]="control" [placeholder]="focused ? '' : placeholder" class="form-control">
+
+      <div class="input-group-append" *ngIf="type === 'password'">
+        <span class="input-group-text" (click)="passwordVisible = !passwordVisible">
+        <img *ngIf="!passwordVisible" src="../../../../../../assets/icons/show.png" alt=""/>
+        <img *ngIf="passwordVisible" src="../../../../../../assets/icons/hide.png" alt=""/>
+      </span>
+      </div>
+    </div>
+  </div>
+
+  <!--   FOR OUTLINED INPUT-->
+  <div class="w-100 flex flex-column justify-content-start outlined-input"
+       [ngClass]="{'outlined-input-image-block': type === 'file'}"
+       *ngIf="appearance === 'outlined'">
+
+    <div class="label" *ngIf="!!label">
+      {{label}} (<span *ngIf="control.errors?.required">*</span>)
+    </div>
+
+    <div class="input-group">
+      <!--   INPUT-->
+      <input [type]="type === 'file' ? 'text' : type" class="form-control"
+             *ngIf="inputType === 'input'"
+             [placeholder]="placeholder" [formControl]="control">
+
+      <!--   TEXTAREA-->
+      <textarea type="text" class="form-control"
+                *ngIf="inputType === 'textarea'"
+                [placeholder]="placeholder" [formControl]="control"></textarea>
+
+      <!--   QUILL-->
+      <quill-editor
+        [placeholder]="placeholder"
+        *ngIf="inputType === 'quill'"
+        [modules]="getQuillModules()"
+        [styles]="{'height': '250px', 'max-width': '100%', 'width': '100%'}"
+        [formControl]="control">
+      </quill-editor>
+
+      <!--   FILE INPUT-->
+      <div class="custom-file" *ngIf="type === 'file'">
+        <input type="file" class="custom-file-input" accept="image/*"
+               id="inputGroupFile04"  (change)="onFileSelected.next($event)">
+        <label class="custom-file-label" for="inputGroupFile04">
+          <img src="../../../../../../assets/icons/add-image.png" alt=""/>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="error-block" [ngClass]="{
+       'error-block__standard': appearance === 'standard',
+       'error-block__outlined': appearance === 'outlined'
+       }"
+       *ngIf="control.touched && control.errors && pattern !== control.value">
+    {{getErrorMessage()}}
+  </div>
+
+</div>
+
+
