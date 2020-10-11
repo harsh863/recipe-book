@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../../store/app.reducer';
 import {googleAuthenticationStarted, startLogin, logout, startSignUp} from '../store/actions/auth.action';
-import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
+import {from, Observable, Subject} from 'rxjs';
 import {AuthService} from '../../core/services/auth.service';
 
 @Injectable({providedIn: 'root'})
@@ -41,6 +41,12 @@ export class AuthManager {
   }
 
   isUserLoggedIn(): Observable<boolean> {
-    return this._authService.selectLoggedInUser().pipe(map(user => !!user));
+    const $isLoggedIn = new Subject<boolean>();
+    this._authService.selectLoggedInUser().subscribe(user => {
+      $isLoggedIn.next(!!user);
+    }, _ => {
+      setTimeout(_ => console.clear(), 1000);
+    });
+    return $isLoggedIn;
   }
 }

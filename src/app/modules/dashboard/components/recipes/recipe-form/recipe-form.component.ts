@@ -7,6 +7,7 @@ import {filter, takeUntil} from 'rxjs/operators';
 import {NotificationService} from '../../../../core/services/notification.service';
 import {Recipe} from '../../../models/recipe.model';
 import {UnsubscribeAbstract} from '../../../../shared/components/unsubscribe/unsubscribe.component';
+import {URL_REGEX} from '../../../../shared/constants/url.constant';
 
 @Component({
   selector: 'rb-recipe-form',
@@ -30,7 +31,7 @@ export class RecipeFormComponent extends UnsubscribeAbstract  implements OnInit 
   control = {
     name: new FormControl(null, Validators.required),
     is_private: new FormControl(false),
-    image_url: new FormControl(null, Validators.required),
+    image_url: new FormControl(null, [Validators.required]),
     description: new FormControl(null),
     recipe: new FormControl(null, Validators.required),
     ingredients: new FormArray([], Validators.required),
@@ -41,6 +42,7 @@ export class RecipeFormComponent extends UnsubscribeAbstract  implements OnInit 
   imageUploadProgress: number;
   isEditMode = false;
   updatedRecipe: Recipe;
+  urlRegex = URL_REGEX;
 
   ngOnInit() {
     if (!this.isEditMode) {

@@ -23,9 +23,7 @@
        [ngClass]="{'outlined-input-image-block': type === 'file'}"
        *ngIf="appearance === 'outlined'">
 
-    <div class="label" *ngIf="!!label">
-      {{label}} (<span *ngIf="control.errors?.required">*</span>)
-    </div>
+    <div class="label" *ngIf="!!label">{{label}}</div>
 
     <div class="input-group">
       <!--   INPUT-->
@@ -62,7 +60,7 @@
        'error-block__standard': appearance === 'standard',
        'error-block__outlined': appearance === 'outlined'
        }"
-       *ngIf="control.touched && control.errors && pattern !== control.value">
+       *ngIf="(control.dirty || control.touched) && (control.errors || pattern !== control.value)">
     {{getErrorMessage()}}
   </div>
 

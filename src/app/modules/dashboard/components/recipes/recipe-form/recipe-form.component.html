@@ -16,6 +16,7 @@
 
   <div class="row w-100 flex flex-column justify-content-start mb-3">
     <rb-input class="w-100" type="file" label="Image Url" placeholder="Image Url" appearance="outlined"
+              [pattern]="urlRegex"
               [control]="control.image_url" (onFileSelected)="onFileSelected($event)"></rb-input>
 
     <div class="progress mt-2" *ngIf="imageUploading" style="height: .6rem !important;">
