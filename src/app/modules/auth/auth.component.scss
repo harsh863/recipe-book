@@ -1,6 +1,8 @@
 .auth-container {
   user-select: none;
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
+
   & .slide {
     &-1{
       background: #00548d;
