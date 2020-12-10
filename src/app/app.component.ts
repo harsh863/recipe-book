@@ -6,6 +6,7 @@ import {RandomColorUtils} from './utils/random-color.utils';
 import {ReferenceUtils} from './utils/reference.utils';
 import {NotificationService} from './modules/core/services/notification.service';
 import {noop} from 'rxjs';
+import {NetworkStatusAngularService} from 'network-status-angular';
 
 @Component({
   selector: 'rb-root',
@@ -17,9 +18,10 @@ export class AppComponent {
 
   constructor(private _router: Router,
               private _spinner: NgxSpinnerService,
-              private _notificationService: NotificationService) {
+              private _notificationService: NotificationService,
+              private _networkStatusAngularService: NetworkStatusAngularService) {
     this.handleConnectivityStatus();
-    console.clear();
+    // console.clear();
     _router.events.subscribe((routerEvent: RouterEvent) => {
       this.checkRouterEvent(routerEvent);
     });
@@ -40,6 +42,9 @@ export class AppComponent {
   }
 
   handleConnectivityStatus() {
+    this._networkStatusAngularService.status.subscribe(status => {
+      console.log(status); // returns true if it is online or false if it is offline
+    });
     // this is to check connectivity status when app reloads
     navigator.onLine ? noop() : this.onOffline();
 

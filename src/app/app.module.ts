@@ -15,6 +15,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CoreModule} from './modules/core/core.module';
+import {NetworkStatusAngularModule} from 'network-status-angular';
 
 const components = [AppComponent];
 const modules = [BrowserModule, AppRoutingModule, BrowserAnimationsModule,
@@ -22,6 +23,7 @@ const modules = [BrowserModule, AppRoutingModule, BrowserAnimationsModule,
   StoreModule.forRoot(appReducer),
   !environment.production ? StoreDevtoolsModule.instrument() : [],
   EffectsModule.forRoot([AuthEffects]),
+  NetworkStatusAngularModule.forRoot(),
   AngularFireModule.initializeApp(environment.firebaseConfig, 'recipe-book'),
   ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
 ];
