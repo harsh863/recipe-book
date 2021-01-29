@@ -6,7 +6,7 @@
     "start_url": "/",
     "app_name": "Recipe Book",
     "short_name": "Recipe Book",
-    "description": "A simple short app, to manage your recipes and discover new ones..",
+    "description": "A simple short app, to manage all your recipes and discover hundred of new recipes.",
     "icons": [
         {
             "src": "assets/images/logo/icon-192x192.png",
