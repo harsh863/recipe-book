@@ -6,7 +6,11 @@ import {AuthStoreAction} from '../../../auth/models/auth-store-action.model';
 import {AuthStoreActions} from '../../../auth/enums/auth-store-actions.enum';
 
 export function shoppingReducer ( state: ShoppingStore = getShoppingInitialState(), action: ShoppingStoreAction | AuthStoreAction): ShoppingStore {
+  const inconsistentState = getShoppingReducerInconsistentState(state, action);
+  return getShoppingReducerConsistentState(inconsistentState);
+}
 
+const getShoppingReducerInconsistentState = (state: ShoppingStore = getShoppingInitialState(), action: ShoppingStoreAction | AuthStoreAction ): ShoppingStore => {
   switch (action.type) {
     case ShoppingStoreActions.GET_SHOPPING_LIST: return startLoadingShoppingList(state);
     case ShoppingStoreActions.SAVE_SHOPPING_LIST: return saveShoppingList(state, action.payload);
@@ -21,6 +25,15 @@ export function shoppingReducer ( state: ShoppingStore = getShoppingInitialState
     case AuthStoreActions.LOGOUT: return getShoppingInitialState();
     default: return state;
   }
+}
+
+const getShoppingReducerConsistentState = (state: ShoppingStore): ShoppingStore => {
+  const filteredIngredients: Ingredient[] = [];
+  [...state.shoppingList.ingredients].forEach((ingredient: Ingredient) => {
+    const duplicateExist = filteredIngredients.findIndex(filteredIngredient => filteredIngredient.id === ingredient.id) !== -1;
+    !duplicateExist && filteredIngredients.push(ingredient);
+  });
+  return { ...state,  shoppingList: { ...state.shoppingList, ingredients: filteredIngredients } };
 }
 
 const startLoadingShoppingList = (state: ShoppingStore): ShoppingStore =>
