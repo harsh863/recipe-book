@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="https://lh3.googleusercontent.com/nff1_bG-PGqwsSQxT8vuznoQ77qR-b9I5uyGIn-CEEUGT1mjsOaZbxkL38xj27RywYzMweUTVt_xV_yFO7_f=w1920-h981"/>
+    <img src="src/assets/images/logo/icon-192x192.png"/>
 </div>
 <h1 align="center">Recipe Book</h1>
 
