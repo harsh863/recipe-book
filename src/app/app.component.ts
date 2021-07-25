@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent} from '@angular/router';
+import {ActivationEnd, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent} from '@angular/router';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {noop} from 'rxjs';
 import {RandomSpinnerUtils} from './utils/random-spinner.utils';
 import {RandomColorUtils} from './utils/random-color.utils';
 import {ReferenceUtils} from './utils/reference.utils';
 import {NotificationService} from './modules/core/services/notification.service';
-import {noop} from 'rxjs';
+import {PlatformService} from './modules/core/services/platform.service';
 
 @Component({
   selector: 'rb-root',
@@ -17,6 +18,7 @@ export class AppComponent {
 
   constructor(private _router: Router,
               private _spinner: NgxSpinnerService,
+              private _platformService: PlatformService,
               private _notificationService: NotificationService) {
     this.handleConnectivityStatus();
     console.clear();
@@ -26,7 +28,10 @@ export class AppComponent {
   }
 
   checkRouterEvent(routerEvent: RouterEvent): void {
-    if (routerEvent instanceof NavigationStart) {
+    console.log(routerEvent);
+    if (routerEvent instanceof NavigationStart ||
+    routerEvent instanceof ActivationEnd) {
+      console.log(1);
       if (!ReferenceUtils.LoadingSpinner) {
         this._spinner.show();
         ReferenceUtils.LoadingSpinner = this.spinner;
@@ -34,12 +39,15 @@ export class AppComponent {
     } else if (routerEvent instanceof NavigationEnd ||
       routerEvent instanceof NavigationCancel ||
       routerEvent instanceof NavigationError) {
+      console.log(2);
       ReferenceUtils.LoadingSpinner = null;
       this._spinner.hide();
     }
   }
 
   handleConnectivityStatus() {
+    if (this._platformService.isRunningOnServer()) return;
+
     // this is to check connectivity status when app reloads
     navigator.onLine ? noop() : this.onOffline();
 

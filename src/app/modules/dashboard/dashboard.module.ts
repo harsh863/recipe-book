@@ -1,4 +1,8 @@
 import { NgModule } from '@angular/core';
+import {EffectsModule} from '@ngrx/effects';
+import {NgbRatingModule} from '@ng-bootstrap/ng-bootstrap';
+import {ClickOutsideModule} from 'ng-click-outside';
+
 import { DashboardComponent } from './dashboard.component';
 import {DashboardRoutingModule} from './dashboard-routing.module';
 import { HeaderComponent } from './components/header/header.component';
@@ -19,19 +23,15 @@ import { ShoppingListComponent } from './components/shopping/shopping-list/shopp
 import {RecipeManager} from './managers/recipe.manager';
 import {RecipeEffects} from './store/effects/recipe.effect';
 import {RecipeResolver} from './resolvers/recipe.resolver';
-import {EffectsModule} from '@ngrx/effects';
-import {NgbRatingModule} from '@ng-bootstrap/ng-bootstrap';
 import {ModalService} from './services/modal.service';
-import {ClickOutsideModule} from 'ng-click-outside';
 import {ShoppingEffects} from './store/effects/shopping.effect';
 import {ShoppingManager} from './managers/shopping.manager';
 import { ShoppingItemComponent } from './components/shopping/shopping-list/shopping-item/shopping-item.component';
 import {ShoppingResolver} from './resolvers/shopping.resolver';
 
-const modules = [DashboardRoutingModule, SharedModule,
-  ClickOutsideModule, NgbRatingModule, EffectsModule.forFeature([RecipeEffects, ShoppingEffects])
+const modules = [DashboardRoutingModule, SharedModule, ClickOutsideModule,
+  NgbRatingModule, EffectsModule.forFeature([RecipeEffects, ShoppingEffects])
 ];
-
 const components = [DashboardComponent, HeaderComponent, MenuIconComponent,
   RecipesComponent, RecipesHomeComponent, RecipesListComponent,
   RecipeItemComponent, RecipePreviewComponent, RecipeFormComponent,

@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
+import {PlatformService} from '../core/services/platform.service';
 
 @Component({
   selector: 'rb-auth',
@@ -15,11 +16,12 @@ export class AuthComponent implements OnInit, AfterViewInit {
   isSignupMode = true;
   openMainBlock = false;  // this is just for UI effects
 
-  constructor(private _router: Router) {
+  constructor(private _router: Router,
+              private _platformService: PlatformService) {
     _router.events.subscribe(routerEvent => {
       if (routerEvent instanceof NavigationEnd) {
         this.isSignupMode = _router.url.includes('signup');
-        document.body.scrollIntoView({behavior: 'auto'});
+        if (this._platformService.isRunningOnBrowser()) { document.body.scrollIntoView({behavior: 'auto'}); }
       }
     });
   }
@@ -30,6 +32,8 @@ export class AuthComponent implements OnInit, AfterViewInit {
   }
 
   onResize() {
+    if (this._platformService.isRunningOnServer()) return;
+
     this.isDesktopMode = window.innerWidth > 600;
     if (this.isDesktopMode) {
       this.hideWelcomeWindow = false;
@@ -38,6 +42,8 @@ export class AuthComponent implements OnInit, AfterViewInit {
   }
 
   navigateToLogin() {
+    if (this._platformService.isRunningOnServer()) return;
+
     this.openMainBlock = true;
     setTimeout(_ => document.querySelector('.main-block').scrollIntoView({behavior: 'smooth'}));
     setTimeout(_ => {
@@ -47,6 +53,8 @@ export class AuthComponent implements OnInit, AfterViewInit {
   }
 
   startCarousel() {
+    if (this._platformService.isRunningOnServer()) return;
+
     // @ts-ignore
     $(document).ready(function(){
       // @ts-ignore
@@ -57,6 +65,8 @@ export class AuthComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    if (this._platformService.isRunningOnServer()) return;
+
     document.querySelector('.carousel').scrollIntoView({behavior: 'auto'});
   }
 
