@@ -1,4 +1,4 @@
-<div class="recipe-form-container flex flex-column align-items-center mt-5 mb-3"
+<form ngForm (ngSubmit)="save()" class="recipe-form-container flex flex-column align-items-center mt-5 mb-3"
      [ngClass]="{'pointer-none': loading}">
 
   <rb-input class="w-100 mb-3" label="Recipe Name" [control]="control.name"
@@ -70,10 +70,10 @@
 
   <div class="row w-100 flex justify-content-end align-items-center">
     <button type="button" class="btn btn-danger mr-3" (click)="cancel()">Cancel</button>
-    <button type="button" class="save-btn btn btn-success" [disabled]="recipeForm.invalid" (click)="save()">
+    <button type="submit" class="save-btn btn btn-success" [disabled]="recipeForm.invalid">
       <i *ngIf="loading" class="fa fa-spinner fa-spin" style="margin-right: 5px;"></i>
       {{isEditMode ? 'Update' : 'Save'}}
     </button>
   </div>
 
-</div>
+</form>

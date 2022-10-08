@@ -1,7 +1,8 @@
 <div class="shopping-form w-100 flex flex-column align-items-center"
      [ngClass]="{'pointer-none': loading}">
 
-  <div class="row w-100 flex flex-row flex-wrap justify-content-start align-items-start">
+  <form ngForm (ngSubmit)="editMode ? updateIngredient() : addIngredient()"
+        class="row w-100 flex flex-row flex-wrap justify-content-start align-items-start">
     <rb-input class="name mr-2" label="Ingredient Name" [control]="control.name"
               appearance="outlined" placeholder="Ingredient Name"></rb-input>
 
@@ -10,13 +11,14 @@
 
     <rb-input class="unit" label="Unit" [control]="control.unit"
               appearance="outlined" placeholder="Unit"></rb-input>
-  </div>
-  <div class="row flex flex-row justify-content-start align-items-center mt-4">
-    <button type="button" [disabled]="ingredientForm.invalid || loading"
-            (click)="editMode ? updateIngredient() : addIngredient()" class="btn btn-outline-primary mr-2">
-      <i *ngIf="loading" class="fa fa-spinner fa-spin" style="margin-right: 5px;"></i>
-      {{editMode ? 'Update' : 'Add'}}
-    </button>
-    <button type="button" (click)="editMode ? cancelUpdate(true) : ingredientForm.reset()" [disabled]="!checkClearButtonValidity()" class="btn btn-outline-warning">{{editMode ? 'Cancel' : 'Clear'}}</button>
-  </div>
+
+    <div class="row flex flex-row justify-content-start align-items-center mt-4 mx-0">
+      <button type="submit" [disabled]="ingredientForm.invalid || loading"
+              class="btn btn-outline-primary mr-2">
+        <i *ngIf="loading" class="fa fa-spinner fa-spin" style="margin-right: 5px;"></i>
+        {{editMode ? 'Update' : 'Add'}}
+      </button>
+      <button type="button" (click)="editMode ? cancelUpdate(true) : ingredientForm.reset()" [disabled]="!checkClearButtonValidity()" class="btn btn-outline-warning">{{editMode ? 'Cancel' : 'Clear'}}</button>
+    </div>
+  </form>
 </div>
