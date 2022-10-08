@@ -26,4 +26,8 @@ export class HeaderComponent implements OnInit {
     const queryParams = await this._activatedRoute.queryParams.pipe(take(1)).toPromise();
     this._router.navigate(['dashboard/recipes'], {queryParams});
   }
+
+  reloadApplication() {
+    window.location.href = window.location.origin;
+  }
 }

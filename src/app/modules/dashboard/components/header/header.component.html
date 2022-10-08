@@ -1,6 +1,6 @@
 <div class="header flex flex-row justify-content-between" (window:resize)="onResize()">
   <dl-menu-icon *ngIf="!isDesktopMode"></dl-menu-icon>
-  <div class="app-logo">
+  <div class="app-logo" (click)="reloadApplication()">
     <img src="../../../../../assets/images/logo/icon-512x512.png" alt="">
   </div>
   <div *ngIf="isDesktopMode" class="menu-items flex flex-row">
